@@ -26,17 +26,17 @@ import java.util.List;
 public class ReservaDAO implements DAO<Reserva, Integer>{
 
     @Override
-    public void add(Reserva s) throws Exception {
+    public void add(Reserva s) throws Throwable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void delete(Reserva s) throws Exception {
+    public void delete(Reserva s) throws Throwable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Reserva get(Integer s) throws Exception {
+    public Reserva get(Integer s) throws Throwable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

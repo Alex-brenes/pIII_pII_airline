@@ -22,17 +22,17 @@ import java.util.List;
 public class VueloDAO implements DAO<Vuelo, String> {
 
     @Override
-    public void add(Vuelo s) throws Exception {
+    public void add(Vuelo s) throws Throwable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void delete(Vuelo s) throws Exception {
+    public void delete(Vuelo s) throws Throwable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Vuelo get(String s) throws Exception {
+    public Vuelo get(String s) throws Throwable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

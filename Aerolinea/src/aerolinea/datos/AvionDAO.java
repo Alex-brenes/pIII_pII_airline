@@ -22,17 +22,17 @@ import java.util.List;
 public class AvionDAO implements DAO<Avion, String> {
 
     @Override
-    public void add(Avion s) throws Exception {
+    public void add(Avion s) throws Throwable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void delete(Avion s) throws Exception {
+    public void delete(Avion s) throws Throwable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Avion get(String s) throws Exception {
+    public Avion get(String s) throws Throwable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

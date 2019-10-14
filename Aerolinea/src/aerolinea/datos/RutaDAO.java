@@ -22,17 +22,17 @@ import java.util.List;
 public class RutaDAO implements DAO<Ruta, String>{
 
     @Override
-    public void add(Ruta s) throws Exception {
+    public void add(Ruta s) throws Throwable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void delete(Ruta s) throws Exception {
+    public void delete(Ruta s) throws Throwable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Ruta get(String s) throws Exception {
+    public Ruta get(String s) throws Throwable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

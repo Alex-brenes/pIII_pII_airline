@@ -27,17 +27,17 @@ import java.util.List;
 public class TiqueteDAO implements DAO<Tiquete, Integer> {
 
     @Override
-    public void add(Tiquete s) throws Exception {
+    public void add(Tiquete s) throws Throwable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void delete(Tiquete s) throws Exception {
+    public void delete(Tiquete s) throws Throwable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Tiquete get(Integer s) throws Exception {
+    public Tiquete get(Integer s) throws Throwable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

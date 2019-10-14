@@ -26,17 +26,17 @@ import java.util.List;
 public class UsuarioDAO implements DAO<Usuario, UsuarioPK> {
 
     @Override
-    public void add(Usuario s) throws Exception {
+    public void add(Usuario s) throws Throwable {
        
     }
 
     @Override
-    public void delete(Usuario s) throws Exception {
+    public void delete(Usuario s) throws Throwable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Usuario get(UsuarioPK s) throws Exception {
+    public Usuario get(UsuarioPK s) throws Throwable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

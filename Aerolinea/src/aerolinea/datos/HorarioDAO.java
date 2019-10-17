@@ -26,17 +26,17 @@ import java.util.List;
 public class HorarioDAO implements DAO<Horario, String>{
 
     @Override
-    public void add(Horario s) throws Exception {
+    public void add(Horario s) throws Throwable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void delete(Horario s) throws Exception {
+    public void delete(Horario s) throws Throwable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Horario get(String s) throws Exception {
+    public Horario get(String s) throws Throwable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

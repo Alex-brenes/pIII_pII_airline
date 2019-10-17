@@ -26,17 +26,17 @@ import java.util.List;
 public class TipoAvionDAO implements DAO<Tipoavion, String> {
 
     @Override
-    public void add(Tipoavion s) throws Exception {
+    public void add(Tipoavion s) throws Throwable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void delete(Tipoavion s) throws Exception {
+    public void delete(Tipoavion s) throws Throwable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Tipoavion get(String s) throws Exception {
+    public Tipoavion get(String s) throws Throwable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -24,11 +24,11 @@ import java.util.List;
 
 public interface DAO <T, K> {
     /*
-        All classes that implement this interface must define a  RelDatabase reference
+        All classes that implement this interface must define a RelDatabase reference
     */
-    public abstract void add(T s) throws Exception;
-    public abstract void delete(T s) throws Exception;
-    public abstract T get(K s) throws Exception;
+    public abstract void add(T s) throws Throwable;
+    public abstract void delete(T s) throws Throwable;
+    public abstract T get(K s) throws Throwable;
     public abstract void update(K s);
     public abstract List<T> searh(K s);
     

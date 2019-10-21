@@ -1,3 +1,4 @@
+
 /*
  * Copyright (C) 2019 pc
  *
@@ -43,7 +44,7 @@ public class AvionDAO implements DAO<Avion, String> {
     }
 
     @Override
-    public List<Avion> searh(String s) {
+    public List<Avion> searh(String s) throws Throwable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

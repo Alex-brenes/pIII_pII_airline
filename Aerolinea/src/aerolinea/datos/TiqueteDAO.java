@@ -48,7 +48,7 @@ public class TiqueteDAO implements DAO<Tiquete, Integer> {
     }
 
     @Override
-    public List<Tiquete> searh(Integer s) {
+    public List<Tiquete> searh(Integer s) throws Throwable{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

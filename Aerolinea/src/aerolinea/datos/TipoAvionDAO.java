@@ -94,7 +94,7 @@ public class TipoAvionDAO implements DAO<Tipoavion, String> {
     }
 
     @Override
-    public List<Tipoavion> searh(String id) { // Búsqueda por id
+    public List<Tipoavion> searh(String id) throws Throwable{ // Búsqueda por id
        List<Tipoavion> resultado = new ArrayList<Tipoavion>();
         try {
             String query = "SELECT * "

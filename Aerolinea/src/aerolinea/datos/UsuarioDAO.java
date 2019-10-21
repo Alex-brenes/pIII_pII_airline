@@ -93,7 +93,7 @@ public class UsuarioDAO implements DAO<Usuario, Integer> {
     }
 
     @Override
-    public List<Usuario> searh(Integer s) {
+    public List<Usuario> searh(Integer s) throws Throwable{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

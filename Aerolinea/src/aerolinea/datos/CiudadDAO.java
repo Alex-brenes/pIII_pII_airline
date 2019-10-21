@@ -32,9 +32,9 @@ public class CiudadDAO implements DAO<Ciudad, String> {
 
     @Override
     public void add(Ciudad c) throws Throwable {
-        String query = "INSER INTO Ciudad (nombre) "
-                + "values('%s')";
-        query = String.format(c.getNombre());
+        String query = "INSER INTO Ciudad (nombre, abreviaturaPais) "
+                + "VALUES('%s', '%s')";
+        query = String.format(c.getNombre(), c.getPais().getAbreviatura());
         int count = db.executeUpdate(query);
         if (count == 0) {
             throw new Exception("La ciudad ya existe");
@@ -58,7 +58,6 @@ public class CiudadDAO implements DAO<Ciudad, String> {
                 + "WHERE c.nombre='%s'";
         query = String.format(query, nombre);
         ResultSet rs = db.executeQuery(query);
-        // VER SI TAMBIÉN CARGAR LOS PAÍSES
         if (rs.next()) {
             return this.instancia(rs);
         } else {
@@ -68,10 +67,10 @@ public class CiudadDAO implements DAO<Ciudad, String> {
 
     @Override
     public void update(Ciudad c) throws Throwable {
-        String sql = "UPDATE Ciudad SET nombre='%s' "
+        String sql = "UPDATE Ciudad SET abreviatura='%s' "
                 + "where nombre='%s'";
-        sql = String.format(sql, c.getNombre(), c.getNombre());
-        // CREO QUE HACE FALTA UNA LLAVE PRIMARIA DIFERENTE PARA LA CIUDAD
+        // Actualiza la abreviatura del pais
+        sql = String.format(sql, c.getPais().getAbreviatura(), c.getNombre());
         int count = db.executeUpdate(sql);
         if (count == 0) {
             throw new Exception("La ciudad no existe");
@@ -95,7 +94,7 @@ public class CiudadDAO implements DAO<Ciudad, String> {
         return resultado;
     }
     
-        // Returns a 'Pais' new reference.
+        // Returns a 'Ciudad' new reference.
     @Override
     public Ciudad instancia(ResultSet rs) {
         try {

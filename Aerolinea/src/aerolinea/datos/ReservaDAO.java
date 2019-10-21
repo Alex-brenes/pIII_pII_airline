@@ -18,42 +18,95 @@ package aerolinea.datos;
 
 import aerolinea.logica.Reserva;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author pc
  */
-public class ReservaDAO implements DAO<Reserva, Integer>{
+public class ReservaDAO implements DAO<Reserva, Integer> {
+
     private RelDatabase db;
+
     @Override
     public void add(Reserva s) throws Throwable {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String query = "INSER INTO Reserva (idReserva, cantidad, documento, viaje, formaPago, usuario) "
+                + "values('%s','%s','%s','%s','%s','%s')";
+        query = String.format(query,
+                s.getIdReserva(),
+                s.getCantidad(),
+                s.getDocumento(),
+                s.getViaje(),
+                s.getFormapago(),
+                s.getUsuario().getIdUsuario());
+        int count = db.executeUpdate(query);
+        if (count == 0) {
+            throw new Exception("La reserva ya existe");
+        }
     }
 
     @Override
     public void delete(Reserva s) throws Throwable {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String query = "DELETE FROM Reserva WHERE idReserva='%s'";
+        query = String.format(query, s.getIdReserva());
+        int count = db.executeUpdate(query);
+        if (count == 0) {
+            throw new Exception("La reserva no existe");
+        }
     }
 
     @Override
     public Reserva get(Integer s) throws Throwable {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String query = "SELECT * "
+                + "FROM Reserva r "
+                + "WHERE r.idReserva='%s'";
+        query = String.format(query, s);
+        ResultSet rs = db.executeQuery(query);
+        if (rs.next()) {
+            return this.instancia(rs);
+        } else {
+            throw new Exception("La reserva no existe");
+        }
     }
 
     @Override
-    public void update(Reserva s) throws Throwable{
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void update(Reserva s) throws Throwable {
+        String sql = "UPDATE Reserva SET cantidad='%s', documento='%s', viaje='%s', formaPago='%s', usuario='%s' "
+                + "where idReserva='%s'";
+        sql = String.format(sql,
+                s.getCantidad(),
+                s.getDocumento(),
+                s.getViaje(),
+                s.getFormapago(), 
+                s.getUsuario());
+        int count = db.executeUpdate(sql);
+        if (count == 0) {
+            throw new Exception("La reserva no existe");
+        }
     }
 
     @Override
-    public List<Reserva> searh(Integer s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Reserva> searh(Integer s) throws Throwable { // Busqueda por usuario
+                List<Reserva> resultado = new ArrayList<Reserva>();
+        try {
+            String query = "SELECT * "
+                    + "FROM Reserva r "
+                    + "WHERE r.usuario LIKE '%%%s%%'";
+            query = String.format(query, s);
+            ResultSet rs = db.executeQuery(query);
+            while (rs.next()) {
+                resultado.add(this.instancia(rs));
+            }
+        } catch (SQLException ex) {
+        }
+        return resultado;
     }
 
     @Override
     public Reserva instancia(ResultSet rs) throws Throwable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

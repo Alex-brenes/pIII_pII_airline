@@ -32,6 +32,6 @@ public interface DAO <T, K> {
     public abstract void delete(T s) throws Throwable;
     public abstract T get(K s) throws Throwable;
     public abstract void update(T s) throws Throwable;
-    public abstract List<T> searh(K s);
+    public abstract List<T> searh(K s) throws Throwable;
     public abstract T instancia(ResultSet rs) throws Throwable;
 }

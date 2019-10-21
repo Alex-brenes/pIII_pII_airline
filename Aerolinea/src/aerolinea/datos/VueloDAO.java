@@ -43,7 +43,7 @@ public class VueloDAO implements DAO<Vuelo, String> {
     }
 
     @Override
-    public List<Vuelo> searh(String s) {
+    public List<Vuelo> searh(String s) throws Throwable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -45,7 +45,7 @@ public class Ciudad implements Serializable {
     @Basic(optional = false)
     @Column(name = "nombre")
     private String nombre;
-    @JoinColumn(name = "Pais_nombre", referencedColumnName = "nombre")
+    @JoinColumn(name = "abreviaturaPais", referencedColumnName = "abreviatura")
     @ManyToOne(optional = false)
     private Pais pais;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ciudad")

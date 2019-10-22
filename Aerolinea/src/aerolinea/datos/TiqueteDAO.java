@@ -17,6 +17,7 @@
 package aerolinea.datos;
 
 import aerolinea.logica.Tiquete;
+import java.sql.ResultSet;
 import java.util.List;
 
 
@@ -25,7 +26,7 @@ import java.util.List;
  * @author pc
  */
 public class TiqueteDAO implements DAO<Tiquete, Integer> {
-
+    private RelDatabase db;
     @Override
     public void add(Tiquete s) throws Throwable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -42,12 +43,17 @@ public class TiqueteDAO implements DAO<Tiquete, Integer> {
     }
 
     @Override
-    public void update(Integer s) {
+    public void update(Tiquete s) throws Throwable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public List<Tiquete> searh(Integer s) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Tiquete instancia(ResultSet rs) throws Throwable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

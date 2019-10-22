@@ -42,7 +42,7 @@ public class Tiquete implements Serializable {
     @Basic(optional = false)
     @Column(name = "numeroAsiento")
     private Integer numeroAsiento;
-    @JoinColumn(name = "Reserva_idReserva", referencedColumnName = "idReserva")
+    @JoinColumn(name = "reserva", referencedColumnName = "idReserva")
     @ManyToOne(optional = false)
     private Reserva reserva;
 

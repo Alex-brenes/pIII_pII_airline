@@ -17,10 +17,11 @@
 package aerolinea.datos;
 
 import aerolinea.logica.Avion;
+import java.sql.ResultSet;
 import java.util.List;
 
 public class AvionDAO implements DAO<Avion, String> {
-
+    private RelDatabase db;
     @Override
     public void add(Avion s) throws Throwable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -37,12 +38,17 @@ public class AvionDAO implements DAO<Avion, String> {
     }
 
     @Override
-    public void update(String s) {
+    public void update(Avion s) throws Throwable{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public List<Avion> searh(String s) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Avion instancia(ResultSet rs) throws Throwable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

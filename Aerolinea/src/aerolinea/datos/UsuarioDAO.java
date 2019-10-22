@@ -20,28 +20,76 @@
 package aerolinea.datos;
 
 import aerolinea.logica.Usuario;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 public class UsuarioDAO implements DAO<Usuario, Integer> {
 
+    private RelDatabase db;
+
     @Override
     public void add(Usuario s) throws Throwable {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String query = "INSER INTO Usuario (idUsuario, email, password, firstName, lastName, dateOfBirth, address, workPhone, phone) "
+                + "values('%s','%s','%s','%s','%s','%s','%s','%s','%s')";
+        query = String.format(query,
+                s.getIdUsuario(),
+                s.getEmail(),
+                s.getPassword(),
+                s.getFirstName(),
+                s.getLastName(),
+                s.getDateOfBirth(),
+                s.getAddress(),
+                s.getWorkPhone(),
+                s.getPhone());
+        int count = db.executeUpdate(query);
+        if (count == 0) {
+            throw new Exception("El usuario ya existe");
+        }
     }
 
     @Override
     public void delete(Usuario s) throws Throwable {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String query = "DELETE FROM Usuario WHERE idUsuario='%s'";
+        query = String.format(query, s.getIdUsuario());
+        int count = db.executeUpdate(query);
+        if (count == 0) {
+            throw new Exception("El usuario no existe");
+        }
     }
 
     @Override
     public Usuario get(Integer s) throws Throwable {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String query = "SELECT * "
+                + "FROM Usuario u "
+                + "WHERE u.idUsuario='%s'";
+        query = String.format(query, s);
+        ResultSet rs = db.executeQuery(query);
+        if (rs.next()) {
+            return this.instancia(rs);
+        } else {
+            throw new Exception("El usuario no existe");
+        }
     }
 
     @Override
-    public void update(Integer s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void update(Usuario s) throws Throwable {
+        String sql = "UPDATE USUARIO SET email='%s', password='%s', firstName='%s', lastName='%s', dateOfBirth='%s', address='%s', workPhone='%s', phone='%s' "
+                + "where idFormaPago='%s'";
+        sql = String.format(sql,
+                s.getEmail(),
+                s.getPassword(),
+                s.getFirstName(),
+                s.getLastName(),
+                s.getDateOfBirth(),
+                s.getAddress(),
+                s.getWorkPhone(),
+                s.getPhone(),
+                s.getIdUsuario());
+        int count = db.executeUpdate(sql);
+        if (count == 0) {
+            throw new Exception("El usuario no existe");
+        }
     }
 
     @Override
@@ -49,5 +97,25 @@ public class UsuarioDAO implements DAO<Usuario, Integer> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public Usuario instancia(ResultSet rs) throws Throwable {
+        try {
+            String s;
+            Usuario c = new Usuario();
+            c.setEmail(rs.getString("email"));
+            c.setPassword(rs.getString("password"));
+            c.setFirstName(rs.getString("firstName"));
+            c.setLastName(rs.getString("lastName"));
+            c.setDateOfBirth(rs.getString("dateOfBirth"));
+            c.setAddress(rs.getString("address"));
+            c.setWorkPhone(rs.getString("worPhone"));
+            c.setPhone(rs.getString("phone"));
+            c.setIdUsuario(Integer.parseInt(rs.getString("idUsuario")));
+            // Ver si cargar también las reservas
+            return c;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
 
 }

@@ -55,15 +55,13 @@ public class Vuelo implements Serializable {
     private Date hora;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "vuelo")
     private List<Viaje> viajeList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vuelo")
-    private List<Usuario> usuarioList;
-    @JoinColumn(name = "Avion_id", referencedColumnName = "id")
+    @JoinColumn(name = "avion", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Avion avion;
-    @JoinColumn(name = "Ciudad_nombre", referencedColumnName = "nombre")
+    @JoinColumn(name = "origen", referencedColumnName = "nombre")
     @ManyToOne(optional = false)
     private Ciudad ciudad;
-    @JoinColumn(name = "Ciudad_nombre1", referencedColumnName = "nombre")
+    @JoinColumn(name = "destino", referencedColumnName = "nombre")
     @ManyToOne(optional = false)
     private Ciudad ciudad1;
 
@@ -104,14 +102,6 @@ public class Vuelo implements Serializable {
 
     public void setViajeList(List<Viaje> viajeList) {
         this.viajeList = viajeList;
-    }
-
-    public List<Usuario> getUsuarioList() {
-        return usuarioList;
-    }
-
-    public void setUsuarioList(List<Usuario> usuarioList) {
-        this.usuarioList = usuarioList;
     }
 
     public Avion getAvion() {

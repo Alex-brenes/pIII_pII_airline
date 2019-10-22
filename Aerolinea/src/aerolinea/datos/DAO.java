@@ -20,7 +20,9 @@
  */
 
 package aerolinea.datos;
+import java.sql.ResultSet;
 import java.util.List;
+
 
 public interface DAO <T, K> {
     /*
@@ -29,7 +31,7 @@ public interface DAO <T, K> {
     public abstract void add(T s) throws Throwable;
     public abstract void delete(T s) throws Throwable;
     public abstract T get(K s) throws Throwable;
-    public abstract void update(K s);
+    public abstract void update(T s) throws Throwable;
     public abstract List<T> searh(K s);
-    
+    public abstract T instancia(ResultSet rs) throws Throwable;
 }

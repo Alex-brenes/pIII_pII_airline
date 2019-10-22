@@ -54,10 +54,13 @@ public class Reserva implements Serializable {
     private String documento;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "reserva")
     private List<Tiquete> tiqueteList;
-    @JoinColumn(name = "FormaPago_idFormaPago", referencedColumnName = "idFormaPago")
+    @JoinColumn(name = "formaPago", referencedColumnName = "idFormaPago")
     @ManyToOne(optional = false)
     private Formapago formapago;
-    @JoinColumn(name = "Viaje_idViaje", referencedColumnName = "idViaje")
+    @JoinColumn(name = "usuario", referencedColumnName = "idUsuario")
+    @ManyToOne(optional = false)
+    private Usuario usuario;
+    @JoinColumn(name = "viaje", referencedColumnName = "idViaje")
     @ManyToOne(optional = false)
     private Viaje viaje;
 
@@ -106,6 +109,14 @@ public class Reserva implements Serializable {
 
     public void setFormapago(Formapago formapago) {
         this.formapago = formapago;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public Viaje getViaje() {

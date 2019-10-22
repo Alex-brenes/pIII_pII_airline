@@ -59,7 +59,7 @@ public class Viaje implements Serializable {
     private Float precio;
     @Column(name = "disponibles")
     private Integer disponibles;
-    @JoinColumn(name = "Vuelo_idVuelo", referencedColumnName = "idVuelo")
+    @JoinColumn(name = "vuelo", referencedColumnName = "idVuelo")
     @ManyToOne(optional = false)
     private Vuelo vuelo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "viaje")

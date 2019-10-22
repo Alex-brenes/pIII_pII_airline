@@ -17,16 +17,17 @@
 package aerolinea.logica;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -63,9 +64,8 @@ public class Usuario implements Serializable {
     private String workPhone;
     @Column(name = "phone")
     private String phone;
-    @JoinColumn(name = "Vuelo_idVuelo", referencedColumnName = "idVuelo")
-    @ManyToOne(optional = false)
-    private Vuelo vuelo;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+    private List<Reserva> reservaList;
 
     public Usuario() {
     }
@@ -152,12 +152,12 @@ public class Usuario implements Serializable {
         this.phone = phone;
     }
 
-    public Vuelo getVuelo() {
-        return vuelo;
+    public List<Reserva> getReservaList() {
+        return reservaList;
     }
 
-    public void setVuelo(Vuelo vuelo) {
-        this.vuelo = vuelo;
+    public void setReservaList(List<Reserva> reservaList) {
+        this.reservaList = reservaList;
     }
 
     @Override

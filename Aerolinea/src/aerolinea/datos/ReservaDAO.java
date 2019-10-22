@@ -17,6 +17,7 @@
 package aerolinea.datos;
 
 import aerolinea.logica.Reserva;
+import java.sql.ResultSet;
 import java.util.List;
 
 /**
@@ -24,7 +25,7 @@ import java.util.List;
  * @author pc
  */
 public class ReservaDAO implements DAO<Reserva, Integer>{
-
+    private RelDatabase db;
     @Override
     public void add(Reserva s) throws Throwable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -41,12 +42,17 @@ public class ReservaDAO implements DAO<Reserva, Integer>{
     }
 
     @Override
-    public void update(Integer s) {
+    public void update(Reserva s) throws Throwable{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public List<Reserva> searh(Integer s) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Reserva instancia(ResultSet rs) throws Throwable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

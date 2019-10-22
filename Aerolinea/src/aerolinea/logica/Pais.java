@@ -41,6 +41,8 @@ public class Pais implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
+    @Column(name = "abreviatura")
+    private String abreviatura;
     @Column(name = "nombre")
     private String nombre;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pais")
@@ -49,8 +51,16 @@ public class Pais implements Serializable {
     public Pais() {
     }
 
-    public Pais(String nombre) {
-        this.nombre = nombre;
+    public Pais(String abreviatura) {
+        this.abreviatura = abreviatura;
+    }
+
+    public String getAbreviatura() {
+        return abreviatura;
+    }
+
+    public void setAbreviatura(String abreviatura) {
+        this.abreviatura = abreviatura;
     }
 
     public String getNombre() {
@@ -72,7 +82,7 @@ public class Pais implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (nombre != null ? nombre.hashCode() : 0);
+        hash += (abreviatura != null ? abreviatura.hashCode() : 0);
         return hash;
     }
 
@@ -83,7 +93,7 @@ public class Pais implements Serializable {
             return false;
         }
         Pais other = (Pais) object;
-        if ((this.nombre == null && other.nombre != null) || (this.nombre != null && !this.nombre.equals(other.nombre))) {
+        if ((this.abreviatura == null && other.abreviatura != null) || (this.abreviatura != null && !this.abreviatura.equals(other.abreviatura))) {
             return false;
         }
         return true;
@@ -91,7 +101,7 @@ public class Pais implements Serializable {
 
     @Override
     public String toString() {
-        return "aerolinea.logica.Pais[ nombre=" + nombre + " ]";
+        return "aerolinea.logica.Pais[ abreviatura=" + abreviatura + " ]";
     }
     
 }

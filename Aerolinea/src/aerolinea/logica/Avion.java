@@ -47,7 +47,7 @@ public class Avion implements Serializable {
     private String id;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "avion")
     private List<Vuelo> vueloList;
-    @JoinColumn(name = "TipoAvion_idTipoAvion", referencedColumnName = "idTipoAvion")
+    @JoinColumn(name = "tipoAvion", referencedColumnName = "idTipoAvion")
     @ManyToOne(optional = false)
     private Tipoavion tipoavion;
 

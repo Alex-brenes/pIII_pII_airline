@@ -18,6 +18,9 @@ package aerolinea.datos;
 
 import aerolinea.logica.Tipoavion;
 import java.util.List;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -25,31 +28,104 @@ import java.util.List;
  */
 public class TipoAvionDAO implements DAO<Tipoavion, String> {
 
+    private RelDatabase db;
+
     @Override
     public void add(Tipoavion s) throws Throwable {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String query = "INSER INTO TipoAvion (idTipoAvion, marca, annio, modelo, cantidadPasajeros, cantidadFilas, asientosPorFila) "
+                + "values('%s','%s','%s','%s', '%s', '%s', '%s')";
+        query = String.format(
+                s.getIdTipoAvion(),
+                s.getMarca(),
+                s.getAnnio(),
+                s.getModelo(),
+                s.getCantidadPasajeros(),
+                s.getCantidadFilas(),
+                s.getAsientosPorFila());
+        int count = db.executeUpdate(query);
+        if (count == 0) {
+            throw new Exception("El tipo de avion ya existe");
+        }
     }
 
     @Override
     public void delete(Tipoavion s) throws Throwable {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String query = "DELETE FROM TipoAvion where id='%s'";
+        query = String.format(query, s.getIdTipoAvion());
+        int count = db.executeUpdate(query);
+        if (count == 0) {
+            throw new Exception("El tipo de avion no existe");
+        }
     }
 
     @Override
-    public Tipoavion get(String s) throws Throwable {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Tipoavion get(String id) throws Throwable {
+        String query = "SELECT * "
+                + "FROM TipoAvion s "
+                + "where s.idTipoAvion='%s'";
+        query = String.format(query, id);
+        ResultSet rs = db.executeQuery(query);
+        if (rs.next()) {
+            return this.instancia(rs);
+        } else {
+            throw new Exception("El tipo de avión no Existe");
+        }
     }
 
     @Override
-    public void update(String s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void update(Tipoavion t) throws Throwable {
+        String query = "UPDATE TipoAvion SET marca='%s'," +
+                "annio='%s', modelo = '%s', cantidadPasajeros = '%s', " +
+                "cantidadFilas = '%s', asientosPorFilas = '%' "
+                + "where idTipoAvion='%s'";
+        query = String.format(query,
+                t.getMarca(), 
+                t.getAnnio(), 
+                t.getModelo(), 
+                t.getCantidadPasajeros(), 
+                t.getCantidadFilas(), 
+                t.getAsientosPorFila(),
+                t.getIdTipoAvion());
+
+        int count = db.executeUpdate(query);
+        if (count == 0) {
+            throw new Exception("El tipo de avión no existe");
+        }
     }
 
     @Override
-    public List<Tipoavion> searh(String s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Tipoavion> searh(String id) { // Búsqueda por id
+       List<Tipoavion> resultado = new ArrayList<Tipoavion>();
+        try {
+            String query = "SELECT * "
+                    + "FROM TipoAvion t "
+                    + "where t.idTipoAvion like '%%%s%%'";
+            query = String.format(query, id);
+            ResultSet rs = db.executeQuery(query);
+            while (rs.next()) {
+                resultado.add(this.instancia(rs));
+            }
+        } catch (SQLException ex) {
+        }
+        return resultado;
     }
 
-   
-    
+    // Returns a 'TipoAvion' new reference.
+    @Override
+    public Tipoavion instancia(ResultSet rs) {
+        try {
+            String s;
+            Tipoavion t = new Tipoavion();
+            t.setIdTipoAvion(rs.getString("idTipoAvion"));
+            t.setMarca(rs.getString("marca"));
+            t.setAnnio(Integer.parseInt(rs.getString("annio")));
+            t.setModelo(rs.getString("modelo"));
+            t.setCantidadPasajeros(Integer.parseInt(rs.getString("cantidadPasajeros")));
+            t.setCantidadFilas(Integer.parseInt(rs.getString("cantidadFilas")));
+            t.setAsientosPorFila(Integer.parseInt(rs.getString("asientosPorFila")));
+            return t;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
 }

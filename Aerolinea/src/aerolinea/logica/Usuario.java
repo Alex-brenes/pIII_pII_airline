@@ -17,15 +17,16 @@
 package aerolinea.logica;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -39,8 +40,14 @@ import javax.persistence.Table;
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected UsuarioPK usuarioPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "idUsuario")
+    private Integer idUsuario;
+    @Basic(optional = false)
+    @Column(name = "email")
+    private String email;
     @Basic(optional = false)
     @Column(name = "password")
     private String password;
@@ -56,31 +63,37 @@ public class Usuario implements Serializable {
     private String workPhone;
     @Column(name = "phone")
     private String phone;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
-    private List<Reserva> reservaList;
+    @JoinColumn(name = "Vuelo_idVuelo", referencedColumnName = "idVuelo")
+    @ManyToOne(optional = false)
+    private Vuelo vuelo;
 
     public Usuario() {
     }
 
-    public Usuario(UsuarioPK usuarioPK) {
-        this.usuarioPK = usuarioPK;
+    public Usuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
-    public Usuario(UsuarioPK usuarioPK, String password) {
-        this.usuarioPK = usuarioPK;
+    public Usuario(Integer idUsuario, String email, String password) {
+        this.idUsuario = idUsuario;
+        this.email = email;
         this.password = password;
     }
 
-    public Usuario(String userName, String email, String id) {
-        this.usuarioPK = new UsuarioPK(userName, email, id);
+    public Integer getIdUsuario() {
+        return idUsuario;
     }
 
-    public UsuarioPK getUsuarioPK() {
-        return usuarioPK;
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
-    public void setUsuarioPK(UsuarioPK usuarioPK) {
-        this.usuarioPK = usuarioPK;
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -139,18 +152,18 @@ public class Usuario implements Serializable {
         this.phone = phone;
     }
 
-    public List<Reserva> getReservaList() {
-        return reservaList;
+    public Vuelo getVuelo() {
+        return vuelo;
     }
 
-    public void setReservaList(List<Reserva> reservaList) {
-        this.reservaList = reservaList;
+    public void setVuelo(Vuelo vuelo) {
+        this.vuelo = vuelo;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (usuarioPK != null ? usuarioPK.hashCode() : 0);
+        hash += (idUsuario != null ? idUsuario.hashCode() : 0);
         return hash;
     }
 
@@ -161,7 +174,7 @@ public class Usuario implements Serializable {
             return false;
         }
         Usuario other = (Usuario) object;
-        if ((this.usuarioPK == null && other.usuarioPK != null) || (this.usuarioPK != null && !this.usuarioPK.equals(other.usuarioPK))) {
+        if ((this.idUsuario == null && other.idUsuario != null) || (this.idUsuario != null && !this.idUsuario.equals(other.idUsuario))) {
             return false;
         }
         return true;
@@ -169,7 +182,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "aerolinea.logica.Usuario[ usuarioPK=" + usuarioPK + " ]";
+        return "aerolinea.logica.Usuario[ idUsuario=" + idUsuario + " ]";
     }
     
 }

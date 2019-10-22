@@ -35,96 +35,78 @@ import javax.persistence.Table;
  * @author pc
  */
 @Entity
-@Table(name = "ruta")
+@Table(name = "ciudad")
 @NamedQueries({
-    @NamedQuery(name = "Ruta.findAll", query = "SELECT r FROM Ruta r")})
-public class Ruta implements Serializable {
+    @NamedQuery(name = "Ciudad.findAll", query = "SELECT c FROM Ciudad c")})
+public class Ciudad implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "id")
-    private String id;
-    @Basic(optional = false)
-    @Column(name = "route")
-    private String route;
-    @Basic(optional = false)
-    @Column(name = "duration")
-    private String duration;
-    @JoinColumn(name = "Horario_id", referencedColumnName = "id")
+    @Column(name = "nombre")
+    private String nombre;
+    @JoinColumn(name = "Pais_nombre", referencedColumnName = "nombre")
     @ManyToOne(optional = false)
-    private Horario horario;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ruta")
-    private List<Avion> avionList;
+    private Pais pais;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ciudad")
+    private List<Vuelo> vueloList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ciudad1")
+    private List<Vuelo> vueloList1;
 
-    public Ruta() {
+    public Ciudad() {
     }
 
-    public Ruta(String id) {
-        this.id = id;
+    public Ciudad(String nombre) {
+        this.nombre = nombre;
     }
 
-    public Ruta(String id, String route, String duration) {
-        this.id = id;
-        this.route = route;
-        this.duration = duration;
+    public String getNombre() {
+        return nombre;
     }
 
-    public String getId() {
-        return id;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public Pais getPais() {
+        return pais;
     }
 
-    public String getRoute() {
-        return route;
+    public void setPais(Pais pais) {
+        this.pais = pais;
     }
 
-    public void setRoute(String route) {
-        this.route = route;
+    public List<Vuelo> getVueloList() {
+        return vueloList;
     }
 
-    public String getDuration() {
-        return duration;
+    public void setVueloList(List<Vuelo> vueloList) {
+        this.vueloList = vueloList;
     }
 
-    public void setDuration(String duration) {
-        this.duration = duration;
+    public List<Vuelo> getVueloList1() {
+        return vueloList1;
     }
 
-    public Horario getHorario() {
-        return horario;
-    }
-
-    public void setHorario(Horario horario) {
-        this.horario = horario;
-    }
-
-    public List<Avion> getAvionList() {
-        return avionList;
-    }
-
-    public void setAvionList(List<Avion> avionList) {
-        this.avionList = avionList;
+    public void setVueloList1(List<Vuelo> vueloList1) {
+        this.vueloList1 = vueloList1;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (nombre != null ? nombre.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Ruta)) {
+        if (!(object instanceof Ciudad)) {
             return false;
         }
-        Ruta other = (Ruta) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        Ciudad other = (Ciudad) object;
+        if ((this.nombre == null && other.nombre != null) || (this.nombre != null && !this.nombre.equals(other.nombre))) {
             return false;
         }
         return true;
@@ -132,7 +114,7 @@ public class Ruta implements Serializable {
 
     @Override
     public String toString() {
-        return "aerolinea.logica.Ruta[ id=" + id + " ]";
+        return "aerolinea.logica.Ciudad[ nombre=" + nombre + " ]";
     }
     
 }

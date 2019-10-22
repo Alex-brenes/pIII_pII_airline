@@ -17,15 +17,19 @@
 package aerolinea.logica;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -40,54 +44,82 @@ public class Reserva implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
-    private Integer id;
-    @JoinColumn(name = "Tiquete_seatNumber", referencedColumnName = "seatNumber")
+    @Column(name = "idReserva")
+    private Integer idReserva;
+    @Column(name = "cantidad")
+    private Integer cantidad;
+    @Column(name = "documento")
+    private String documento;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "reserva")
+    private List<Tiquete> tiqueteList;
+    @JoinColumn(name = "FormaPago_idFormaPago", referencedColumnName = "idFormaPago")
     @ManyToOne(optional = false)
-    private Tiquete tiquete;
-    @JoinColumns({
-        @JoinColumn(name = "Usuario_userName", referencedColumnName = "userName"),
-        @JoinColumn(name = "Usuario_email", referencedColumnName = "email"),
-        @JoinColumn(name = "Usuario_id", referencedColumnName = "id")})
+    private Formapago formapago;
+    @JoinColumn(name = "Viaje_idViaje", referencedColumnName = "idViaje")
     @ManyToOne(optional = false)
-    private Usuario usuario;
+    private Viaje viaje;
 
     public Reserva() {
     }
 
-    public Reserva(Integer id) {
-        this.id = id;
+    public Reserva(Integer idReserva) {
+        this.idReserva = idReserva;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getIdReserva() {
+        return idReserva;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdReserva(Integer idReserva) {
+        this.idReserva = idReserva;
     }
 
-    public Tiquete getTiquete() {
-        return tiquete;
+    public Integer getCantidad() {
+        return cantidad;
     }
 
-    public void setTiquete(Tiquete tiquete) {
-        this.tiquete = tiquete;
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public String getDocumento() {
+        return documento;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setDocumento(String documento) {
+        this.documento = documento;
+    }
+
+    public List<Tiquete> getTiqueteList() {
+        return tiqueteList;
+    }
+
+    public void setTiqueteList(List<Tiquete> tiqueteList) {
+        this.tiqueteList = tiqueteList;
+    }
+
+    public Formapago getFormapago() {
+        return formapago;
+    }
+
+    public void setFormapago(Formapago formapago) {
+        this.formapago = formapago;
+    }
+
+    public Viaje getViaje() {
+        return viaje;
+    }
+
+    public void setViaje(Viaje viaje) {
+        this.viaje = viaje;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (idReserva != null ? idReserva.hashCode() : 0);
         return hash;
     }
 
@@ -98,7 +130,7 @@ public class Reserva implements Serializable {
             return false;
         }
         Reserva other = (Reserva) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.idReserva == null && other.idReserva != null) || (this.idReserva != null && !this.idReserva.equals(other.idReserva))) {
             return false;
         }
         return true;
@@ -106,7 +138,7 @@ public class Reserva implements Serializable {
 
     @Override
     public String toString() {
-        return "aerolinea.logica.Reserva[ id=" + id + " ]";
+        return "aerolinea.logica.Reserva[ idReserva=" + idReserva + " ]";
     }
     
 }

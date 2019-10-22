@@ -17,7 +17,9 @@
 package aerolinea.logica;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -25,6 +27,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -42,10 +45,9 @@ public class Avion implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private String id;
-    @JoinColumn(name = "Ruta_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Ruta ruta;
-    @JoinColumn(name = "TipoAvion_id", referencedColumnName = "id")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "avion")
+    private List<Vuelo> vueloList;
+    @JoinColumn(name = "TipoAvion_idTipoAvion", referencedColumnName = "idTipoAvion")
     @ManyToOne(optional = false)
     private Tipoavion tipoavion;
 
@@ -64,12 +66,12 @@ public class Avion implements Serializable {
         this.id = id;
     }
 
-    public Ruta getRuta() {
-        return ruta;
+    public List<Vuelo> getVueloList() {
+        return vueloList;
     }
 
-    public void setRuta(Ruta ruta) {
-        this.ruta = ruta;
+    public void setVueloList(List<Vuelo> vueloList) {
+        this.vueloList = vueloList;
     }
 
     public Tipoavion getTipoavion() {

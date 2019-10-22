@@ -17,14 +17,15 @@
 package aerolinea.logica;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -32,58 +33,57 @@ import javax.persistence.Table;
  * @author pc
  */
 @Entity
-@Table(name = "tiquete")
+@Table(name = "formapago")
 @NamedQueries({
-    @NamedQuery(name = "Tiquete.findAll", query = "SELECT t FROM Tiquete t")})
-public class Tiquete implements Serializable {
+    @NamedQuery(name = "Formapago.findAll", query = "SELECT f FROM Formapago f")})
+public class Formapago implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "numeroAsiento")
-    private Integer numeroAsiento;
-    @JoinColumn(name = "Reserva_idReserva", referencedColumnName = "idReserva")
-    @ManyToOne(optional = false)
-    private Reserva reserva;
+    @Column(name = "idFormaPago")
+    private String idFormaPago;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "formapago")
+    private List<Reserva> reservaList;
 
-    public Tiquete() {
+    public Formapago() {
     }
 
-    public Tiquete(Integer numeroAsiento) {
-        this.numeroAsiento = numeroAsiento;
+    public Formapago(String idFormaPago) {
+        this.idFormaPago = idFormaPago;
     }
 
-    public Integer getNumeroAsiento() {
-        return numeroAsiento;
+    public String getIdFormaPago() {
+        return idFormaPago;
     }
 
-    public void setNumeroAsiento(Integer numeroAsiento) {
-        this.numeroAsiento = numeroAsiento;
+    public void setIdFormaPago(String idFormaPago) {
+        this.idFormaPago = idFormaPago;
     }
 
-    public Reserva getReserva() {
-        return reserva;
+    public List<Reserva> getReservaList() {
+        return reservaList;
     }
 
-    public void setReserva(Reserva reserva) {
-        this.reserva = reserva;
+    public void setReservaList(List<Reserva> reservaList) {
+        this.reservaList = reservaList;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (numeroAsiento != null ? numeroAsiento.hashCode() : 0);
+        hash += (idFormaPago != null ? idFormaPago.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Tiquete)) {
+        if (!(object instanceof Formapago)) {
             return false;
         }
-        Tiquete other = (Tiquete) object;
-        if ((this.numeroAsiento == null && other.numeroAsiento != null) || (this.numeroAsiento != null && !this.numeroAsiento.equals(other.numeroAsiento))) {
+        Formapago other = (Formapago) object;
+        if ((this.idFormaPago == null && other.idFormaPago != null) || (this.idFormaPago != null && !this.idFormaPago.equals(other.idFormaPago))) {
             return false;
         }
         return true;
@@ -91,7 +91,7 @@ public class Tiquete implements Serializable {
 
     @Override
     public String toString() {
-        return "aerolinea.logica.Tiquete[ numeroAsiento=" + numeroAsiento + " ]";
+        return "aerolinea.logica.Formapago[ idFormaPago=" + idFormaPago + " ]";
     }
     
 }

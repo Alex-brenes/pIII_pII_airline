@@ -41,100 +41,84 @@ public class Tipoavion implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "id")
-    private String id;
-    @Basic(optional = false)
-    @Column(name = "brand")
-    private String brand;
-    @Basic(optional = false)
-    @Column(name = "year")
-    private String year;
-    @Basic(optional = false)
-    @Column(name = "model")
-    private String model;
-    @Basic(optional = false)
-    @Column(name = "passengersQuantity")
-    private int passengersQuantity;
-    @Basic(optional = false)
-    @Column(name = "rowsQuantity")
-    private int rowsQuantity;
-    @Basic(optional = false)
-    @Column(name = "seatsRow")
-    private int seatsRow;
+    @Column(name = "idTipoAvion")
+    private String idTipoAvion;
+    @Column(name = "marca")
+    private String marca;
+    @Column(name = "annio")
+    private Integer annio;
+    @Column(name = "modelo")
+    private String modelo;
+    @Column(name = "cantidadPasajeros")
+    private Integer cantidadPasajeros;
+    @Column(name = "cantidadFilas")
+    private Integer cantidadFilas;
+    @Column(name = "asientosPorFila")
+    private Integer asientosPorFila;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoavion")
     private List<Avion> avionList;
 
     public Tipoavion() {
     }
 
-    public Tipoavion(String id) {
-        this.id = id;
+    public Tipoavion(String idTipoAvion) {
+        this.idTipoAvion = idTipoAvion;
     }
 
-    public Tipoavion(String id, String brand, String year, String model, int passengersQuantity, int rowsQuantity, int seatsRow) {
-        this.id = id;
-        this.brand = brand;
-        this.year = year;
-        this.model = model;
-        this.passengersQuantity = passengersQuantity;
-        this.rowsQuantity = rowsQuantity;
-        this.seatsRow = seatsRow;
+    public String getIdTipoAvion() {
+        return idTipoAvion;
     }
 
-    public String getId() {
-        return id;
+    public void setIdTipoAvion(String idTipoAvion) {
+        this.idTipoAvion = idTipoAvion;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public String getMarca() {
+        return marca;
     }
 
-    public String getBrand() {
-        return brand;
+    public void setMarca(String marca) {
+        this.marca = marca;
     }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
+    public Integer getAnnio() {
+        return annio;
     }
 
-    public String getYear() {
-        return year;
+    public void setAnnio(Integer annio) {
+        this.annio = annio;
     }
 
-    public void setYear(String year) {
-        this.year = year;
+    public String getModelo() {
+        return modelo;
     }
 
-    public String getModel() {
-        return model;
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
     }
 
-    public void setModel(String model) {
-        this.model = model;
+    public Integer getCantidadPasajeros() {
+        return cantidadPasajeros;
     }
 
-    public int getPassengersQuantity() {
-        return passengersQuantity;
+    public void setCantidadPasajeros(Integer cantidadPasajeros) {
+        this.cantidadPasajeros = cantidadPasajeros;
     }
 
-    public void setPassengersQuantity(int passengersQuantity) {
-        this.passengersQuantity = passengersQuantity;
+    public Integer getCantidadFilas() {
+        return cantidadFilas;
     }
 
-    public int getRowsQuantity() {
-        return rowsQuantity;
+    public void setCantidadFilas(Integer cantidadFilas) {
+        this.cantidadFilas = cantidadFilas;
     }
 
-    public void setRowsQuantity(int rowsQuantity) {
-        this.rowsQuantity = rowsQuantity;
+    public Integer getAsientosPorFila() {
+        return asientosPorFila;
     }
 
-    public int getSeatsRow() {
-        return seatsRow;
-    }
-
-    public void setSeatsRow(int seatsRow) {
-        this.seatsRow = seatsRow;
+    public void setAsientosPorFila(Integer asientosPorFila) {
+        this.asientosPorFila = asientosPorFila;
     }
 
     public List<Avion> getAvionList() {
@@ -148,7 +132,7 @@ public class Tipoavion implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (idTipoAvion != null ? idTipoAvion.hashCode() : 0);
         return hash;
     }
 
@@ -159,7 +143,7 @@ public class Tipoavion implements Serializable {
             return false;
         }
         Tipoavion other = (Tipoavion) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.idTipoAvion == null && other.idTipoAvion != null) || (this.idTipoAvion != null && !this.idTipoAvion.equals(other.idTipoAvion))) {
             return false;
         }
         return true;
@@ -167,7 +151,7 @@ public class Tipoavion implements Serializable {
 
     @Override
     public String toString() {
-        return "aerolinea.logica.Tipoavion[ id=" + id + " ]";
+        return "aerolinea.logica.Tipoavion[ idTipoAvion=" + idTipoAvion + " ]";
     }
     
 }

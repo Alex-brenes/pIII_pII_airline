@@ -17,16 +17,21 @@
 package aerolinea.logica;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -41,114 +46,102 @@ public class Vuelo implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "id")
-    private String id;
-    @Basic(optional = false)
-    @Column(name = "return")
-    private short return1;
-    @Basic(optional = false)
-    @Column(name = "from")
-    private String from;
-    @Basic(optional = false)
-    @Column(name = "to")
-    private String to;
-    @Basic(optional = false)
-    @Column(name = "departDate")
-    private String departDate;
-    @Basic(optional = false)
-    @Column(name = "returnDate")
-    private String returnDate;
-    @Basic(optional = false)
-    @Column(name = "passengersQuantity")
-    private int passengersQuantity;
+    @Column(name = "idVuelo")
+    private String idVuelo;
+    @Column(name = "dia")
+    private String dia;
+    @Column(name = "hora")
+    @Temporal(TemporalType.TIME)
+    private Date hora;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "vuelo")
-    private List<Tiquete> tiqueteList;
+    private List<Viaje> viajeList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vuelo")
+    private List<Usuario> usuarioList;
+    @JoinColumn(name = "Avion_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Avion avion;
+    @JoinColumn(name = "Ciudad_nombre", referencedColumnName = "nombre")
+    @ManyToOne(optional = false)
+    private Ciudad ciudad;
+    @JoinColumn(name = "Ciudad_nombre1", referencedColumnName = "nombre")
+    @ManyToOne(optional = false)
+    private Ciudad ciudad1;
 
     public Vuelo() {
     }
 
-    public Vuelo(String id) {
-        this.id = id;
+    public Vuelo(String idVuelo) {
+        this.idVuelo = idVuelo;
     }
 
-    public Vuelo(String id, short return1, String from, String to, String departDate, String returnDate, int passengersQuantity) {
-        this.id = id;
-        this.return1 = return1;
-        this.from = from;
-        this.to = to;
-        this.departDate = departDate;
-        this.returnDate = returnDate;
-        this.passengersQuantity = passengersQuantity;
+    public String getIdVuelo() {
+        return idVuelo;
     }
 
-    public String getId() {
-        return id;
+    public void setIdVuelo(String idVuelo) {
+        this.idVuelo = idVuelo;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public String getDia() {
+        return dia;
     }
 
-    public short getReturn1() {
-        return return1;
+    public void setDia(String dia) {
+        this.dia = dia;
     }
 
-    public void setReturn1(short return1) {
-        this.return1 = return1;
+    public Date getHora() {
+        return hora;
     }
 
-    public String getFrom() {
-        return from;
+    public void setHora(Date hora) {
+        this.hora = hora;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
+    public List<Viaje> getViajeList() {
+        return viajeList;
     }
 
-    public String getTo() {
-        return to;
+    public void setViajeList(List<Viaje> viajeList) {
+        this.viajeList = viajeList;
     }
 
-    public void setTo(String to) {
-        this.to = to;
+    public List<Usuario> getUsuarioList() {
+        return usuarioList;
     }
 
-    public String getDepartDate() {
-        return departDate;
+    public void setUsuarioList(List<Usuario> usuarioList) {
+        this.usuarioList = usuarioList;
     }
 
-    public void setDepartDate(String departDate) {
-        this.departDate = departDate;
+    public Avion getAvion() {
+        return avion;
     }
 
-    public String getReturnDate() {
-        return returnDate;
+    public void setAvion(Avion avion) {
+        this.avion = avion;
     }
 
-    public void setReturnDate(String returnDate) {
-        this.returnDate = returnDate;
+    public Ciudad getCiudad() {
+        return ciudad;
     }
 
-    public int getPassengersQuantity() {
-        return passengersQuantity;
+    public void setCiudad(Ciudad ciudad) {
+        this.ciudad = ciudad;
     }
 
-    public void setPassengersQuantity(int passengersQuantity) {
-        this.passengersQuantity = passengersQuantity;
+    public Ciudad getCiudad1() {
+        return ciudad1;
     }
 
-    public List<Tiquete> getTiqueteList() {
-        return tiqueteList;
-    }
-
-    public void setTiqueteList(List<Tiquete> tiqueteList) {
-        this.tiqueteList = tiqueteList;
+    public void setCiudad1(Ciudad ciudad1) {
+        this.ciudad1 = ciudad1;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (idVuelo != null ? idVuelo.hashCode() : 0);
         return hash;
     }
 
@@ -159,7 +152,7 @@ public class Vuelo implements Serializable {
             return false;
         }
         Vuelo other = (Vuelo) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.idVuelo == null && other.idVuelo != null) || (this.idVuelo != null && !this.idVuelo.equals(other.idVuelo))) {
             return false;
         }
         return true;
@@ -167,7 +160,7 @@ public class Vuelo implements Serializable {
 
     @Override
     public String toString() {
-        return "aerolinea.logica.Vuelo[ id=" + id + " ]";
+        return "aerolinea.logica.Vuelo[ idVuelo=" + idVuelo + " ]";
     }
     
 }

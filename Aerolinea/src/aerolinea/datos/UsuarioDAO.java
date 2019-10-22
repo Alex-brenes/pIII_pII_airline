@@ -20,14 +20,13 @@
 package aerolinea.datos;
 
 import aerolinea.logica.Usuario;
-import aerolinea.logica.UsuarioPK;
 import java.util.List;
 
-public class UsuarioDAO implements DAO<Usuario, UsuarioPK> {
+public class UsuarioDAO implements DAO<Usuario, Integer> {
 
     @Override
     public void add(Usuario s) throws Throwable {
-       
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -36,18 +35,19 @@ public class UsuarioDAO implements DAO<Usuario, UsuarioPK> {
     }
 
     @Override
-    public Usuario get(UsuarioPK s) throws Throwable {
+    public Usuario get(Integer s) throws Throwable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void update(UsuarioPK s) {
+    public void update(Integer s) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Usuario> searh(UsuarioPK s) {
+    public List<Usuario> searh(Integer s) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
 
 }

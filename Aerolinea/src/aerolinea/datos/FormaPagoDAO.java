@@ -15,18 +15,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package aerolinea.datos;
+
 import aerolinea.logica.Formapago;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author pc
  */
-public class FormaPagoDAO implements DAO<Formapago, String>{
+public class FormaPagoDAO extends AbstractDAO<Formapago, String> {
 
     private RelDatabase db;
+
     @Override
     public void add(Formapago s) throws Throwable {
         String query = "INSER INTO FormaPago (idFormaPago) "
@@ -75,8 +78,21 @@ public class FormaPagoDAO implements DAO<Formapago, String>{
     }
 
     @Override
-    public List<Formapago> searh(String s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Formapago> searh(String s) throws Throwable{ //Búsqueda por id
+        List<Formapago> resultado = new ArrayList<Formapago>();
+        try {
+            String query = "SELECT * "
+                    + "FROM Formapago f  "
+                    + "where f.idFormaPago like '%%%s%%'";
+            query = String.format(query, s);
+            ResultSet rs = db.executeQuery(query);
+            while (rs.next()) {
+                resultado.add(this.instancia(rs));
+            }
+
+        } catch (SQLException ex) {
+        }
+        return resultado;
     }
 
     @Override
@@ -91,5 +107,5 @@ public class FormaPagoDAO implements DAO<Formapago, String>{
             return null;
         }
     }
-    
+
 }

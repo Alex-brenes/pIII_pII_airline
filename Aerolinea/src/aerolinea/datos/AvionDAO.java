@@ -21,7 +21,7 @@ import aerolinea.logica.Avion;
 import java.sql.ResultSet;
 import java.util.List;
 
-public class AvionDAO implements DAO<Avion, String> {
+public class AvionDAO extends AbstractDAO<Avion, String> {
     private RelDatabase db;
     @Override
     public void add(Avion s) throws Throwable {

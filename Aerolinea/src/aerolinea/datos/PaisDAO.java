@@ -27,7 +27,7 @@ import java.util.List;
  *
  * @author pc
  */
-public class PaisDAO implements DAO<Pais, String> {
+public class PaisDAO extends AbstractDAO<Pais, String> {
 
     private RelDatabase db;
 
@@ -35,9 +35,12 @@ public class PaisDAO implements DAO<Pais, String> {
     public void add(Pais p) throws Throwable {
         String query = "INSER INTO Pais (abreviatura, nombre) "
                 + "values('%s', '%s')";
-        // VER SI TAMBIÉN SE AGREGAN LAS CIUDADES
         query = String.format(p.getAbreviatura(), p.getNombre());
         int count = db.executeUpdate(query);
+        //Cargar las ciudades
+//        for(Ciudad c : p.getCiudadList()){
+//            
+//        }
         if (count == 0) {
             throw new Exception("El país ya existe");
         }
@@ -80,7 +83,7 @@ public class PaisDAO implements DAO<Pais, String> {
     }
 
     @Override
-    public List<Pais> searh(String ab) { // Búsqueda por abreviatura
+    public List<Pais> searh(String ab) throws Throwable { // Búsqueda por abreviatura
         List<Pais> resultado = new ArrayList<Pais>();
         try {
             String query = "SELECT * "

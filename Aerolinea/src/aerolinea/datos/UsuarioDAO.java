@@ -22,9 +22,10 @@ package aerolinea.datos;
 import aerolinea.logica.Usuario;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
-public class UsuarioDAO implements DAO<Usuario, Integer> {
+public class UsuarioDAO extends AbstractDAO<Usuario, Integer> {
 
     private RelDatabase db;
 
@@ -43,6 +44,7 @@ public class UsuarioDAO implements DAO<Usuario, Integer> {
                 s.getWorkPhone(),
                 s.getPhone());
         int count = db.executeUpdate(query);
+        // CARGAR TODAS LAS RESERVAS DE ESTE USUARIO
         if (count == 0) {
             throw new Exception("El usuario ya existe");
         }
@@ -94,7 +96,19 @@ public class UsuarioDAO implements DAO<Usuario, Integer> {
 
     @Override
     public List<Usuario> searh(Integer s) throws Throwable{
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+               List<Usuario> resultado = new ArrayList<Usuario>();
+        try {
+            String query = "SELECT * "
+                    + "FROM Usuario u "
+                    + "WHERE u.idUsuario LIKE '%%%s%%'";
+            query = String.format(query, s);
+            ResultSet rs = db.executeQuery(query);
+            while (rs.next()) {
+                resultado.add(this.instancia(rs));
+            }
+        } catch (SQLException ex) {
+        }
+        return resultado;
     }
 
     @Override
@@ -111,7 +125,6 @@ public class UsuarioDAO implements DAO<Usuario, Integer> {
             c.setWorkPhone(rs.getString("worPhone"));
             c.setPhone(rs.getString("phone"));
             c.setIdUsuario(Integer.parseInt(rs.getString("idUsuario")));
-            // Ver si cargar también las reservas
             return c;
         } catch (SQLException ex) {
             return null;

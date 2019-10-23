@@ -18,20 +18,25 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package aerolinea.datos;
+
 import java.sql.ResultSet;
 import java.util.List;
 
+public interface DAO<T, K> {
 
-public interface DAO <T, K> {
-    /*
-        All classes that implement this interface must define a RelDatabase reference
-    */
-    public abstract void add(T s) throws Throwable;
-    public abstract void delete(T s) throws Throwable;
-    public abstract T get(K s) throws Throwable;
-    public abstract void update(T s) throws Throwable;
-    public abstract List<T> searh(K s) throws Throwable;
-    public abstract T instancia(ResultSet rs) throws Throwable;
+    public List<T> searh() throws Throwable;
+
+    public void add(T s) throws Throwable;
+
+    public void delete(T s) throws Throwable;
+
+    public T get(K s) throws Throwable;
+
+    public void update(T s) throws Throwable;
+
+    public List<T> searh(K s) throws Throwable;
+
+    public T instancia(ResultSet rs) throws Throwable;
+
 }

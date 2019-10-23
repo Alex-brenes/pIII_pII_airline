@@ -26,7 +26,7 @@ import java.util.List;
  *
  * @author pc
  */
-public class ReservaDAO implements DAO<Reserva, Integer> {
+public class ReservaDAO extends AbstractDAO<Reserva, Integer> {
 
     private RelDatabase db;
 

@@ -16,40 +16,50 @@
  */
 package aerolinea.datos;
 
-import aerolinea.logica.Vuelo;
 import java.sql.ResultSet;
 import java.util.List;
 
-public class VueloDAO extends AbstractDAO<Vuelo, String> {
-    private RelDatabase db;
+/**
+ *
+ * @author pc
+ * @param <T>
+ * @param <K>
+ */
+public abstract class AbstractDAO<T, K> implements DAO<T, K> {
+
+    protected RelDatabase db;
+
+    public AbstractDAO() {
+        this.db = new RelDatabase();
+    }
+    
     @Override
-    public void add(Vuelo s) throws Throwable {
+    public List<T> searh() throws Throwable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void delete(Vuelo s) throws Throwable {
+    public void add(T s) throws Throwable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Vuelo get(String s) throws Throwable {
+    public void delete(T s) throws Throwable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void update(Vuelo s) throws Throwable{
+    public T get(K s) throws Throwable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Vuelo> searh(String s) throws Throwable {
+    public void update(T s) throws Throwable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Vuelo instancia(ResultSet rs) throws Throwable {
+    public T instancia(ResultSet rs) throws Throwable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
 }

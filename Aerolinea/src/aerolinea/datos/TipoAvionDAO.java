@@ -26,7 +26,7 @@ import java.util.ArrayList;
  *
  * @author pc
  */
-public class TipoAvionDAO implements DAO<Tipoavion, String> {
+public class TipoAvionDAO extends AbstractDAO<Tipoavion, String> {
 
     private RelDatabase db;
 

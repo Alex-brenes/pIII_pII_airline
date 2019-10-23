@@ -26,9 +26,8 @@ import java.util.List;
  *
  * @author pc
  */
-public class CiudadDAO implements DAO<Ciudad, String> {
+public class CiudadDAO extends AbstractDAO<Ciudad, String> {
 
-    private RelDatabase db;
 
     @Override
     public void add(Ciudad c) throws Throwable {

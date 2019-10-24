@@ -42,7 +42,7 @@ public class Application {
         applicationView.setVisible(true);
         
         //jInternalFrames
-        applicationView.add(ViewFlotaEdicion);
+        applicationView.panel.add(ViewFlotaEdicion);
         
     }
     

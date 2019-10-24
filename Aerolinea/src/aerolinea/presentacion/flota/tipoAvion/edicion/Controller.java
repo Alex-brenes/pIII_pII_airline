@@ -15,7 +15,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package aerolinea.presentacion.flota.tipoAvion.edicion;
+
 import aerolinea.logica.Tipoavion;
+
 /**
  *
  * @author pc
@@ -28,6 +30,8 @@ public class Controller {
     public Controller(Model model, View view) {
         this.model = model;
         this.view = view;
+        this.view.setModel(this.model);
+        this.view.setController(this);
     }
 
     public void consultar(String id) {

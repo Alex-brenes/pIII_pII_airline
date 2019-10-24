@@ -30,11 +30,15 @@ public class Model extends Observable {
 
     private Tipoavion tipoAvion;
     private List<Integer> annios;
+    private List<Integer> filas;
+    private List<Integer> asientos;
 
     public Model() {
-        this.tipoAvion = new Tipoavion();
+        this.tipoAvion = new Tipoavion("", "", 1980, "", 0, 0, 6, null);
         this.annios = new ArrayList<Integer>();
-        this.iniciarAnnios();
+        this.filas = new ArrayList<Integer>();
+        this.asientos = new ArrayList<Integer>();
+        this.iniciarListas();
     }
 
     @Override
@@ -44,9 +48,15 @@ public class Model extends Observable {
         this.notifyObservers();
     }
 
-    private void iniciarAnnios() {
-        for (int annios = 1980; annios <= java.util.Calendar.getInstance().get(java.util.Calendar.YEAR); annios++) {
+    private void iniciarListas() {
+        for (int annios = Tipoavion.ANNIO_BASE; annios <= java.util.Calendar.getInstance().get(java.util.Calendar.YEAR); annios++) {
             this.annios.add(annios);
+        }
+        for (int filas = Tipoavion.MIN_FILAS; filas <= Tipoavion.MAX_FILAS; filas++) {
+            this.filas.add(filas);
+        }
+        for (int asientos = Tipoavion.MIN_ASIENTOS; asientos <= Tipoavion.MAX_ASIENTOS; asientos++) {
+            this.asientos.add(asientos);
         }
     }
 
@@ -68,6 +78,22 @@ public class Model extends Observable {
         this.annios = annios;
         this.setChanged();
         this.notifyObservers();
+    }
+
+    public List<Integer> getFilas() {
+        return filas;
+    }
+
+    public void setFilas(List<Integer> filas) {
+        this.filas = filas;
+    }
+
+    public List<Integer> getAsientos() {
+        return asientos;
+    }
+
+    public void setAsientos(List<Integer> asientos) {
+        this.asientos = asientos;
     }
 
 }

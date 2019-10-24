@@ -26,6 +26,7 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Tipoavion.findAll", query = "SELECT t FROM Tipoavion t")})
 public class Tipoavion implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -51,6 +52,24 @@ public class Tipoavion implements Serializable {
 
     public Tipoavion(String idTipoAvion) {
         this.idTipoAvion = idTipoAvion;
+        this.marca = "";
+        this.annio = ANNIO_BASE;
+        this.modelo = "";
+        this.cantidadPasajeros = MIN_ASIENTOS * MIN_FILAS;
+        this.cantidadFilas = MIN_FILAS;
+        this.asientosPorFila = MIN_ASIENTOS;
+        this.avionList = null;
+    }
+
+    public Tipoavion(String idTipoAvion, String marca, Integer annio, String modelo, Integer cantidadPasajeros, Integer cantidadFilas, Integer asientosPorFila, List<Avion> avionList) {
+        this.idTipoAvion = idTipoAvion;
+        this.marca = marca;
+        this.annio = annio;
+        this.modelo = modelo;
+        this.cantidadPasajeros = cantidadPasajeros;
+        this.cantidadFilas = cantidadFilas;
+        this.asientosPorFila = asientosPorFila;
+        this.avionList = avionList;
     }
 
     public String getIdTipoAvion() {
@@ -141,5 +160,9 @@ public class Tipoavion implements Serializable {
     public String toString() {
         return "aerolinea.logica.Tipoavion[ idTipoAvion=" + idTipoAvion + " ]";
     }
-    
+    public final static int MIN_FILAS = 45;
+    public final static int MAX_FILAS = 90;
+    public final static int MIN_ASIENTOS = 6;
+    public final static int MAX_ASIENTOS = 9;
+    public final static int ANNIO_BASE = 1980;
 }

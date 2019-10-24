@@ -33,7 +33,6 @@ public class Controller {
         this.view.setModel(this.model);
         this.view.setController(this);
     }
-
     //Flota
         // Edicion
         public void EdicionTipoShow() {

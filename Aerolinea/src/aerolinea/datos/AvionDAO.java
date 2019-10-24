@@ -19,38 +19,92 @@ package aerolinea.datos;
 
 import aerolinea.logica.Avion;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AvionDAO extends AbstractDAO<Avion, String> {
-    private RelDatabase db;
+
+    public AvionDAO(){
+        super();
+    }
+    
     @Override
     public void add(Avion s) throws Throwable {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String query = "INSER INTO Avion (id, tipoAvion) "
+                + "VALUES('%s', '%s')";
+        query = String.format(query, s.getId(), s.getTipoavion().getIdTipoAvion());
+        int count = db.executeUpdate(query);
+        if (count == 0) {
+            throw new Exception("El avión ya existe");
+        }
     }
 
     @Override
     public void delete(Avion s) throws Throwable {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String query = "DELETE FROM Avion WHERE id='%s'";
+        query = String.format(query, s.getId());
+        int count = db.executeUpdate(query);
+        if (count == 0) {
+            throw new Exception("El avión no existe");
+        }
     }
 
     @Override
     public Avion get(String s) throws Throwable {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String query = "SELECT * "
+                + "FROM Avion a "
+                + "WHERE a.id='%s'";
+        query = String.format(query, s);
+        ResultSet rs = db.executeQuery(query);
+        if (rs.next()) {
+            return this.instancia(rs);
+        } else {
+            throw new Exception("El avión no existe");
+        }
     }
 
     @Override
-    public void update(Avion s) throws Throwable{
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void update(Avion s) throws Throwable {
+        String query = "UPDATE Avion SET tipoAvion='%s' "
+                + "where id='%s'";
+        // Actualiza la abreviatura del pais
+        query = String.format(query, s.getTipoavion().getIdTipoAvion(), s.getId());
+        int count = db.executeUpdate(query);
+        if (count == 0) {
+            throw new Exception("El avión no existe");
+        }
     }
 
     @Override
-    public List<Avion> searh(String s) throws Throwable {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Avion> searh(String s) throws Throwable { //Búsqueda por id
+        List<Avion> resultado = new ArrayList<Avion>();
+        try {
+            String query = "SELECT * "
+                    + "FROM Avion a "
+                    + "WHERE a.id LIKE '%%%s%%'";
+            query = String.format(query, s);
+            ResultSet rs = db.executeQuery(query);
+            while (rs.next()) {
+                resultado.add(this.instancia(rs));
+            }
+        } catch (SQLException ex) {
+        }
+        return resultado;
     }
 
     @Override
     public Avion instancia(ResultSet rs) throws Throwable {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            String s;
+            Avion c = new Avion();
+            c.setId(rs.getString("id"));
+            // Por ahora
+            c.setTipoavion(new aerolinea.logica.Tipoavion(rs.getString("tipoAvion")));
+            return c;
+        } catch (SQLException ex) {
+            return null;
+        }
     }
-    
+
 }

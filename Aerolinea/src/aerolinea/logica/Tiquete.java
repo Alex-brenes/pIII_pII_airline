@@ -20,6 +20,8 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -39,7 +41,10 @@ public class Tiquete implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @Column(name = "idTiquete")
+    private Integer idTiquete;
     @Column(name = "numeroAsiento")
     private Integer numeroAsiento;
     @JoinColumn(name = "reserva", referencedColumnName = "idReserva")
@@ -49,8 +54,16 @@ public class Tiquete implements Serializable {
     public Tiquete() {
     }
 
-    public Tiquete(Integer numeroAsiento) {
-        this.numeroAsiento = numeroAsiento;
+    public Tiquete(Integer idTiquete) {
+        this.idTiquete = idTiquete;
+    }
+
+    public Integer getIdTiquete() {
+        return idTiquete;
+    }
+
+    public void setIdTiquete(Integer idTiquete) {
+        this.idTiquete = idTiquete;
     }
 
     public Integer getNumeroAsiento() {
@@ -72,7 +85,7 @@ public class Tiquete implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (numeroAsiento != null ? numeroAsiento.hashCode() : 0);
+        hash += (idTiquete != null ? idTiquete.hashCode() : 0);
         return hash;
     }
 
@@ -83,7 +96,7 @@ public class Tiquete implements Serializable {
             return false;
         }
         Tiquete other = (Tiquete) object;
-        if ((this.numeroAsiento == null && other.numeroAsiento != null) || (this.numeroAsiento != null && !this.numeroAsiento.equals(other.numeroAsiento))) {
+        if ((this.idTiquete == null && other.idTiquete != null) || (this.idTiquete != null && !this.idTiquete.equals(other.idTiquete))) {
             return false;
         }
         return true;
@@ -91,7 +104,7 @@ public class Tiquete implements Serializable {
 
     @Override
     public String toString() {
-        return "aerolinea.logica.Tiquete[ numeroAsiento=" + numeroAsiento + " ]";
+        return "aerolinea.logica.Tiquete[ idTiquete=" + idTiquete + " ]";
     }
     
 }

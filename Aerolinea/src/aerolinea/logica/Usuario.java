@@ -50,20 +50,22 @@ public class Usuario implements Serializable {
     @Column(name = "email")
     private String email;
     @Basic(optional = false)
-    @Column(name = "password")
-    private String password;
-    @Column(name = "firstName")
-    private String firstName;
-    @Column(name = "lastName")
-    private String lastName;
-    @Column(name = "dateOfBirth")
-    private String dateOfBirth;
-    @Column(name = "address")
-    private String address;
-    @Column(name = "workPhone")
-    private String workPhone;
-    @Column(name = "phone")
-    private String phone;
+    @Column(name = "contrasenna")
+    private String contrasenna;
+    @Column(name = "nombre")
+    private String nombre;
+    @Column(name = "apellido")
+    private String apellido;
+    @Column(name = "fechaNacimiento")
+    private String fechaNacimiento;
+    @Column(name = "direccion")
+    private String direccion;
+    @Column(name = "telefonoTrabajo")
+    private String telefonoTrabajo;
+    @Column(name = "telefono")
+    private String telefono;
+    @Column(name = "admin")
+    private boolean admin;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
     private List<Reserva> reservaList;
 
@@ -74,10 +76,10 @@ public class Usuario implements Serializable {
         this.idUsuario = idUsuario;
     }
 
-    public Usuario(Integer idUsuario, String email, String password) {
+    public Usuario(Integer idUsuario, String email, String contrasenna) {
         this.idUsuario = idUsuario;
         this.email = email;
-        this.password = password;
+        this.contrasenna = contrasenna;
     }
 
     public Integer getIdUsuario() {
@@ -96,60 +98,68 @@ public class Usuario implements Serializable {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getContrasenna() {
+        return contrasenna;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setContrasenna(String contrasenna) {
+        this.contrasenna = contrasenna;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
-    public String getDateOfBirth() {
-        return dateOfBirth;
+    public String getFechaNacimiento() {
+        return fechaNacimiento;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+    public void setFechaNacimiento(String fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
 
-    public String getAddress() {
-        return address;
+    public String getDireccion() {
+        return direccion;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
-    public String getWorkPhone() {
-        return workPhone;
+    public String getTelefonoTrabajo() {
+        return telefonoTrabajo;
     }
 
-    public void setWorkPhone(String workPhone) {
-        this.workPhone = workPhone;
+    public void setTelefonoTrabajo(String telefonoTrabajo) {
+        this.telefonoTrabajo = telefonoTrabajo;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getTelefono() {
+        return telefono;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public boolean getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
     }
 
     public List<Reserva> getReservaList() {

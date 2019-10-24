@@ -28,6 +28,10 @@ import java.util.List;
  */
 public class ViajeDAO extends AbstractDAO<Viaje, Integer> {
 
+    public ViajeDAO(){
+        super();
+    }
+    
     @Override
     public void add(Viaje s) throws Throwable {
         String query = "INSER INTO Viaje v (idViaje, fecha, precio, disponibles, vuelo) "

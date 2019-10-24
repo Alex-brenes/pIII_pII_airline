@@ -28,62 +28,63 @@ import java.util.List;
  */
 public class TiqueteDAO extends AbstractDAO<Tiquete, Integer> {
 
+    public TiqueteDAO(){
+        super();
+    }
+    
     @Override
     public void add(Tiquete s) throws Throwable {
-        // TENGO LA DUDA CON LO DEL NÚMERO DE ASIENTO COMO PRIMARY KEY DE TIQUETE
-        String query = "INSER INTO Tiquete (numeroAsiento, reserva) "
-                + "VALUES('%s', '%s')";
-        query = String.format(query, s.getNumeroAsiento(), s.getReserva());
+        String query = "INSER INTO Tiquete (idTiquete, numeroAsiento, reserva) "
+                + "VALUES('%s', '%s', '%s')";
+        query = String.format(query, s.getIdTiquete(), s.getNumeroAsiento(), s.getReserva().getIdReserva());
         int count = db.executeUpdate(query);
         if (count == 0) {
-            throw new Exception("La ciudad ya existe");
+            throw new Exception("El tiquete ya existe");
         }
     }
 
     @Override
     public void delete(Tiquete s) throws Throwable {
-        String query = "DELETE FROM Tiquete WHERE numeroAsiento='%s'";
-        query = String.format(query, s.getNumeroAsiento());
+        String query = "DELETE FROM Tiquete WHERE idTiquete='%s'";
+        query = String.format(query, s.getIdTiquete());
         int count = db.executeUpdate(query);
         if (count == 0) {
-            throw new Exception("La ciudad no existe");
+            throw new Exception("El tiquete no existe");
         }
     }
 
     @Override
     public Tiquete get(Integer s) throws Throwable {
-        // CAMBIAR LLAVE PRIMARIA
         String query = "SELECT * "
                 + "FROM Tiquete t "
-                + "WHERE t.numeroAsiento='%s'";
+                + "WHERE t.idTiquete='%s'";
         query = String.format(query, s);
         ResultSet rs = db.executeQuery(query);
         if (rs.next()) {
             return this.instancia(rs);
         } else {
-            throw new Exception("La ciudad no existe");
+            throw new Exception("El tiquete no existe");
         }
     }
 
     @Override
     public void update(Tiquete s) throws Throwable {
-        String sql = "UPDATE Tiquete SET reserva='%s' "
-                + "where numeroAsiento='%s'";
-        // Actualiza la abreviatura del pais
-        sql = String.format(sql, s.getReserva().getIdReserva(), s.getNumeroAsiento());
-        int count = db.executeUpdate(sql);
+        String query = "UPDATE Tiquete SET numeroAsiento='%s', reserva='%s' "
+                + "where idTiquete='%s'";
+        query = String.format(query,  s.getNumeroAsiento(),s.getReserva().getIdReserva(),s.getIdTiquete());
+        int count = db.executeUpdate(query);
         if (count == 0) {
-            throw new Exception("La ciudad no existe");
+            throw new Exception("El tiquete no existe");
         }
     }
 
     @Override
-    public List<Tiquete> searh(Integer s) throws Throwable {
+    public List<Tiquete> searh(Integer s) throws Throwable { // Búsqueda por idTiquete
         List<Tiquete> resultado = new ArrayList<Tiquete>();
         try {
             String query = "SELECT * "
                     + "FROM Tiquete t "
-                    + "WHERE t.numeroAsiento LIKE '%%%s%%'";
+                    + "WHERE t.idTiquete LIKE '%%%s%%'";
             query = String.format(query, s);
             ResultSet rs = db.executeQuery(query);
             while (rs.next()) {
@@ -99,7 +100,9 @@ public class TiqueteDAO extends AbstractDAO<Tiquete, Integer> {
         try {
             String s;
             Tiquete c = new Tiquete();
+            c.setIdTiquete(Integer.parseInt(rs.getString("idTiquete")));
             c.setNumeroAsiento(Integer.parseInt(rs.getString("numeroAsiento")));
+            //Por ahora
             c.setReserva(new aerolinea.logica.Reserva(Integer.parseInt(rs.getString("reserva"))));
             return c;
         } catch (SQLException ex) {

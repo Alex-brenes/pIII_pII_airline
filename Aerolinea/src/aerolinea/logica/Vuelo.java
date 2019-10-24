@@ -60,10 +60,10 @@ public class Vuelo implements Serializable {
     private Avion avion;
     @JoinColumn(name = "origen", referencedColumnName = "nombre")
     @ManyToOne(optional = false)
-    private Ciudad ciudad;
+    private Ciudad origen;
     @JoinColumn(name = "destino", referencedColumnName = "nombre")
     @ManyToOne(optional = false)
-    private Ciudad ciudad1;
+    private Ciudad destino;
 
     public Vuelo() {
     }
@@ -112,20 +112,20 @@ public class Vuelo implements Serializable {
         this.avion = avion;
     }
 
-    public Ciudad getCiudad() {
-        return ciudad;
+    public Ciudad getOrigen() {
+        return origen;
     }
 
-    public void setCiudad(Ciudad ciudad) {
-        this.ciudad = ciudad;
+    public void setOrigen(Ciudad origen) {
+        this.origen = origen;
     }
 
-    public Ciudad getCiudad1() {
-        return ciudad1;
+    public Ciudad getDestino() {
+        return destino;
     }
 
-    public void setCiudad1(Ciudad ciudad1) {
-        this.ciudad1 = ciudad1;
+    public void setDestino(Ciudad destino) {
+        this.destino = destino;
     }
 
     @Override

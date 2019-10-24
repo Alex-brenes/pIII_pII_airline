@@ -28,7 +28,9 @@ import java.util.List;
  */
 public class FormaPagoDAO extends AbstractDAO<Formapago, String> {
 
-    private RelDatabase db;
+    public FormaPagoDAO(){
+        super();
+    }
 
     @Override
     public void add(Formapago s) throws Throwable {

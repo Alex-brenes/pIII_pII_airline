@@ -27,13 +27,16 @@ import java.util.List;
  * @author pc
  */
 public class CiudadDAO extends AbstractDAO<Ciudad, String> {
-
+    
+    public CiudadDAO(){
+        super();
+    }
 
     @Override
     public void add(Ciudad c) throws Throwable {
         String query = "INSER INTO Ciudad (nombre, abreviaturaPais) "
                 + "VALUES('%s', '%s')";
-        query = String.format(c.getNombre(), c.getPais().getAbreviatura());
+        query = String.format(query, c.getNombre(), c.getPais().getAbreviatura());
         int count = db.executeUpdate(query);
         if (count == 0) {
             throw new Exception("La ciudad ya existe");

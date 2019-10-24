@@ -28,7 +28,9 @@ import java.util.List;
  */
 public class ReservaDAO extends AbstractDAO<Reserva, Integer> {
 
-    private RelDatabase db;
+    public ReservaDAO(){
+        super();
+    }
 
     @Override
     public void add(Reserva s) throws Throwable {

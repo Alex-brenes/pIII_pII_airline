@@ -28,7 +28,9 @@ import java.util.ArrayList;
  */
 public class TipoAvionDAO extends AbstractDAO<Tipoavion, String> {
 
-    private RelDatabase db;
+    public TipoAvionDAO(){
+        super();
+    }
 
     @Override
     public void add(Tipoavion s) throws Throwable {

@@ -29,7 +29,9 @@ import java.util.List;
  */
 public class PaisDAO extends AbstractDAO<Pais, String> {
 
-    private RelDatabase db;
+    public PaisDAO() {
+        super();
+    }
 
     @Override
     public void add(Pais p) throws Throwable {

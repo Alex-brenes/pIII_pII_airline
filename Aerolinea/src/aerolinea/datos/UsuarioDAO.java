@@ -27,22 +27,26 @@ import java.util.List;
 
 public class UsuarioDAO extends AbstractDAO<Usuario, Integer> {
 
-    private RelDatabase db;
+    public UsuarioDAO() {
+        super();
+    }
 
     @Override
     public void add(Usuario s) throws Throwable {
-        String query = "INSER INTO Usuario (idUsuario, email, password, firstName, lastName, dateOfBirth, address, workPhone, phone) "
-                + "values('%s','%s','%s','%s','%s','%s','%s','%s','%s')";
+        //Se quita idUsuario porque es AUTO INCREMENT
+        String query = "INSER INTO Usuario (idUsuario, email, password, firstName, lastName, dateOfBirth, address, workPhone, phone, admin) "
+                + "values('%s','%s','%s','%s','%s','%s','%s','%s','%s', '%s')";
         query = String.format(query,
                 s.getIdUsuario(),
                 s.getEmail(),
-                s.getPassword(),
-                s.getFirstName(),
-                s.getLastName(),
-                s.getDateOfBirth(),
-                s.getAddress(),
-                s.getWorkPhone(),
-                s.getPhone());
+                s.getContrasenna(),
+                s.getNombre(),
+                s.getApellido(),
+                s.getFechaNacimiento(),
+                s.getDireccion(),
+                s.getTelefonoTrabajo(),
+                s.getTelefono(),
+                s.getAdmin());
         int count = db.executeUpdate(query);
         // CARGAR TODAS LAS RESERVAS DE ESTE USUARIO
         if (count == 0) {
@@ -76,27 +80,28 @@ public class UsuarioDAO extends AbstractDAO<Usuario, Integer> {
 
     @Override
     public void update(Usuario s) throws Throwable {
-        String sql = "UPDATE USUARIO SET email='%s', password='%s', firstName='%s', lastName='%s', dateOfBirth='%s', address='%s', workPhone='%s', phone='%s' "
-                + "where idFormaPago='%s'";
-        sql = String.format(sql,
+        String query = "UPDATE USUARIO SET email='%s', contrasenna='%s', nombre='%s', apellido='%s', fechaNacimiento='%s', direccion='%s', telefonoTrabajo='%s', telefono='%s', admin='%s' "
+                + "WHERE idUsuario='%s'";
+        query = String.format(query,
                 s.getEmail(),
-                s.getPassword(),
-                s.getFirstName(),
-                s.getLastName(),
-                s.getDateOfBirth(),
-                s.getAddress(),
-                s.getWorkPhone(),
-                s.getPhone(),
+                s.getContrasenna(),
+                s.getNombre(),
+                s.getApellido(),
+                s.getFechaNacimiento(),
+                s.getDireccion(),
+                s.getTelefonoTrabajo(),
+                s.getTelefono(),
+                s.getAdmin(),
                 s.getIdUsuario());
-        int count = db.executeUpdate(sql);
+        int count = db.executeUpdate(query);
         if (count == 0) {
             throw new Exception("El usuario no existe");
         }
     }
 
     @Override
-    public List<Usuario> searh(Integer s) throws Throwable{
-               List<Usuario> resultado = new ArrayList<Usuario>();
+    public List<Usuario> searh(Integer s) throws Throwable {
+        List<Usuario> resultado = new ArrayList<Usuario>();
         try {
             String query = "SELECT * "
                     + "FROM Usuario u "
@@ -117,13 +122,14 @@ public class UsuarioDAO extends AbstractDAO<Usuario, Integer> {
             String s;
             Usuario c = new Usuario();
             c.setEmail(rs.getString("email"));
-            c.setPassword(rs.getString("password"));
-            c.setFirstName(rs.getString("firstName"));
-            c.setLastName(rs.getString("lastName"));
-            c.setDateOfBirth(rs.getString("dateOfBirth"));
-            c.setAddress(rs.getString("address"));
-            c.setWorkPhone(rs.getString("worPhone"));
-            c.setPhone(rs.getString("phone"));
+            c.setContrasenna(rs.getString("contrasenna"));
+            c.setNombre(rs.getString("nombre"));
+            c.setApellido(rs.getString("apellido"));
+            c.setFechaNacimiento(rs.getString("fechaNacimiento"));
+            c.setDireccion(rs.getString("direccion"));
+            c.setTelefonoTrabajo(rs.getString("telefonoTrabajo"));
+            c.setTelefono(rs.getString("telefono"));
+            c.setAdmin(rs.getBoolean("admin"));
             c.setIdUsuario(Integer.parseInt(rs.getString("idUsuario")));
             return c;
         } catch (SQLException ex) {

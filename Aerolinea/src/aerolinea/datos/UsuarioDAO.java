@@ -34,7 +34,7 @@ public class UsuarioDAO extends AbstractDAO<Usuario, Integer> {
     @Override
     public void add(Usuario s) throws Throwable {
         //Se quita idUsuario porque es AUTO INCREMENT
-        String query = "INSER INTO Usuario (idUsuario, email, password, firstName, lastName, dateOfBirth, address, workPhone, phone, admin) "
+        String query = "INSER INTO Usuario (idUsuario, email, contrasenna, nombre, apellido, fechaNacimiento, direccion, telefonoTrabajo, telefono, esAdmin) "
                 + "values('%s','%s','%s','%s','%s','%s','%s','%s','%s', '%s')";
         query = String.format(query,
                 s.getIdUsuario(),
@@ -46,9 +46,9 @@ public class UsuarioDAO extends AbstractDAO<Usuario, Integer> {
                 s.getDireccion(),
                 s.getTelefonoTrabajo(),
                 s.getTelefono(),
-                s.getAdmin());
+                s.getEsAdmin());
         int count = db.executeUpdate(query);
-        // CARGAR TODAS LAS RESERVAS DE ESTE USUARIO
+        // CARGAR TODAS LAS RESERVAS DE ESTE USUARIO si no es admin
         if (count == 0) {
             throw new Exception("El usuario ya existe");
         }
@@ -91,7 +91,7 @@ public class UsuarioDAO extends AbstractDAO<Usuario, Integer> {
                 s.getDireccion(),
                 s.getTelefonoTrabajo(),
                 s.getTelefono(),
-                s.getAdmin(),
+                s.getEsAdmin(),
                 s.getIdUsuario());
         int count = db.executeUpdate(query);
         if (count == 0) {
@@ -129,7 +129,7 @@ public class UsuarioDAO extends AbstractDAO<Usuario, Integer> {
             c.setDireccion(rs.getString("direccion"));
             c.setTelefonoTrabajo(rs.getString("telefonoTrabajo"));
             c.setTelefono(rs.getString("telefono"));
-            c.setAdmin(rs.getBoolean("admin"));
+            c.setEsAdmin(rs.getBoolean("admin"));
             c.setIdUsuario(Integer.parseInt(rs.getString("idUsuario")));
             return c;
         } catch (SQLException ex) {

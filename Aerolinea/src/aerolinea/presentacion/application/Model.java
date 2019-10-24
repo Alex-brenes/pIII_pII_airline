@@ -14,52 +14,36 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package aerolinea.datos;
+package aerolinea.presentacion.application;
 
-import java.sql.ResultSet;
-import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  *
  * @author pc
- * @param <T>
- * @param <K>
  */
-public abstract class AbstractDAO<T, K> implements DAO<T, K> {
+public class Model extends Observable {
 
-    protected RelDatabase db;
+    private aerolinea.logica.Usuario user;
 
-    public AbstractDAO() {
-        this.db = new RelDatabase();
+    public Model() {
+        this.user = null;
+    }
+
+    public Model(aerolinea.logica.Usuario user) {
+        this.user = user;
+    }
+
+    public void setUser(aerolinea.logica.Usuario user) {
+        this.user = user;
     }
 
     @Override
-    public List<T> searh() throws Throwable {
-        return null;
+    public void addObserver(Observer o) {
+        super.addObserver(o);
+        this.setChanged();
+        this.notifyObservers();
     }
 
-    @Override
-    public void add(T s) throws Throwable {
-
-    }
-
-    @Override
-    public void delete(T s) throws Throwable {
-
-    }
-
-    @Override
-    public T get(K s) throws Throwable {
-        return null;
-    }
-
-    @Override
-    public void update(T s) throws Throwable {
-
-    }
-
-    @Override
-    public T instancia(ResultSet rs) throws Throwable {
-        return null;
-    }
 }

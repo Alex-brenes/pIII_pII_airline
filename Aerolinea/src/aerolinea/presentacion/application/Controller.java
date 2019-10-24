@@ -14,52 +14,47 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package aerolinea.datos;
+package aerolinea.presentacion.application;
 
-import java.sql.ResultSet;
-import java.util.List;
+import aerolinea.Application;
 
 /**
  *
  * @author pc
- * @param <T>
- * @param <K>
  */
-public abstract class AbstractDAO<T, K> implements DAO<T, K> {
+public class Controller {
 
-    protected RelDatabase db;
+    Model model;
+    View view;
 
-    public AbstractDAO() {
-        this.db = new RelDatabase();
+    public Controller(Model model, View view) {
+        this.model = model;
+        this.view = view;
+        this.view.setModel(this.model);
+        this.view.setController(this);
     }
 
-    @Override
-    public List<T> searh() throws Throwable {
-        return null;
-    }
+    //Flota
+        // Edicion
+        public void EdicionTipoShow() {
+            Application.EDICION_FLOTA_CONTROLLER.show();
+        }
+        // Listado
 
-    @Override
-    public void add(T s) throws Throwable {
+        public void ListadoTipoShow() {
 
-    }
+        }
 
-    @Override
-    public void delete(T s) throws Throwable {
-
-    }
-
-    @Override
-    public T get(K s) throws Throwable {
-        return null;
-    }
-
-    @Override
-    public void update(T s) throws Throwable {
+    public void vueloShow() {
 
     }
 
-    @Override
-    public T instancia(ResultSet rs) throws Throwable {
-        return null;
+    public void informacionUsuarioShow() {
+
     }
+
+    public void informacionAerolineaShow() {
+
+    }
+
 }

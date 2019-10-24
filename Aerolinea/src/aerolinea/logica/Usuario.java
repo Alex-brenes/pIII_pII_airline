@@ -1,18 +1,7 @@
 /*
- * Copyright (C) 2019 pc
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package aerolinea.logica;
 
@@ -39,7 +28,6 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")})
 public class Usuario implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -64,9 +52,9 @@ public class Usuario implements Serializable {
     private String telefonoTrabajo;
     @Column(name = "telefono")
     private String telefono;
-    @Column(name = "admin")
-    private boolean admin;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+    @Column(name = "esAdmin")
+    private boolean esAdmin;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario1")
     private List<Reserva> reservaList;
 
     public Usuario() {
@@ -154,12 +142,12 @@ public class Usuario implements Serializable {
         this.telefono = telefono;
     }
 
-    public boolean getAdmin() {
-        return admin;
+    public boolean getEsAdmin() {
+        return esAdmin;
     }
 
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
+    public void setEsAdmin(boolean esAdmin) {
+        this.esAdmin = esAdmin;
     }
 
     public List<Reserva> getReservaList() {

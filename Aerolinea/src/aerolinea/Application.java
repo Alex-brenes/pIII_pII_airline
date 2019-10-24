@@ -15,14 +15,38 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package aerolinea;
-import aerolinea.presentación.application.*;
+import aerolinea.presentacion.application.*;
 /**
  *
  * @author pc
  */
 public class Application {
     public static void main(String[] args) {
+        // Flota
+            // Edición
+            aerolinea.presentacion.flota.tipoAvion.edicion.Model ModelFlotaEdicion = 
+                    new aerolinea.presentacion.flota.tipoAvion.edicion.Model();
+            aerolinea.presentacion.flota.tipoAvion.edicion.View ViewFlotaEdicion = 
+                    new aerolinea.presentacion.flota.tipoAvion.edicion.View();
+            aerolinea.presentacion.flota.tipoAvion.edicion.Controller ControllerFlotaEdicion = 
+                    new aerolinea.presentacion.flota.tipoAvion.edicion.Controller
+                        (ModelFlotaEdicion, ViewFlotaEdicion);
+            EDICION_FLOTA_CONTROLLER = ControllerFlotaEdicion;
+        
+        
+        // Application
+        Model applicationModel = new Model();
         View applicationView = new View();
+        Controller applicationController = new Controller(applicationModel, applicationView);
+        
         applicationView.setVisible(true);
+        
+        //jInternalFrames
+        applicationView.add(ViewFlotaEdicion);
+        
     }
+    
+    public static aerolinea.presentacion.flota.tipoAvion.edicion.Controller 
+            EDICION_FLOTA_CONTROLLER;
+    
 }

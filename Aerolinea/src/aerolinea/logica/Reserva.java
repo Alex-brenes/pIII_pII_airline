@@ -1,18 +1,7 @@
 /*
- * Copyright (C) 2019 pc
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package aerolinea.logica;
 
@@ -41,7 +30,6 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Reserva.findAll", query = "SELECT r FROM Reserva r")})
 public class Reserva implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,14 +40,17 @@ public class Reserva implements Serializable {
     private Integer cantidad;
     @Column(name = "documento")
     private String documento;
+    @Basic(optional = false)
+    @Column(name = "usuario")
+    private String usuario;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "reserva")
     private List<Tiquete> tiqueteList;
     @JoinColumn(name = "formaPago", referencedColumnName = "idFormaPago")
     @ManyToOne(optional = false)
     private Formapago formapago;
-    @JoinColumn(name = "usuario", referencedColumnName = "idUsuario")
+    @JoinColumn(name = "Usuario_idUsuario", referencedColumnName = "idUsuario")
     @ManyToOne(optional = false)
-    private Usuario usuario;
+    private Usuario usuario1;
     @JoinColumn(name = "viaje", referencedColumnName = "idViaje")
     @ManyToOne(optional = false)
     private Viaje viaje;
@@ -69,6 +60,11 @@ public class Reserva implements Serializable {
 
     public Reserva(Integer idReserva) {
         this.idReserva = idReserva;
+    }
+
+    public Reserva(Integer idReserva, String usuario) {
+        this.idReserva = idReserva;
+        this.usuario = usuario;
     }
 
     public Integer getIdReserva() {
@@ -95,6 +91,14 @@ public class Reserva implements Serializable {
         this.documento = documento;
     }
 
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
     public List<Tiquete> getTiqueteList() {
         return tiqueteList;
     }
@@ -111,12 +115,12 @@ public class Reserva implements Serializable {
         this.formapago = formapago;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public Usuario getUsuario1() {
+        return usuario1;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setUsuario1(Usuario usuario1) {
+        this.usuario1 = usuario1;
     }
 
     public Viaje getViaje() {

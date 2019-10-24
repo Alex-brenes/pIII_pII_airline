@@ -41,8 +41,9 @@ public class ReservaDAO extends AbstractDAO<Reserva, Integer> {
                 s.getCantidad(),
                 s.getDocumento(),
                 s.getViaje(),
-                s.getFormapago(),
-                s.getUsuario().getIdUsuario());
+                s.getFormapago()
+        //        s.getUsuario().getIdUsuario()
+        );
         int count = db.executeUpdate(query);
         if (count == 0) {
             throw new Exception("La reserva ya existe");

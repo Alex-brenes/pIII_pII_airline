@@ -119,6 +119,11 @@ public class View extends javax.swing.JInternalFrame implements java.util.Observ
         });
 
         jButton3.setText("Modificar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -212,12 +217,16 @@ public class View extends javax.swing.JInternalFrame implements java.util.Observ
     }//GEN-LAST:event_jComboBoxAnniosActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        this.controller.consultar(this.jTextFieldID.getText());
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.controller.agregar(this.toTipoAvion());
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        this.controller.modificar(this.toTipoAvion());
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     private Model model;
     private Controller controller;

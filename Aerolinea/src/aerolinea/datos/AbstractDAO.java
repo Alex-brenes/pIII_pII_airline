@@ -30,7 +30,7 @@ public abstract class AbstractDAO<T, K> implements DAO<T, K> {
     protected RelDatabase db;
 
     public AbstractDAO() {
-        this.db = new RelDatabase();
+        this.db = RelDatabase.getInstance();
     }
 
     @Override

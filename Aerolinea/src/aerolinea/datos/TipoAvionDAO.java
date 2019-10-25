@@ -34,9 +34,9 @@ public class TipoAvionDAO extends AbstractDAO<Tipoavion, String> {
 
     @Override
     public void add(Tipoavion s) throws Throwable {
-        String query = "INSER INTO TipoAvion (idTipoAvion, marca, annio, modelo, cantidadPasajeros, cantidadFilas, asientosPorFila) "
-                + "values('%s','%s','%s','%s', '%s', '%s', '%s')";
-        query = String.format(
+        String query = "INSERT INTO TipoAvion (idTipoAvion, marca, annio, modelo, cantidadPasajeros, cantidadFilas, asientosPorFila) "
+                + "values('%s','%s',%s,'%s', %s, %s, %s)";
+        query = String.format(query,
                 s.getIdTipoAvion(),
                 s.getMarca(),
                 s.getAnnio(),
@@ -77,8 +77,8 @@ public class TipoAvionDAO extends AbstractDAO<Tipoavion, String> {
     @Override
     public void update(Tipoavion t) throws Throwable {
         String query = "UPDATE TipoAvion SET marca='%s'," +
-                "annio='%s', modelo = '%s', cantidadPasajeros = '%s', " +
-                "cantidadFilas = '%s', asientosPorFilas = '%' "
+                "annio=%s, modelo = '%s', cantidadPasajeros = %s, " +
+                "cantidadFilas = %s, asientosPorFila = %s "
                 + "where idTipoAvion='%s'";
         query = String.format(query,
                 t.getMarca(), 
@@ -88,7 +88,7 @@ public class TipoAvionDAO extends AbstractDAO<Tipoavion, String> {
                 t.getCantidadFilas(), 
                 t.getAsientosPorFila(),
                 t.getIdTipoAvion());
-
+        System.out.println(query);
         int count = db.executeUpdate(query);
         if (count == 0) {
             throw new Exception("El tipo de avión no existe");

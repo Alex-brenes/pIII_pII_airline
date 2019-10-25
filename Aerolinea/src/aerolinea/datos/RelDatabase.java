@@ -16,12 +16,20 @@ import java.util.Properties;
 
 public class RelDatabase {
 
-    private static final String PROPERTIES_FILE_PATH = "../../../properties/aerolinea.properties";
+    private static final String PROPERTIES_FILE_PATH = "properties/aerolinea.properties";
     public static final String PROPERTIES_FILE_NAME = PROPERTIES_FILE_PATH;
     Connection cnx;
+    private static RelDatabase instance;
 
-    public RelDatabase() {
+    private RelDatabase() {
         cnx = this.getConnection();
+    }
+
+    public static RelDatabase getInstance() {
+        if (instance == null) {
+            instance = new RelDatabase();
+        }
+        return instance;
     }
 
     public Connection getConnection() {
@@ -36,9 +44,8 @@ public class RelDatabase {
             String user = prop.getProperty("database_user");
             String password = prop.getProperty("database_password");
             String database = prop.getProperty("database_name");
-
             String URL_conexion = "jdbc:mysql://" + server + ":" + port + "/" + database + "?useTimezone=true&serverTimezone=UTC&user=" + user + "&password=" + password + "&useSSL=false";
-            Class.forName(driver).newInstance();
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
             return DriverManager.getConnection(URL_conexion);
         } catch (Exception e) {
             System.err.println(e.getMessage());

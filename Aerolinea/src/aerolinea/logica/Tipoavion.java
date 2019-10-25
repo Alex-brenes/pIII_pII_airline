@@ -48,6 +48,14 @@ public class Tipoavion implements Serializable {
     private List<Avion> avionList;
 
     public Tipoavion() {
+        this.idTipoAvion = "";
+        this.marca = "";
+        this.annio = ANNIO_BASE;
+        this.modelo = "";
+        this.cantidadPasajeros = MIN_ASIENTOS * MIN_FILAS;
+        this.cantidadFilas = MIN_FILAS;
+        this.asientosPorFila = MIN_ASIENTOS;
+        this.avionList = null;
     }
 
     public Tipoavion(String idTipoAvion) {

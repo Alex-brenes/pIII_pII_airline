@@ -41,7 +41,7 @@ public class Controller {
         // Listado
 
         public void ListadoTipoShow() {
-
+            Application.LISTADO_FLOTA_CONTROLLER.show();
         }
 
     public void vueloShow() {

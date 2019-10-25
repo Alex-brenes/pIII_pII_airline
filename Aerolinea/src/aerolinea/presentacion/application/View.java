@@ -140,6 +140,11 @@ public class View extends javax.swing.JFrame implements Observer{
         jMenuFlota.add(jMenuItemAgregarTipoAvion);
 
         jMenuItemListadoTiposAviones.setText("Listado de tipos de aviones en la aerolínea");
+        jMenuItemListadoTiposAviones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemListadoTiposAvionesActionPerformed(evt);
+            }
+        });
         jMenuFlota.add(jMenuItemListadoTiposAviones);
 
         jMenuItemAgregarAvion.setText("Agregar y modificar información de un avión");
@@ -196,6 +201,10 @@ public class View extends javax.swing.JFrame implements Observer{
     private void jMenuItemAgregarTipoAvionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAgregarTipoAvionActionPerformed
         this.controller.EdicionTipoShow();
     }//GEN-LAST:event_jMenuItemAgregarTipoAvionActionPerformed
+
+    private void jMenuItemListadoTiposAvionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemListadoTiposAvionesActionPerformed
+        this.controller.ListadoTipoShow();
+    }//GEN-LAST:event_jMenuItemListadoTiposAvionesActionPerformed
 
     /**
      * @param args the command line arguments

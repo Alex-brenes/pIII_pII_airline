@@ -37,7 +37,6 @@ public class Controller {
     public void consultar(String id) {
         try {
             model.setTipoAvion(aerolinea.logica.Model.getInstance().getTipoAvion(id));
-
         } catch (Throwable ex) {
             model.setTipoAvion(new Tipoavion("El avión no existe"));
         }
@@ -47,6 +46,7 @@ public class Controller {
         try {
             aerolinea.logica.Model.getInstance().updateTipoavion(a);
         } catch (Throwable ex) {
+            ex.printStackTrace(System.out);
         }
     }
 

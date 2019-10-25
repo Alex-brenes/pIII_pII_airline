@@ -51,6 +51,11 @@ public class View extends javax.swing.JInternalFrame implements Observer {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTableTipos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableTiposMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableTipos);
 
         jButtonBuscar.setText("Buscar por id");
@@ -99,6 +104,13 @@ public class View extends javax.swing.JInternalFrame implements Observer {
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
         this.controller.buscar(this.jTextField1.getText());
     }//GEN-LAST:event_jButtonBuscarActionPerformed
+
+    private void jTableTiposMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableTiposMouseClicked
+        if(evt.getClickCount() == 2){
+            int row = this.jTableTipos.getSelectedRow();
+            controller.editar(row);
+        }
+    }//GEN-LAST:event_jTableTiposMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

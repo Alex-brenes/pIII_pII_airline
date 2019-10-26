@@ -23,7 +23,7 @@ import java.util.Observer;
  *
  * @author pc
  */
-public class View extends javax.swing.JFrame implements Observer{
+public class View extends javax.swing.JFrame implements Observer {
 
     /**
      * Creates new form View
@@ -156,6 +156,11 @@ public class View extends javax.swing.JFrame implements Observer{
         jMenuFlota.add(jMenuItemAgregarAvion);
 
         jMenuItemListadoAviones.setText("Listado de aviones en la aerolínea");
+        jMenuItemListadoAviones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemListadoAvionesActionPerformed(evt);
+            }
+        });
         jMenuFlota.add(jMenuItemListadoAviones);
 
         jMenuOpcionesAdministrador.add(jMenuFlota);
@@ -205,6 +210,10 @@ public class View extends javax.swing.JFrame implements Observer{
     private void jMenuItemListadoTiposAvionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemListadoTiposAvionesActionPerformed
         this.controller.ListadoTipoShow();
     }//GEN-LAST:event_jMenuItemListadoTiposAvionesActionPerformed
+
+    private void jMenuItemListadoAvionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemListadoAvionesActionPerformed
+        this.controller.ListadoAvionShow();
+    }//GEN-LAST:event_jMenuItemListadoAvionesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -283,7 +292,7 @@ public class View extends javax.swing.JFrame implements Observer{
     }
     
     @Override
-    public void update(Observable arg0, Object arg1) {
+    public void update(Observable o, Object arg) {
         
     }
 }

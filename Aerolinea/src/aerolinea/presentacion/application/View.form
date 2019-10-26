@@ -112,6 +112,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Listado de aviones en la aerol&#xed;nea"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemListadoAvionesActionPerformed"/>
+                  </Events>
                 </MenuItem>
               </SubComponents>
             </Menu>

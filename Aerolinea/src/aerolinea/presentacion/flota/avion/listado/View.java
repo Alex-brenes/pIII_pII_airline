@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package aerolinea.presentacion.flota.tipoAvion.listado;
+package aerolinea.presentacion.flota.avion.listado;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -31,15 +31,15 @@ public class View extends javax.swing.JInternalFrame implements Observer {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableTipos = new javax.swing.JTable();
+        jTableAviones = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jTextFieldID = new javax.swing.JTextField();
-        jButtonBuscar = new javax.swing.JButton();
-        jLabelTitulo = new javax.swing.JLabel();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
 
-        jTableTipos.setModel(new javax.swing.table.DefaultTableModel(
+        jTableAviones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -50,21 +50,21 @@ public class View extends javax.swing.JInternalFrame implements Observer {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jTableTipos.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTableAviones.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableTiposMouseClicked(evt);
+                jTableAvionesMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jTableTipos);
+        jScrollPane1.setViewportView(jTableAviones);
 
-        jButtonBuscar.setText("Buscar por id");
-        jButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
+        jLabel1.setText("Listado de aviones");
+
+        jButton1.setText("Buscar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonBuscarActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
-
-        jLabelTitulo.setText("Listado de tipos de aviones");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -73,52 +73,44 @@ public class View extends javax.swing.JInternalFrame implements Observer {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelTitulo)
-                            .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonBuscar)))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(11, Short.MAX_VALUE))
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jTextFieldID, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabelTitulo)
-                .addGap(18, 18, 18)
+                .addComponent(jLabel1)
+                .addGap(24, 24, 24)
                 .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19)
-                .addComponent(jButtonBuscar)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(156, Short.MAX_VALUE))
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.controller.buscar(this.jTextFieldID.getText());
-    }//GEN-LAST:event_jButtonBuscarActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jTableTiposMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableTiposMouseClicked
-        if(evt.getClickCount() == 2){
-            int row = this.jTableTipos.getSelectedRow();
+    private void jTableAvionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableAvionesMouseClicked
+        if (evt.getClickCount() == 2) {
+            int row = this.jTableAviones.getSelectedRow();
             controller.editar(row);
         }
-    }//GEN-LAST:event_jTableTiposMouseClicked
-
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonBuscar;
-    private javax.swing.JLabel jLabelTitulo;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableTipos;
-    private javax.swing.JTextField jTextFieldID;
-    // End of variables declaration//GEN-END:variables
+    }//GEN-LAST:event_jTableAvionesMouseClicked
 
     private Model model;
     private Controller controller;
@@ -142,9 +134,17 @@ public class View extends javax.swing.JInternalFrame implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        this.jTableTipos.setModel(new TipoAvionTableModel(this.model.getTiposAviones()));
-        this.jTableTipos.getColumnModel().getColumn(4).setPreferredWidth(260);
-        this.jTableTipos.getColumnModel().getColumn(5).setPreferredWidth(220);
-        this.jTableTipos.getColumnModel().getColumn(6).setPreferredWidth(220);
+        this.jTableAviones.setModel(new AvionTableModel(this.model.getAviones()));
+//        this.jTableAviones.getColumnModel().getColumn(4).setPreferredWidth(260);
+//        this.jTableAviones.getColumnModel().getColumn(5).setPreferredWidth(220);
+//        this.jTableAviones.getColumnModel().getColumn(6).setPreferredWidth(220);
     }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTableAviones;
+    private javax.swing.JTextField jTextFieldID;
+    // End of variables declaration//GEN-END:variables
 }

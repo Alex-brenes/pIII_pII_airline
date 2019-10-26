@@ -3,11 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package aerolinea.presentacion.flota.tipoAvion.listado;
+package aerolinea.presentacion.flota.avion.listado;
 
 import aerolinea.Application;
 
+/**
+ *
+ * @author pc
+ */
 public class Controller {
+    
 
     private Model model;
     private View view;
@@ -21,13 +26,13 @@ public class Controller {
 
     public void buscar(String id) {
         try {
-            model.setTiposAviones(aerolinea.logica.Model.getInstance().searchTipoAvion(id));
+            model.setAviones(aerolinea.logica.Model.getInstance().searchAvion(id));
         } catch (Throwable ex) {
         }
     }
 
     public void editar(int row) {
-        Application.EDICION_TIPO_AVION_CONTROLLER.consultar(model.getTiposAviones().get(row).getIdTipoAvion());
+        Application.EDICION_AVION_CONTROLLER.consultar(model.getAviones().get(row).getId());
     }
 
     public void show() {
@@ -37,5 +42,5 @@ public class Controller {
     public void hide() {
         view.setVisible(false);
     }
-
+    
 }

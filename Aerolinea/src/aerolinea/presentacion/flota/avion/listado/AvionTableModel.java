@@ -45,18 +45,14 @@ public class AvionTableModel extends AbstractTableModel {
         switch (columnIndex) {
             case ID:
                 return a.getId();
+            case ID_TIPO:
+                return a.getTipoavion().getIdTipoAvion();
             case MARCA:
-                return t.getMarca();
+                return a.getTipoavion().getMarca();
             case ANNIO:
-                return t.getAnnio();
+                return a.getTipoavion().getAnnio();
             case MODELO:
-                return t.getModelo();
-            case PASAJEROS:
-                return t.getCantidadPasajeros();
-            case FILAS:
-                return t.getCantidadFilas();
-            case ASIENTOS:
-                return t.getAsientosPorFila();
+                return a.getTipoavion().getModelo();
             default:
                 return "";
         }
@@ -67,28 +63,22 @@ public class AvionTableModel extends AbstractTableModel {
         switch (columnIndex) {
             case ID:
                 return "ID";
+            case ID_TIPO:
+                return "ID Tipo de avión";
             case MARCA:
                 return "Marca";
             case ANNIO:
                 return "Año";
             case MODELO:
                 return "Modelo";
-            case PASAJEROS:
-                return "Cantidad de pasajeros";
-            case FILAS:
-                return "Cantidad de filas";
-            case ASIENTOS:
-                return "Asientos por fila";
             default:
                 return "";
         }
     }
     private final int ID = 0;
-    private final int MARCA = 1;
-    private final int ANNIO = 2;
-    private final int MODELO = 3;
-    private final int PASAJEROS = 4;
-    private final int FILAS = 5;
-    private final int ASIENTOS = 6;
-    private final int CANTIDAD_COLUMNAS = 7;
+    private final int ID_TIPO = 1;
+    private final int MARCA = 2;
+    private final int ANNIO = 3;
+    private final int MODELO = 4;
+    private final int CANTIDAD_COLUMNAS = 5;
 }

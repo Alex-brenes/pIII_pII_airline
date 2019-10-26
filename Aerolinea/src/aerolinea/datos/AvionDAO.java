@@ -25,10 +25,10 @@ import java.util.List;
 
 public class AvionDAO extends AbstractDAO<Avion, String> {
 
-    public AvionDAO(){
+    public AvionDAO() {
         super();
     }
-    
+
     @Override
     public void add(Avion s) throws Throwable {
         String query = "INSERT INTO Avion (id, tipoAvion) "
@@ -53,7 +53,7 @@ public class AvionDAO extends AbstractDAO<Avion, String> {
     @Override
     public Avion get(String s) throws Throwable {
         String query = "SELECT * "
-                + "FROM Avion a "
+                + "FROM Avion a INNER JOIN TipoAvion t ON a.tipoAvion = t.idTipoAvion "
                 + "WHERE a.id='%s'";
         query = String.format(query, s);
         ResultSet rs = db.executeQuery(query);
@@ -68,7 +68,6 @@ public class AvionDAO extends AbstractDAO<Avion, String> {
     public void update(Avion s) throws Throwable {
         String query = "UPDATE Avion SET tipoAvion='%s' "
                 + "where id='%s'";
-        // Actualiza la abreviatura del pais
         query = String.format(query, s.getTipoavion().getIdTipoAvion(), s.getId());
         int count = db.executeUpdate(query);
         if (count == 0) {
@@ -81,7 +80,7 @@ public class AvionDAO extends AbstractDAO<Avion, String> {
         List<Avion> resultado = new ArrayList<Avion>();
         try {
             String query = "SELECT * "
-                    + "FROM Avion a "
+                    + "FROM Avion a INNER JOIN TipoAvion t ON a.tipoAvion = t.idTipoAvion "
                     + "WHERE a.id LIKE '%%%s%%'";
             query = String.format(query, s);
             ResultSet rs = db.executeQuery(query);
@@ -99,8 +98,16 @@ public class AvionDAO extends AbstractDAO<Avion, String> {
             String s;
             Avion c = new Avion();
             c.setId(rs.getString("id"));
-            // Por ahora
-            c.setTipoavion(new aerolinea.logica.Tipoavion(rs.getString("tipoAvion")));
+            // Tipo avión
+            aerolinea.logica.Tipoavion t = new aerolinea.logica.Tipoavion();
+            t.setIdTipoAvion(rs.getString("idTipoAvion"));
+            t.setMarca(rs.getString("marca"));
+            t.setAnnio(Integer.parseInt(rs.getString("annio")));
+            t.setModelo(rs.getString("modelo"));
+            t.setCantidadPasajeros(Integer.parseInt(rs.getString("cantidadPasajeros")));
+            t.setCantidadFilas(Integer.parseInt(rs.getString("cantidadFilas")));
+            t.setAsientosPorFila(Integer.parseInt(rs.getString("asientosPorFila")));
+            c.setTipoavion(t);
             return c;
         } catch (SQLException ex) {
             return null;

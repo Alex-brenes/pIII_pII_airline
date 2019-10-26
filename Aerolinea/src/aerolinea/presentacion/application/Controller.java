@@ -34,24 +34,24 @@ public class Controller {
         this.view.setController(this);
     }
     //Flota
-        // Edicion
-        public void EdicionTipoShow() {
-            Application.EDICION_TIPO_AVION_CONTROLLER.show();
-        }
-        // Listado
+    // Edicion
+    public void EdicionTipoShow() {
+        Application.EDICION_TIPO_AVION_CONTROLLER.show();
+    }
+    // Listado
 
-        public void ListadoTipoShow() {
-            Application.LISTADO_TIPO_AVION_CONTROLLER.show();
-        }
-        
-        public void EdicionAvionShow() {
-            Application.EDICION_AVION_CONTROLLER.show();
-        }
-        // Listado
+    public void ListadoTipoShow() {
+        Application.LISTADO_TIPO_AVION_CONTROLLER.show();
+    }
 
-        public void ListadoAvionShow() {
-            Application.LISTADO_AVION_CONTROLLER.show();
-        }
+    public void EdicionAvionShow() {
+        Application.EDICION_AVION_CONTROLLER.show();
+    }
+    // Listado
+
+    public void ListadoAvionShow() {
+        Application.LISTADO_AVION_CONTROLLER.show();
+    }
 
     public void vueloShow() {
 

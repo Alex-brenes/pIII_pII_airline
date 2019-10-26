@@ -52,6 +52,14 @@ public class Application {
                 aerolinea.presentacion.flota.avion.edicion.Controller ControllerAvionEdicion 
                         = new aerolinea.presentacion.flota.avion.edicion.Controller(ModelAvionEdicion, ViewAvionEdicion);
                 EDICION_AVION_CONTROLLER = ControllerAvionEdicion;
+                // Listado
+                aerolinea.presentacion.flota.avion.listado.Model ModelAvionListado 
+                        = new aerolinea.presentacion.flota.avion.listado.Model();
+                aerolinea.presentacion.flota.avion.listado.View ViewAvionListado
+                        = new aerolinea.presentacion.flota.avion.listado.View();
+                aerolinea.presentacion.flota.avion.listado.Controller ControllerAvionListado 
+                        = new aerolinea.presentacion.flota.avion.listado.Controller(ModelAvionListado, ViewAvionListado);
+                LISTADO_AVION_CONTROLLER = ControllerAvionListado;
         // Application
         Model applicationModel = new Model();
         View applicationView = new View();
@@ -63,6 +71,7 @@ public class Application {
         applicationView.panel.add(ViewTipoAvionEdicion);
         applicationView.panel.add(ViewTipoAvionListado);
         applicationView.panel.add(ViewAvionEdicion);
+        applicationView.panel.add(ViewAvionListado);
 
     }
 
@@ -70,7 +79,7 @@ public class Application {
     public static aerolinea.presentacion.flota.tipoAvion.listado.Controller LISTADO_TIPO_AVION_CONTROLLER;
 
     public static aerolinea.presentacion.flota.avion.edicion.Controller EDICION_AVION_CONTROLLER;
-    public static aerolinea.presentacion.flota.avion.edicion.Controller LISTADO_AVION_CONTROLLER;
+    public static aerolinea.presentacion.flota.avion.listado.Controller LISTADO_AVION_CONTROLLER;
     
 
 }

@@ -56,8 +56,9 @@ public class Controller {
     public void agregar(Avion a) {
         try {
             aerolinea.logica.Model.getInstance().addAvion(a);
-            this.model.setAvion(new Avion());
-            this.model.getAvion().setTipoavion(this.model.getTiposAviones().get(0));
+            Avion e = new Avion();
+            e.setTipoavion(this.model.getTiposAviones().get(0));
+            this.model.setAvion(e);
         } catch (Throwable ex) {
         }
     }

@@ -101,7 +101,7 @@ public class TipoAvionDAO extends AbstractDAO<Tipoavion, String> {
         try {
             String query = "SELECT * "
                     + "FROM TipoAvion t "
-                    + "where t.idTipoAvion like '%%%s%%'";
+                    + "WHERE t.idTipoAvion LIKE '%%%s%%'";
             query = String.format(query, id);
             ResultSet rs = db.executeQuery(query);
             while (rs.next()) {

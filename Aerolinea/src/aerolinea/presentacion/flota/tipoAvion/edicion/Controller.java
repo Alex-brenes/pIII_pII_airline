@@ -38,7 +38,7 @@ public class Controller {
         try {
             model.setTipoAvion(aerolinea.logica.Model.getInstance().getTipoAvion(id));
         } catch (Throwable ex) {
-            model.setTipoAvion(new Tipoavion("El avión no existe"));
+            model.setTipoAvion(new Tipoavion("El tipo de avión no existe"));
         }
     }
 

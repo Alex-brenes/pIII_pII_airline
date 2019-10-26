@@ -33,6 +33,7 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "Viaje.findAll", query = "SELECT v FROM Viaje v")})
 public class Viaje implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

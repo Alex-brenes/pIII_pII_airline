@@ -34,10 +34,9 @@ public class TipoAvionDAO extends AbstractDAO<Tipoavion, String> {
 
     @Override
     public void add(Tipoavion s) throws Throwable {
-        String query = "INSERT INTO TipoAvion (idTipoAvion, marca, annio, modelo, cantidadPasajeros, cantidadFilas, asientosPorFila) "
-                + "values('%s','%s',%s,'%s', %s, %s, %s)";
+        String query = "INSERT INTO TipoAvion (marca, annio, modelo, cantidadPasajeros, cantidadFilas, asientosPorFila) "
+                + "values('%s',%s,'%s', %s, %s, %s)";
         query = String.format(query,
-                s.getIdTipoAvion(),
                 s.getMarca(),
                 s.getAnnio(),
                 s.getModelo(),
@@ -46,7 +45,7 @@ public class TipoAvionDAO extends AbstractDAO<Tipoavion, String> {
                 s.getAsientosPorFila());
         int count = db.executeUpdate(query);
         if (count == 0) {
-            throw new Exception("El tipo de avion ya existe");
+            throw new Exception("El tipo de avión ya existe");
         }
     }
 
@@ -101,7 +100,7 @@ public class TipoAvionDAO extends AbstractDAO<Tipoavion, String> {
         try {
             String query = "SELECT * "
                     + "FROM TipoAvion t "
-                    + "WHERE t.idTipoAvion LIKE '%%%s%%'";
+                    + "WHERE t.modelo LIKE '%%%s%%'";
             query = String.format(query, id);
             ResultSet rs = db.executeQuery(query);
             while (rs.next()) {
@@ -116,9 +115,9 @@ public class TipoAvionDAO extends AbstractDAO<Tipoavion, String> {
     @Override
     public Tipoavion instancia(ResultSet rs) {
         try {
-            String s;
+
             Tipoavion t = new Tipoavion();
-            t.setIdTipoAvion(rs.getString("idTipoAvion"));
+            t.setIdTipoAvion(Integer.parseInt(rs.getString("idTipoAvion")));
             t.setMarca(rs.getString("marca"));
             t.setAnnio(Integer.parseInt(rs.getString("annio")));
             t.setModelo(rs.getString("modelo"));

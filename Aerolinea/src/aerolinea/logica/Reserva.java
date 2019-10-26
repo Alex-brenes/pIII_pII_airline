@@ -30,6 +30,7 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Reserva.findAll", query = "SELECT r FROM Reserva r")})
 public class Reserva implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

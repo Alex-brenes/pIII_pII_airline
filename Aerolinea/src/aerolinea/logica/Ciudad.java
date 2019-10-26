@@ -28,6 +28,7 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Ciudad.findAll", query = "SELECT c FROM Ciudad c")})
 public class Ciudad implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -36,9 +37,9 @@ public class Ciudad implements Serializable {
     @JoinColumn(name = "abreviaturaPais", referencedColumnName = "abreviatura")
     @ManyToOne(optional = false)
     private Pais pais;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "origen")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ciudad")
     private List<Vuelo> vueloList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "destino")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ciudad1")
     private List<Vuelo> vueloList1;
 
     public Ciudad() {

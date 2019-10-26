@@ -27,7 +27,7 @@ public class Controller {
     }
 
     public void editar(int row) {
-        Application.EDICION_TIPO_AVION_CONTROLLER.consultar(model.getTiposAviones().get(row).getIdTipoAvion());
+        Application.EDICION_TIPO_AVION_CONTROLLER.consultar(model.getTiposAviones().get(row).getModelo());
     }
 
     public void show() {

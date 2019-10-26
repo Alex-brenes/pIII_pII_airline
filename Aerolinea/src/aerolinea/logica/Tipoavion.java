@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -29,9 +31,10 @@ public class Tipoavion implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "idTipoAvion")
-    private String idTipoAvion;
+    private Integer idTipoAvion;
     @Column(name = "marca")
     private String marca;
     @Column(name = "annio")
@@ -48,7 +51,6 @@ public class Tipoavion implements Serializable {
     private List<Avion> avionList;
 
     public Tipoavion() {
-        this.idTipoAvion = "";
         this.marca = "";
         this.annio = ANNIO_BASE;
         this.modelo = "";
@@ -58,7 +60,7 @@ public class Tipoavion implements Serializable {
         this.avionList = null;
     }
 
-    public Tipoavion(String idTipoAvion) {
+    public Tipoavion(Integer idTipoAvion) {
         this.idTipoAvion = idTipoAvion;
         this.marca = "";
         this.annio = ANNIO_BASE;
@@ -69,8 +71,7 @@ public class Tipoavion implements Serializable {
         this.avionList = null;
     }
 
-    public Tipoavion(String idTipoAvion, String marca, Integer annio, String modelo, Integer cantidadPasajeros, Integer cantidadFilas, Integer asientosPorFila, List<Avion> avionList) {
-        this.idTipoAvion = idTipoAvion;
+    public Tipoavion(String marca, Integer annio, String modelo, Integer cantidadPasajeros, Integer cantidadFilas, Integer asientosPorFila, List<Avion> avionList) {
         this.marca = marca;
         this.annio = annio;
         this.modelo = modelo;
@@ -80,11 +81,21 @@ public class Tipoavion implements Serializable {
         this.avionList = avionList;
     }
 
-    public String getIdTipoAvion() {
+    public Tipoavion(String modelo) {
+        this.modelo = modelo;
+        this.marca = "";
+        this.annio = ANNIO_BASE;
+        this.cantidadPasajeros = MIN_ASIENTOS * MIN_FILAS;
+        this.cantidadFilas = MIN_FILAS;
+        this.asientosPorFila = MIN_ASIENTOS;
+        this.avionList = null;
+    }
+
+    public Integer getIdTipoAvion() {
         return idTipoAvion;
     }
 
-    public void setIdTipoAvion(String idTipoAvion) {
+    public void setIdTipoAvion(Integer idTipoAvion) {
         this.idTipoAvion = idTipoAvion;
     }
 
@@ -166,11 +177,13 @@ public class Tipoavion implements Serializable {
 
     @Override
     public String toString() {
-        return idTipoAvion;
+        return this.marca + " " + this.modelo;
     }
+
     public final static int MIN_FILAS = 45;
     public final static int MAX_FILAS = 90;
     public final static int MIN_ASIENTOS = 6;
     public final static int MAX_ASIENTOS = 9;
     public final static int ANNIO_BASE = 1980;
+
 }

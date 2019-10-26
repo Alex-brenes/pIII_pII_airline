@@ -34,7 +34,7 @@ public class Model extends Observable {
     private List<Integer> asientos;
 
     public Model() {
-        this.tipoAvion = new Tipoavion("", "", 1980, "", 0, 0, 6, null);
+        this.tipoAvion = new Tipoavion();
         this.annios = new ArrayList<Integer>();
         this.filas = new ArrayList<Integer>();
         this.asientos = new ArrayList<Integer>();

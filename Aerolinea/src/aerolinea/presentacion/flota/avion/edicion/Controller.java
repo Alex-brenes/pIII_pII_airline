@@ -23,16 +23,20 @@ public class Controller {
         this.view = view;
         this.view.setModel(this.model);
         this.view.setController(this);
-        this.recuperarTodos();
-        this.model.getAvion().setTipoavion(this.model.getTiposAviones().get(0));
-        this.model.notifyObservers();
+        this.iniciar();
+
     }
 
-    public void recuperarTodos() {
+    public void iniciar() {
         try {
             this.model.setTiposAviones(aerolinea.logica.Model.getInstance().searchTipoAvion());
         } catch (Throwable ex) {
         }
+        List<Tipoavion> aux = this.model.getTiposAviones();
+        if (aux.size() > 0) {
+            this.model.getAvion().setTipoavion(this.model.getTiposAviones().get(0));
+        }
+        this.model.notifyObservers();
     }
 
     public void consultar(String id) {
@@ -40,7 +44,10 @@ public class Controller {
             model.setAvion(aerolinea.logica.Model.getInstance().getAvion(id));
         } catch (Throwable ex) {
             Avion a = new Avion("El avión no existe");
-            a.setTipoavion(this.model.getTiposAviones().get(0));
+            List<Tipoavion> aux = this.model.getTiposAviones();
+            if (aux.size() > 0) {
+                a.setTipoavion(aux.get(0));
+            }
             this.model.setAvion(a);
         }
     }
@@ -64,7 +71,7 @@ public class Controller {
     }
 
     public void show() {
-        this.recuperarTodos();
+        this.iniciar();
         this.view.setVisible(true);
     }
 

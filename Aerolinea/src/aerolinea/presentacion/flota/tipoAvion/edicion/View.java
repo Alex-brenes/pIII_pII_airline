@@ -41,8 +41,6 @@ public class View extends javax.swing.JInternalFrame implements java.util.Observ
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabelID = new javax.swing.JLabel();
-        jTextFieldID = new javax.swing.JTextField();
         jLabelTitulo = new javax.swing.JLabel();
         jLabelMarca = new javax.swing.JLabel();
         jTextFieldMarca = new javax.swing.JTextField();
@@ -61,14 +59,6 @@ public class View extends javax.swing.JInternalFrame implements java.util.Observ
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
         setIconifiable(true);
-
-        jLabelID.setText("ID del tipo de avión");
-
-        jTextFieldID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldIDActionPerformed(evt);
-            }
-        });
 
         jLabelTitulo.setText("Tipo de avión");
 
@@ -135,40 +125,35 @@ public class View extends javax.swing.JInternalFrame implements java.util.Observ
                         .addContainerGap()
                         .addComponent(jLabelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelID)
-                            .addComponent(jLabelMarca)
-                            .addComponent(jLabelAnnio)
-                            .addComponent(jLabelModelo)
-                            .addComponent(jLabelFilas)
-                            .addComponent(jLabelAsientos))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextFieldID)
-                            .addComponent(jTextFieldMarca)
-                            .addComponent(jTextFieldModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBoxFilas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBoxAsientos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBoxAnnios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(63, 63, 63)
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3)))
-                .addContainerGap(62, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelMarca)
+                                    .addComponent(jLabelAnnio)
+                                    .addComponent(jLabelModelo)
+                                    .addComponent(jLabelFilas)
+                                    .addComponent(jLabelAsientos))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextFieldMarca)
+                                    .addComponent(jTextFieldModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jComboBoxFilas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jComboBoxAsientos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jComboBoxAnnios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton3)))))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelID)
-                    .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelMarca)
@@ -189,20 +174,16 @@ public class View extends javax.swing.JInternalFrame implements java.util.Observ
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelAsientos)
                     .addComponent(jComboBoxAsientos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
                     .addComponent(jButton2)
                     .addComponent(jButton1))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTextFieldIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldIDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldIDActionPerformed
 
     private void jTextFieldModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldModeloActionPerformed
         // TODO add your handling code here:
@@ -217,7 +198,7 @@ public class View extends javax.swing.JInternalFrame implements java.util.Observ
     }//GEN-LAST:event_jComboBoxAnniosActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.controller.consultar(this.jTextFieldID.getText());
+        this.controller.consultar(this.jTextFieldModelo.getText());
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -254,7 +235,6 @@ public class View extends javax.swing.JInternalFrame implements java.util.Observ
     }
 
     private void renderTipoAvion(aerolinea.logica.Tipoavion t) {
-        this.jTextFieldID.setText(t.getIdTipoAvion());
         this.jTextFieldMarca.setText(t.getMarca());
         this.jTextFieldModelo.setText(t.getModelo());
         this.jComboBoxAnnios.setModel(new DefaultComboBoxModel<Integer>(
@@ -270,7 +250,6 @@ public class View extends javax.swing.JInternalFrame implements java.util.Observ
 
     private aerolinea.logica.Tipoavion toTipoAvion() {
         aerolinea.logica.Tipoavion nuevo = new aerolinea.logica.Tipoavion();
-        nuevo.setIdTipoAvion(this.jTextFieldID.getText());
         nuevo.setMarca(this.jTextFieldMarca.getText());
         nuevo.setAnnio((int) this.jComboBoxAnnios.getSelectedItem());
         nuevo.setModelo(this.jTextFieldModelo.getText());
@@ -290,11 +269,9 @@ public class View extends javax.swing.JInternalFrame implements java.util.Observ
     private javax.swing.JLabel jLabelAnnio;
     private javax.swing.JLabel jLabelAsientos;
     private javax.swing.JLabel jLabelFilas;
-    private javax.swing.JLabel jLabelID;
     private javax.swing.JLabel jLabelMarca;
     private javax.swing.JLabel jLabelModelo;
     private javax.swing.JLabel jLabelTitulo;
-    private javax.swing.JTextField jTextFieldID;
     private javax.swing.JTextField jTextFieldMarca;
     private javax.swing.JTextField jTextFieldModelo;
     // End of variables declaration//GEN-END:variables

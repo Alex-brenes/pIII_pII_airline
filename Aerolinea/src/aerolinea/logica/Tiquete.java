@@ -27,6 +27,7 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Tiquete.findAll", query = "SELECT t FROM Tiquete t")})
 public class Tiquete implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

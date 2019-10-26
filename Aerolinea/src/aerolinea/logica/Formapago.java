@@ -26,6 +26,7 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Formapago.findAll", query = "SELECT f FROM Formapago f")})
 public class Formapago implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)

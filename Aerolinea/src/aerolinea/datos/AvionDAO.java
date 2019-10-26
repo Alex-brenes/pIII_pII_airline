@@ -32,7 +32,7 @@ public class AvionDAO extends AbstractDAO<Avion, String> {
     @Override
     public void add(Avion s) throws Throwable {
         String query = "INSERT INTO Avion (id, tipoAvion) "
-                + "VALUES('%s', '%s')";
+                + "VALUES('%s', %s)";
         query = String.format(query, s.getId(), s.getTipoavion().getIdTipoAvion());
         int count = db.executeUpdate(query);
         if (count == 0) {
@@ -100,7 +100,7 @@ public class AvionDAO extends AbstractDAO<Avion, String> {
             c.setId(rs.getString("id"));
             // Tipo avión
             aerolinea.logica.Tipoavion t = new aerolinea.logica.Tipoavion();
-            t.setIdTipoAvion(rs.getString("idTipoAvion"));
+            t.setIdTipoAvion(Integer.parseInt(rs.getString("idTipoAvion")));
             t.setMarca(rs.getString("marca"));
             t.setAnnio(Integer.parseInt(rs.getString("annio")));
             t.setModelo(rs.getString("modelo"));

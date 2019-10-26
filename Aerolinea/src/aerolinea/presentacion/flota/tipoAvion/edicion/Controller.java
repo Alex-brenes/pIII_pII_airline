@@ -34,7 +34,7 @@ public class Controller {
         this.view.setController(this);
     }
 
-    public void consultar(String id) {
+    public void consultar(String id) { // Búsqueda por modelo
         try {
             model.setTipoAvion(aerolinea.logica.Model.getInstance().getTipoAvion(id));
         } catch (Throwable ex) {

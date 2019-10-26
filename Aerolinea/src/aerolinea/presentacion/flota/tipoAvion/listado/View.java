@@ -32,7 +32,7 @@ public class View extends javax.swing.JInternalFrame implements Observer {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableTipos = new javax.swing.JTable();
-        jTextFieldID = new javax.swing.JTextField();
+        jTextFieldModelo = new javax.swing.JTextField();
         jButtonBuscar = new javax.swing.JButton();
         jLabelTitulo = new javax.swing.JLabel();
 
@@ -57,7 +57,7 @@ public class View extends javax.swing.JInternalFrame implements Observer {
         });
         jScrollPane1.setViewportView(jTableTipos);
 
-        jButtonBuscar.setText("Buscar por id");
+        jButtonBuscar.setText("Buscar por modelo");
         jButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonBuscarActionPerformed(evt);
@@ -76,8 +76,9 @@ public class View extends javax.swing.JInternalFrame implements Observer {
                         .addGap(41, 41, 41)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelTitulo)
-                            .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonBuscar)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jTextFieldModelo, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jButtonBuscar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -89,19 +90,19 @@ public class View extends javax.swing.JInternalFrame implements Observer {
                 .addContainerGap()
                 .addComponent(jLabelTitulo)
                 .addGap(18, 18, 18)
-                .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19)
                 .addComponent(jButtonBuscar)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(156, Short.MAX_VALUE))
+                .addContainerGap(160, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
-        this.controller.buscar(this.jTextFieldID.getText());
+        this.controller.buscar(this.jTextFieldModelo.getText());
     }//GEN-LAST:event_jButtonBuscarActionPerformed
 
     private void jTableTiposMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableTiposMouseClicked
@@ -117,7 +118,7 @@ public class View extends javax.swing.JInternalFrame implements Observer {
     private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableTipos;
-    private javax.swing.JTextField jTextFieldID;
+    private javax.swing.JTextField jTextFieldModelo;
     // End of variables declaration//GEN-END:variables
 
     private Model model;
@@ -143,7 +144,10 @@ public class View extends javax.swing.JInternalFrame implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         this.jTableTipos.setModel(new TipoAvionTableModel(this.model.getTiposAviones()));
-        this.jTableTipos.getColumnModel().getColumn(4).setPreferredWidth(260);
+        this.jTableTipos.getColumnModel().getColumn(1).setPreferredWidth(120);
+        this.jTableTipos.getColumnModel().getColumn(2).setPreferredWidth(100);
+        this.jTableTipos.getColumnModel().getColumn(3).setPreferredWidth(120);
+        this.jTableTipos.getColumnModel().getColumn(4).setPreferredWidth(300);
         this.jTableTipos.getColumnModel().getColumn(5).setPreferredWidth(220);
         this.jTableTipos.getColumnModel().getColumn(6).setPreferredWidth(220);
     }

@@ -31,7 +31,7 @@ public class AvionDAO extends AbstractDAO<Avion, String> {
     
     @Override
     public void add(Avion s) throws Throwable {
-        String query = "INSER INTO Avion (id, tipoAvion) "
+        String query = "INSERT INTO Avion (id, tipoAvion) "
                 + "VALUES('%s', '%s')";
         query = String.format(query, s.getId(), s.getTipoavion().getIdTipoAvion());
         int count = db.executeUpdate(query);

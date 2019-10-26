@@ -28,7 +28,7 @@ import java.util.ArrayList;
  */
 public class TipoAvionDAO extends AbstractDAO<Tipoavion, String> {
 
-    public TipoAvionDAO(){
+    public TipoAvionDAO() {
         super();
     }
 
@@ -76,16 +76,16 @@ public class TipoAvionDAO extends AbstractDAO<Tipoavion, String> {
 
     @Override
     public void update(Tipoavion t) throws Throwable {
-        String query = "UPDATE TipoAvion SET marca='%s'," +
-                "annio=%s, modelo = '%s', cantidadPasajeros = %s, " +
-                "cantidadFilas = %s, asientosPorFila = %s "
+        String query = "UPDATE TipoAvion SET marca='%s',"
+                + "annio=%s, modelo = '%s', cantidadPasajeros = %s, "
+                + "cantidadFilas = %s, asientosPorFila = %s "
                 + "where idTipoAvion='%s'";
         query = String.format(query,
-                t.getMarca(), 
-                t.getAnnio(), 
-                t.getModelo(), 
-                t.getCantidadPasajeros(), 
-                t.getCantidadFilas(), 
+                t.getMarca(),
+                t.getAnnio(),
+                t.getModelo(),
+                t.getCantidadPasajeros(),
+                t.getCantidadFilas(),
                 t.getAsientosPorFila(),
                 t.getIdTipoAvion());
         System.out.println(query);
@@ -96,8 +96,8 @@ public class TipoAvionDAO extends AbstractDAO<Tipoavion, String> {
     }
 
     @Override
-    public List<Tipoavion> searh(String id) throws Throwable{ // Búsqueda por id
-       List<Tipoavion> resultado = new ArrayList<Tipoavion>();
+    public List<Tipoavion> searh(String id) throws Throwable { // Búsqueda por id
+        List<Tipoavion> resultado = new ArrayList<Tipoavion>();
         try {
             String query = "SELECT * "
                     + "FROM TipoAvion t "
@@ -130,4 +130,19 @@ public class TipoAvionDAO extends AbstractDAO<Tipoavion, String> {
             return null;
         }
     }
+
+    @Override
+    public List<Tipoavion> searh() throws Throwable {
+        List<Tipoavion> resultado = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM TipoAvion";
+            ResultSet rs = db.executeQuery(query);
+            while (rs.next()) {
+                resultado.add(this.instancia(rs));
+            }
+        } catch (Throwable ex) {
+        }
+        return resultado;
+    }
+
 }

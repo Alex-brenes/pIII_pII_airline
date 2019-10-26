@@ -196,6 +196,10 @@ public class Model {
         return this.tipoAvionDAO.get(s);
     }
 
+    public List<Tipoavion> searchTipoAvion() throws Throwable {
+        return this.tipoAvionDAO.searh();
+    }
+
     // Vuelo
     public void addVuelo(Vuelo t) throws Throwable {
         this.vueloDAO.add(t);

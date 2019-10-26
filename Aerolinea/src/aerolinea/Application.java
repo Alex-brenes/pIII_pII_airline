@@ -15,49 +15,62 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package aerolinea;
+
 import aerolinea.presentacion.application.*;
+
 /**
  *
  * @author pc
  */
 public class Application {
+
     public static void main(String[] args) {
         // Flota
-            // Edición
-            aerolinea.presentacion.flota.tipoAvion.edicion.Model ModelFlotaEdicion = 
-                    new aerolinea.presentacion.flota.tipoAvion.edicion.Model();
-            aerolinea.presentacion.flota.tipoAvion.edicion.View ViewFlotaEdicion = 
-                    new aerolinea.presentacion.flota.tipoAvion.edicion.View();
-            aerolinea.presentacion.flota.tipoAvion.edicion.Controller ControllerFlotaEdicion = 
-                    new aerolinea.presentacion.flota.tipoAvion.edicion.Controller
-                        (ModelFlotaEdicion, ViewFlotaEdicion);
-            EDICION_FLOTA_CONTROLLER = ControllerFlotaEdicion;
-            // Listado
-            aerolinea.presentacion.flota.tipoAvion.listado.Model ModelFlotaListado =
-                    new aerolinea.presentacion.flota.tipoAvion.listado.Model();
-            aerolinea.presentacion.flota.tipoAvion.listado.View ViewFlotaListado =
-                    new aerolinea.presentacion.flota.tipoAvion.listado.View();
-            aerolinea.presentacion.flota.tipoAvion.listado.Controller ControllerFlotaListado =
-                    new aerolinea.presentacion.flota.tipoAvion.listado.Controller
-                        (ModelFlotaListado,ViewFlotaListado);
-            LISTADO_FLOTA_CONTROLLER = ControllerFlotaListado;
-
+            // Tipos de avión
+                // Edición
+                aerolinea.presentacion.flota.tipoAvion.edicion.Model ModelTipoAvionEdicion
+                        = new aerolinea.presentacion.flota.tipoAvion.edicion.Model();
+                aerolinea.presentacion.flota.tipoAvion.edicion.View ViewTipoAvionEdicion
+                        = new aerolinea.presentacion.flota.tipoAvion.edicion.View();
+                aerolinea.presentacion.flota.tipoAvion.edicion.Controller ControllerTipoAvionEdicion
+                        = new aerolinea.presentacion.flota.tipoAvion.edicion.Controller(ModelTipoAvionEdicion, ViewTipoAvionEdicion);
+                EDICION_TIPO_AVION_CONTROLLER = ControllerTipoAvionEdicion;
+                // Listado
+                aerolinea.presentacion.flota.tipoAvion.listado.Model ModelTipoAvionListado
+                        = new aerolinea.presentacion.flota.tipoAvion.listado.Model();
+                aerolinea.presentacion.flota.tipoAvion.listado.View ViewTipoAvionListado
+                        = new aerolinea.presentacion.flota.tipoAvion.listado.View();
+                aerolinea.presentacion.flota.tipoAvion.listado.Controller ControllerTipoAvionListado
+                        = new aerolinea.presentacion.flota.tipoAvion.listado.Controller(ModelTipoAvionListado, ViewTipoAvionListado);
+                LISTADO_TIPO_AVION_CONTROLLER = ControllerTipoAvionListado;
+            // Avión
+                // Edición
+                aerolinea.presentacion.flota.avion.edicion.Model ModelAvionEdicion 
+                        = new aerolinea.presentacion.flota.avion.edicion.Model();
+                aerolinea.presentacion.flota.avion.edicion.View ViewAvionEdicion 
+                        = new aerolinea.presentacion.flota.avion.edicion.View();
+                aerolinea.presentacion.flota.avion.edicion.Controller ControllerAvionEdicion 
+                        = new aerolinea.presentacion.flota.avion.edicion.Controller(ModelAvionEdicion, ViewAvionEdicion);
+                EDICION_AVION_CONTROLLER = ControllerAvionEdicion;
         // Application
         Model applicationModel = new Model();
         View applicationView = new View();
         Controller applicationController = new Controller(applicationModel, applicationView);
-        
+
         applicationView.setVisible(true);
-        
+
         //jInternalFrames
-        applicationView.panel.add(ViewFlotaEdicion);
-        applicationView.panel.add(ViewFlotaListado);
-        
+        applicationView.panel.add(ViewTipoAvionEdicion);
+        applicationView.panel.add(ViewTipoAvionListado);
+        applicationView.panel.add(ViewAvionEdicion);
+
     }
+
+    public static aerolinea.presentacion.flota.tipoAvion.edicion.Controller EDICION_TIPO_AVION_CONTROLLER;
+    public static aerolinea.presentacion.flota.tipoAvion.listado.Controller LISTADO_TIPO_AVION_CONTROLLER;
+
+    public static aerolinea.presentacion.flota.avion.edicion.Controller EDICION_AVION_CONTROLLER;
+    public static aerolinea.presentacion.flota.avion.edicion.Controller LISTADO_AVION_CONTROLLER;
     
-    public static aerolinea.presentacion.flota.tipoAvion.edicion.Controller 
-            EDICION_FLOTA_CONTROLLER;
-    public static aerolinea.presentacion.flota.tipoAvion.listado.Controller 
-            LISTADO_FLOTA_CONTROLLER;
-    
+
 }

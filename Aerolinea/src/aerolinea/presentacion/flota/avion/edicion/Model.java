@@ -16,10 +16,57 @@
  */
 package aerolinea.presentacion.flota.avion.edicion;
 
+import aerolinea.logica.Avion;
+import aerolinea.logica.Tipoavion;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
+
 /**
  *
  * @author pc
  */
-public class Model {
+public class Model extends Observable {
+
+    private Avion avion;
+    private List<Tipoavion> tiposAviones;
+
+    public Model() {
+        this.avion = new Avion();
+        this.tiposAviones = new ArrayList<>();
+    }
+
+    public Avion getAvion() {
+        return this.avion;
+    }
+
+    public void setAvion(Avion avion) {
+        this.avion = avion;
+        this.setChanged();
+        this.notifyObservers();
+    }
+
+    public List<Tipoavion> getTiposAviones() {
+        return this.tiposAviones;
+    }
+
+    public void setTiposAviones(List<Tipoavion> tiposAviones) {
+        this.tiposAviones = tiposAviones;
+        this.setChanged();
+        this.notifyObservers();
+    }
+
+    @Override
+    public void addObserver(Observer o) {
+        super.addObserver(o);
+        this.setChanged();
+        this.notifyObservers();
+    }
+
+    @Override
+    public void notifyObservers(){
+        super.notifyObservers();
+    }
     
 }

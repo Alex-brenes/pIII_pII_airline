@@ -36,7 +36,6 @@ public class View extends javax.swing.JInternalFrame implements Observer {
         jButtonBuscar = new javax.swing.JButton();
         jLabelTitulo = new javax.swing.JLabel();
 
-        setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
 
@@ -82,7 +81,7 @@ public class View extends javax.swing.JInternalFrame implements Observer {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,7 +94,7 @@ public class View extends javax.swing.JInternalFrame implements Observer {
                 .addComponent(jButtonBuscar)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(155, Short.MAX_VALUE))
+                .addContainerGap(156, Short.MAX_VALUE))
         );
 
         pack();
@@ -125,16 +124,16 @@ public class View extends javax.swing.JInternalFrame implements Observer {
     private Controller controller;
 
     public Model getModel() {
-        return model;
+        return this.model;
     }
 
     public void setModel(Model model) {
         this.model = model;
-        model.addObserver(this);
+        this.model.addObserver(this);
     }
 
     public Controller getController() {
-        return controller;
+        return this.controller;
     }
 
     public void setController(Controller controller) {

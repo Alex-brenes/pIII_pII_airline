@@ -15,7 +15,7 @@ public class Controller {
     public Controller(Model model, View view) {
         this.model = model;
         this.view = view;
-        this.view.setModel(model);
+        this.view.setModel(this.model);
         this.view.setController(this);
     }
 
@@ -27,7 +27,7 @@ public class Controller {
     }
 
     public void editar(int row) {
-        Application.EDICION_FLOTA_CONTROLLER.consultar(model.getTiposAviones().get(row).getIdTipoAvion());
+        Application.EDICION_AVION_CONTROLLER.consultar(model.getTiposAviones().get(row).getIdTipoAvion());
     }
 
     public void show() {

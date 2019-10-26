@@ -36,12 +36,21 @@ public class Controller {
     //Flota
         // Edicion
         public void EdicionTipoShow() {
-            Application.EDICION_FLOTA_CONTROLLER.show();
+            Application.EDICION_TIPO_AVION_CONTROLLER.show();
         }
         // Listado
 
         public void ListadoTipoShow() {
-            Application.LISTADO_FLOTA_CONTROLLER.show();
+            Application.LISTADO_TIPO_AVION_CONTROLLER.show();
+        }
+        
+        public void EdicionAvionShow() {
+            Application.EDICION_AVION_CONTROLLER.show();
+        }
+        // Listado
+
+        public void ListadoAvionShow() {
+            Application.LISTADO_AVION_CONTROLLER.show();
         }
 
     public void vueloShow() {

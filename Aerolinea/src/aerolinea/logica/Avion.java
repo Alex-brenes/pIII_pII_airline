@@ -28,6 +28,7 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Avion.findAll", query = "SELECT a FROM Avion a")})
 public class Avion implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -40,10 +41,15 @@ public class Avion implements Serializable {
     private Tipoavion tipoavion;
 
     public Avion() {
+        this.id = "";
+        this.tipoavion = null;
+        this.vueloList = null;
     }
 
     public Avion(String id) {
         this.id = id;
+        this.tipoavion = null;
+        this.vueloList = null;
     }
 
     public String getId() {
@@ -94,5 +100,5 @@ public class Avion implements Serializable {
     public String toString() {
         return "aerolinea.logica.Avion[ id=" + id + " ]";
     }
-    
+
 }

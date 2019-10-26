@@ -258,13 +258,13 @@ public class View extends javax.swing.JInternalFrame implements java.util.Observ
         this.jTextFieldMarca.setText(t.getMarca());
         this.jTextFieldModelo.setText(t.getModelo());
         this.jComboBoxAnnios.setModel(new DefaultComboBoxModel<Integer>(
-                model.getAnnios().toArray(new Integer[0])));
+                this.model.getAnnios().toArray(new Integer[0])));
         this.jComboBoxAnnios.setSelectedItem(t.getAnnio());
         this.jComboBoxAsientos.setModel(new DefaultComboBoxModel<Integer>(
-                model.getAsientos().toArray(new Integer[0])));
+                this.model.getAsientos().toArray(new Integer[0])));
         this.jComboBoxAsientos.setSelectedItem(t.getAsientosPorFila());
         this.jComboBoxFilas.setModel(new DefaultComboBoxModel<Integer>(
-                model.getFilas().toArray(new Integer[0])));
+                this.model.getFilas().toArray(new Integer[0])));
         this.jComboBoxFilas.setSelectedItem(t.getCantidadFilas());
     }
 

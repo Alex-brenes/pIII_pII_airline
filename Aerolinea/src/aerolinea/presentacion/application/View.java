@@ -195,7 +195,7 @@ public class View extends javax.swing.JFrame implements Observer{
     }//GEN-LAST:event_jMenuItemVerInformacionActionPerformed
 
     private void jMenuItemAgregarAvionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAgregarAvionActionPerformed
-        // TODO add your handling code here:
+        this.controller.EdicionAvionShow();
     }//GEN-LAST:event_jMenuItemAgregarAvionActionPerformed
 
     private void jMenuItemAgregarTipoAvionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAgregarTipoAvionActionPerformed

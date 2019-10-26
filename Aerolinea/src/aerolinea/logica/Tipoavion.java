@@ -166,7 +166,7 @@ public class Tipoavion implements Serializable {
 
     @Override
     public String toString() {
-        return "aerolinea.logica.Tipoavion[ idTipoAvion=" + idTipoAvion + " ]";
+        return idTipoAvion;
     }
     public final static int MIN_FILAS = 45;
     public final static int MAX_FILAS = 90;

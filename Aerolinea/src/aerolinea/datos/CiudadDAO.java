@@ -15,6 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package aerolinea.datos;
+
 import aerolinea.logica.Pais;
 import aerolinea.logica.Ciudad;
 import java.sql.ResultSet;
@@ -27,8 +28,8 @@ import java.util.List;
  * @author pc
  */
 public class CiudadDAO extends AbstractDAO<Ciudad, String> {
-    
-    public CiudadDAO(){
+
+    public CiudadDAO() {
         super();
     }
 
@@ -80,7 +81,7 @@ public class CiudadDAO extends AbstractDAO<Ciudad, String> {
     }
 
     @Override
-    public List<Ciudad> searh(String nombre) {
+    public List<Ciudad> searh(String nombre) throws Throwable {
         List<Ciudad> resultado = new ArrayList<Ciudad>();
         try {
             String query = "SELECT * "
@@ -95,8 +96,23 @@ public class CiudadDAO extends AbstractDAO<Ciudad, String> {
         }
         return resultado;
     }
-    
-        // Returns a 'Ciudad' new reference.
+
+    @Override
+    public List<Ciudad> search() throws Throwable {
+        List<Ciudad> resultado = new ArrayList<Ciudad>();
+        try {
+            String query = "SELECT * FROM Ciudad c "
+                    + "INNER JOIN Pais p ON c.abreviaturaPais = p.abreviatura";
+            ResultSet rs = db.executeQuery(query);
+            while (rs.next()) {
+                resultado.add(this.instancia(rs));
+            }
+        } catch (SQLException ex) {
+        }
+        return resultado;
+    }
+
+    // Returns a 'Ciudad' new reference.
     @Override
     public Ciudad instancia(ResultSet rs) {
         try {

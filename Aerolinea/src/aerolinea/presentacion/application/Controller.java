@@ -79,5 +79,12 @@ public class Controller {
         public void ListadoFormaPagoShow() {
             Application.LISTADO_FORMA_PAGO_CONTROLLER.show();
         }
+    // Vuelo
+        void EdicionVueloShow() {
+            Application.EDICION_VUELO_CONTROLLER.show();
+        }
+        void ListadoVueloShow() {
+            Application.LISTADO_VUELO_CONTROLLER.show();
+        }
         
 }

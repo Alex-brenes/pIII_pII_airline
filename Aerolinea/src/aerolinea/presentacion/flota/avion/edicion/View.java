@@ -158,8 +158,8 @@ public class View extends javax.swing.JInternalFrame implements Observer {
         this.controller.agregar(this.toAvion());
     }//GEN-LAST:event_jButtonAgregarActionPerformed
 
-    public Model model;
-    public Controller controller;
+    private Model model;
+    private Controller controller;
 
     @Override
     public void update(Observable o, Object arg) {

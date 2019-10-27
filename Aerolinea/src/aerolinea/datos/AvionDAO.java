@@ -93,9 +93,24 @@ public class AvionDAO extends AbstractDAO<Avion, String> {
     }
 
     @Override
+    public List<Avion> search() throws Throwable {
+        List<Avion> resultado = new ArrayList<Avion>();
+        try {
+            String query = "SELECT * FROM Avion a INNER JOIN TipoAvion t "
+                    + "ON a.tipoAvion = t.idTipoAvion";
+            ResultSet rs = db.executeQuery(query);
+            while (rs.next()) {
+                resultado.add(this.instancia(rs));
+            }
+        } catch (SQLException ex) {
+
+        }
+        return resultado;
+    }
+
+    @Override
     public Avion instancia(ResultSet rs) throws Throwable {
         try {
-            String s;
             Avion c = new Avion();
             c.setId(rs.getString("id"));
             // Tipo avión

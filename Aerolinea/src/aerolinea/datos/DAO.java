@@ -21,11 +21,13 @@
 package aerolinea.datos;
 
 import java.sql.ResultSet;
+import java.sql.Time;
+import java.util.Date;
 import java.util.List;
 
 public interface DAO<T, K> {
 
-    public List<T> searh() throws Throwable;
+    public List<T> search() throws Throwable;
 
     public void add(T s) throws Throwable;
 
@@ -39,4 +41,6 @@ public interface DAO<T, K> {
 
     public T instancia(ResultSet rs) throws Throwable;
 
+    public Time dateSQLWrapper(Date date);
+    
 }

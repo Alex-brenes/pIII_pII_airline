@@ -16,21 +16,25 @@
  */
 package aerolinea.datos;
 
+import aerolinea.logica.Avion;
+import aerolinea.logica.Tipoavion;
 import aerolinea.logica.Vuelo;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class VueloDAO extends AbstractDAO<Vuelo, String> {
 
-    public VueloDAO(){
+    public VueloDAO() {
         super();
     }
-    
+
     @Override
     public void add(Vuelo s) throws Throwable {
-        String query = "INSER INTO Vuelo (idVuelo, dia, hora, origen, destino, avion) "
+        String query = "INSERT INTO Vuelo (idVuelo, dia, hora, origen, destino, avion) "
                 + "VALUES('%s', '%s', '%s', '%s', '%s', '%s')";
         query = String.format(query,
                 s.getIdVuelo(),
@@ -60,7 +64,8 @@ public class VueloDAO extends AbstractDAO<Vuelo, String> {
     @Override
     public Vuelo get(String s) throws Throwable { //Búsqueda por id
         String query = "SELECT * "
-                + "FROM Vuelo v "
+                + "FROM Vuelo v INNER JOIN Avion a ON v.avion=a.id "
+                + "INNER JOIN tipoavion t ON a.tipoAvion=t.idTipoAvion "
                 + "WHERE v.idVuelo='%s'";
         query = String.format(query, s);
         ResultSet rs = db.executeQuery(query);
@@ -73,16 +78,16 @@ public class VueloDAO extends AbstractDAO<Vuelo, String> {
 
     @Override
     public void update(Vuelo s) throws Throwable {
-        String sql = "UPDATE Vuelo SET dia='%s', hora='%s', origen='%s', destino='%s', avion='%s' "
+        String query = "UPDATE Vuelo SET dia='%s', hora='%s', origen='%s', destino='%s', avion='%s' "
                 + "where idVuelo='%s'";
         // Actualiza la abreviatura del pais
-        sql = String.format(sql,
+        query = String.format(query,
                 s.getDia(),
-                s.getHora().toString() /*cambiar el formato de la hora*/,
+                s.getHora().toString(),
                 s.getOrigen().getNombre(),
                 s.getDestino().getNombre(),
                 s.getAvion().getId());
-        int count = db.executeUpdate(sql);
+        int count = db.executeUpdate(query);
         if (count == 0) {
             throw new Exception("El vuelo no existe");
         }
@@ -93,8 +98,9 @@ public class VueloDAO extends AbstractDAO<Vuelo, String> {
         List<Vuelo> resultado = new ArrayList<Vuelo>();
         try {
             String query = "SELECT * "
-                    + "FROM Vuelo v "
-                    + "WHERE v LIKE '%%%s%%'";
+                    + "FROM Vuelo v INNER JOIN Avion a ON v.avion=a.id "
+                    + "INNER JOIN tipoavion t ON a.tipoAvion=t.idTipoAvion "
+                    + "WHERE v.idVuelo LIKE '%%%s%%'";
             query = String.format(query, s);
             ResultSet rs = db.executeQuery(query);
             while (rs.next()) {
@@ -103,26 +109,42 @@ public class VueloDAO extends AbstractDAO<Vuelo, String> {
         } catch (SQLException ex) {
         }
         return resultado;
-
     }
 
     @Override
     public Vuelo instancia(ResultSet rs) throws Throwable {
-                try {
-            String s;
+        try {
             Vuelo v = new Vuelo();
             v.setIdVuelo(rs.getString("idVuelo"));
             v.setDia(rs.getString("dia"));
-            v.setHora(rs.getDate("hora"));
-            //Por ahora, creo que se debería crear toda la ciudad
+            v.setHora(rs.getTime("hora"));
+            // Origen
             v.setOrigen(new aerolinea.logica.Ciudad(rs.getString("origen")));
+            // Destino
             v.setDestino(new aerolinea.logica.Ciudad(rs.getString("destino")));
-            //Por ahora solo se le pone la id
-            v.setAvion(new aerolinea.logica.Avion(rs.getString("avion")));
+            // Avión
+            Avion a = new Avion();
+            a.setId(rs.getString("id"));
+            // Tipo avión
+            Tipoavion t = new Tipoavion();
+            t.setIdTipoAvion(Integer.parseInt(rs.getString("idTipoAvion")));
+            t.setMarca(rs.getString("marca"));
+            t.setAnnio(rs.getInt("annio"));
+            t.setModelo(rs.getString("modelo"));
+            t.setCantidadPasajeros(rs.getInt("cantidadPasajeros"));
+            t.setCantidadFilas(rs.getInt("cantidadFilas"));
+            t.setAsientosPorFila(rs.getInt("asientosPorFilas"));
+            a.setTipoavion(t);
+            v.setAvion(a);
             return v;
         } catch (SQLException ex) {
             return null;
         }
+    }
+
+    @Override
+    public Time dateSQLWrapper(Date date) {
+        return new Time(date.getHours(), date.getMinutes(), date.getSeconds());
     }
 
 }

@@ -6,7 +6,7 @@
 package aerolinea.logica;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Time;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -41,7 +41,7 @@ public class Vuelo implements Serializable {
     private String dia;
     @Column(name = "hora")
     @Temporal(TemporalType.TIME)
-    private Date hora;
+    private Time hora;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "vuelo")
     private List<Viaje> viajeList;
     @JoinColumn(name = "avion", referencedColumnName = "id")
@@ -55,10 +55,23 @@ public class Vuelo implements Serializable {
     private Ciudad destino;
 
     public Vuelo() {
+        this.avion = null;
+        this.destino = null;
+        this.dia = DIA_DEFECTO;
+        this.hora = new Time(0, 0, 0);
+        this.idVuelo = "";
+        this.origen = null;
+        this.viajeList = null;
     }
 
     public Vuelo(String idVuelo) {
         this.idVuelo = idVuelo;
+        this.avion = null;
+        this.destino = null;
+        this.dia = DIA_DEFECTO;
+        this.hora = new Time(0, 0, 0);
+        this.origen = null;
+        this.viajeList = null;
     }
 
     public String getIdVuelo() {
@@ -77,11 +90,11 @@ public class Vuelo implements Serializable {
         this.dia = dia;
     }
 
-    public Date getHora() {
+    public Time getHora() {
         return hora;
     }
 
-    public void setHora(Date hora) {
+    public void setHora(Time hora) {
         this.hora = hora;
     }
 
@@ -141,5 +154,7 @@ public class Vuelo implements Serializable {
     public String toString() {
         return "aerolinea.logica.Vuelo[ idVuelo=" + idVuelo + " ]";
     }
-    
+
+    private static final String DIA_DEFECTO = "Domingo";
+
 }

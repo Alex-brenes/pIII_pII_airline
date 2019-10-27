@@ -102,7 +102,7 @@ public class PaisDAO extends AbstractDAO<Pais, String> {
     }
 
     @Override
-    public List<Pais> searh() throws Throwable { // Búsqueda por abreviatura
+    public List<Pais> search() throws Throwable { // Búsqueda por abreviatura
         List<Pais> resultado = new ArrayList<Pais>();
         try {
             String query = "SELECT * FROM Pais";

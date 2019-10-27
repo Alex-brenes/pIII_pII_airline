@@ -76,6 +76,10 @@ public class Model {
     public Avion getAvion(String s) throws Throwable {
         return this.avionDAO.get(s);
     }
+    
+    public List<Avion> searchAvion() throws Throwable {
+        return this.avionDAO.search();
+    }
 
     // Usuario
     public void addUsuario(Usuario u) throws Throwable {
@@ -109,6 +113,10 @@ public class Model {
 
     public Ciudad getCiudad(String s) throws Throwable {
         return this.ciudadDAO.get(s);
+    }
+    
+    public List<Ciudad> searchCiudad() throws Throwable{
+        return this.ciudadDAO.search();
     }
 
     // formaPago
@@ -146,7 +154,7 @@ public class Model {
     }
 
     public List<Pais> searchPais() throws Throwable {
-        return this.paisDAO.searh();
+        return this.paisDAO.search();
     }
 
     // Reserva
@@ -201,7 +209,7 @@ public class Model {
     }
 
     public List<Tipoavion> searchTipoAvion() throws Throwable {
-        return this.tipoAvionDAO.searh();
+        return this.tipoAvionDAO.search();
     }
 
     // Vuelo

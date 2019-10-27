@@ -17,6 +17,8 @@
 package aerolinea.datos;
 
 import java.sql.ResultSet;
+import java.sql.Time;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,18 +36,16 @@ public abstract class AbstractDAO<T, K> implements DAO<T, K> {
     }
 
     @Override
-    public List<T> searh() throws Throwable {
+    public List<T> search() throws Throwable {
         return null;
     }
 
     @Override
     public void add(T s) throws Throwable {
-
     }
 
     @Override
     public void delete(T s) throws Throwable {
-
     }
 
     @Override
@@ -55,11 +55,16 @@ public abstract class AbstractDAO<T, K> implements DAO<T, K> {
 
     @Override
     public void update(T s) throws Throwable {
-
     }
 
     @Override
     public T instancia(ResultSet rs) throws Throwable {
         return null;
     }
+
+    @Override
+    public Time dateSQLWrapper(Date date) {
+        return null;
+    }
+
 }

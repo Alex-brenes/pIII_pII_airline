@@ -131,7 +131,7 @@ public class TipoAvionDAO extends AbstractDAO<Tipoavion, String> {
     }
 
     @Override
-    public List<Tipoavion> searh() throws Throwable {
+    public List<Tipoavion> search() throws Throwable {
         List<Tipoavion> resultado = new ArrayList<>();
         try {
             String query = "SELECT * FROM TipoAvion";

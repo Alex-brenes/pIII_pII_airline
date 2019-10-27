@@ -112,6 +112,16 @@ public class Application {
         aerolinea.presentacion.formaPago.listado.Controller ControllerFormaPagoListado
                 = new aerolinea.presentacion.formaPago.listado.Controller(ModelFormaPagoListado, ViewFormaPagoListado);
         LISTADO_FORMA_PAGO_CONTROLLER = ControllerFormaPagoListado;
+        // Vuelo
+        // Edición
+        aerolinea.presentacion.vuelos.edicion.Model ModelVueloEdicion
+                = new aerolinea.presentacion.vuelos.edicion.Model();
+        aerolinea.presentacion.vuelos.edicion.View ViewVueloEdicion
+                = new aerolinea.presentacion.vuelos.edicion.View();
+        aerolinea.presentacion.vuelos.edicion.Controller ControllerVueloEdicion
+                = new aerolinea.presentacion.vuelos.edicion.Controller(ModelVueloEdicion, ViewVueloEdicion);
+        EDICION_VUELO_CONTROLLER = ControllerVueloEdicion;
+        // Listado
         // Application
         Model applicationModel = new Model();
         View applicationView = new View();
@@ -130,6 +140,7 @@ public class Application {
         applicationView.panel.add(ViewCiudadListado);
         applicationView.panel.add(ViewFormaPagoEdicion);
         applicationView.panel.add(ViewFormaPagoListado);
+        applicationView.panel.add(ViewVueloEdicion);
     }
 
     public static aerolinea.presentacion.flota.tipoAvion.edicion.Controller EDICION_TIPO_AVION_CONTROLLER;
@@ -146,5 +157,8 @@ public class Application {
 
     public static aerolinea.presentacion.formaPago.edicion.Controller EDICION_FORMA_PAGO_CONTROLLER;
     public static aerolinea.presentacion.formaPago.listado.Controller LISTADO_FORMA_PAGO_CONTROLLER;
+    
+    public static aerolinea.presentacion.vuelos.edicion.Controller EDICION_VUELO_CONTROLLER;
+    public static aerolinea.presentacion.vuelos.edicion.Controller LISTADO_VUELO_CONTROLLER;
 
 }

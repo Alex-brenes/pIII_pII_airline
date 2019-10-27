@@ -93,7 +93,7 @@ public class Avion implements Serializable {
 
     @Override
     public String toString() {
-        return "aerolinea.logica.Avion[ id=" + id + " ]";
+        return id + " " + this.tipoavion.toString();
     }
-    
+
 }

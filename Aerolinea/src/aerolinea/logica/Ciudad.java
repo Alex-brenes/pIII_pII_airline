@@ -105,7 +105,7 @@ public class Ciudad implements Serializable {
 
     @Override
     public String toString() {
-        return "aerolinea.logica.Ciudad[ nombre=" + nombre + " ]";
+        return nombre + ", " + this.pais.getNombre();
     }
-    
+
 }

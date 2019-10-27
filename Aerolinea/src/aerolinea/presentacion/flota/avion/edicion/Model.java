@@ -65,8 +65,13 @@ public class Model extends Observable {
     }
 
     @Override
-    public void notifyObservers(){
+    public void setChanged() {
+        super.setChanged();
+    }
+
+    @Override
+    public void notifyObservers() {
         super.notifyObservers();
     }
-    
+
 }

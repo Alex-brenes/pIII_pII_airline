@@ -35,9 +35,9 @@ public class PaisDAO extends AbstractDAO<Pais, String> {
 
     @Override
     public void add(Pais p) throws Throwable {
-        String query = "INSER INTO Pais (abreviatura, nombre) "
+        String query = "INSERT INTO Pais (abreviatura, nombrePais) "
                 + "values('%s', '%s')";
-        query = String.format(p.getAbreviatura(), p.getNombre());
+        query = String.format(query, p.getAbreviatura(), p.getNombre());
         int count = db.executeUpdate(query);
         //Cargar las ciudades
 //        for(Ciudad c : p.getCiudadList()){
@@ -74,7 +74,7 @@ public class PaisDAO extends AbstractDAO<Pais, String> {
 
     @Override
     public void update(Pais p) throws Throwable {
-        String query = "UPDATE Pais SET nombre='%s' "
+        String query = "UPDATE Pais SET nombrePais='%s' "
                 + "where abreviatura='%s'";
         query = String.format(query, p.getNombre(), p.getAbreviatura());
 
@@ -85,13 +85,27 @@ public class PaisDAO extends AbstractDAO<Pais, String> {
     }
 
     @Override
-    public List<Pais> searh(String ab) throws Throwable { // Búsqueda por abreviatura
+    public List<Pais> searh(String nombre) throws Throwable { // Búsqueda por abreviatura
         List<Pais> resultado = new ArrayList<Pais>();
         try {
             String query = "SELECT * "
                     + "FROM Pais p "
-                    + "WHERE p.abreviatura LIKE '%%%s%%'";
-            query = String.format(query, ab);
+                    + "WHERE p.nombrePais LIKE '%%%s%%'";
+            query = String.format(query, nombre);
+            ResultSet rs = db.executeQuery(query);
+            while (rs.next()) {
+                resultado.add(this.instancia(rs));
+            }
+        } catch (SQLException ex) {
+        }
+        return resultado;
+    }
+
+    @Override
+    public List<Pais> searh() throws Throwable { // Búsqueda por abreviatura
+        List<Pais> resultado = new ArrayList<Pais>();
+        try {
+            String query = "SELECT * FROM Pais";
             ResultSet rs = db.executeQuery(query);
             while (rs.next()) {
                 resultado.add(this.instancia(rs));
@@ -108,8 +122,7 @@ public class PaisDAO extends AbstractDAO<Pais, String> {
             String s;
             Pais p = new Pais();
             p.setAbreviatura(rs.getString("abreviatura"));
-            p.setNombre(rs.getString("nombre"));
-            // VER SI TAMBIÉN CARGAR LAS CIUDADES
+            p.setNombre(rs.getString("nombrePais"));
             return p;
         } catch (SQLException ex) {
             return null;

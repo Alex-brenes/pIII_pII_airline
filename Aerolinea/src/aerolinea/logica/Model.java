@@ -145,6 +145,10 @@ public class Model {
         return this.paisDAO.get(s);
     }
 
+    public List<Pais> searchPais() throws Throwable {
+        return this.paisDAO.searh();
+    }
+
     // Reserva
     public void addReserva(Reserva p) throws Throwable {
         this.reservaDAO.add(p);

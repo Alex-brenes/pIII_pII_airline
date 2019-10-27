@@ -35,11 +35,28 @@ public class Formapago implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "formapago")
     private List<Reserva> reservaList;
 
+    private String nombreFormaPago;
+
+    public String getNombreFormaPago() {
+        return nombreFormaPago;
+    }
+
+    public void setNombreFormaPago(String nombreFormaPago) {
+        this.nombreFormaPago = nombreFormaPago;
+    }
+    
     public Formapago() {
+        this.idFormaPago = "";
+        this.reservaList = null;
     }
 
     public Formapago(String idFormaPago) {
         this.idFormaPago = idFormaPago;
+    }
+    
+    public Formapago(String idFormaPago, String nombreFormaPago){
+        this.idFormaPago = idFormaPago;
+        this.nombreFormaPago = nombreFormaPago;
     }
 
     public String getIdFormaPago() {

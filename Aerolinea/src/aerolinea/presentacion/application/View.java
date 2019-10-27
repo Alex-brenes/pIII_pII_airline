@@ -55,10 +55,22 @@ public class View extends javax.swing.JFrame implements Observer {
         jMenuItemContacto = new javax.swing.JMenuItem();
         jMenuOpcionesAdministrador = new javax.swing.JMenu();
         jMenuFlota = new javax.swing.JMenu();
+        jMenuTipoAvion = new javax.swing.JMenu();
         jMenuItemAgregarTipoAvion = new javax.swing.JMenuItem();
         jMenuItemListadoTiposAviones = new javax.swing.JMenuItem();
+        jMenuAvion = new javax.swing.JMenu();
         jMenuItemAgregarAvion = new javax.swing.JMenuItem();
         jMenuItemListadoAviones = new javax.swing.JMenuItem();
+        jMenuAeropuertos = new javax.swing.JMenu();
+        jMenuPaises = new javax.swing.JMenu();
+        jMenuItemEdicionPais = new javax.swing.JMenuItem();
+        jMenuItemListadoPais = new javax.swing.JMenuItem();
+        jMenuCiudades = new javax.swing.JMenu();
+        jMenuItemEdicionCiuadades = new javax.swing.JMenuItem();
+        jMenuItemListadoCiudades = new javax.swing.JMenuItem();
+        jMenuFormaPago = new javax.swing.JMenu();
+        jMenuItemFormaPagoEdicion = new javax.swing.JMenuItem();
+        jMenuItemListadoFormaPago = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -131,13 +143,15 @@ public class View extends javax.swing.JFrame implements Observer {
 
         jMenuFlota.setText("Gestión de flota");
 
-        jMenuItemAgregarTipoAvion.setText("Agregar y modificar un tipo de avión");
+        jMenuTipoAvion.setText("Gestión de tipos de aviones");
+
+        jMenuItemAgregarTipoAvion.setText("Agregar y modificar información de un tipo de avión");
         jMenuItemAgregarTipoAvion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemAgregarTipoAvionActionPerformed(evt);
             }
         });
-        jMenuFlota.add(jMenuItemAgregarTipoAvion);
+        jMenuTipoAvion.add(jMenuItemAgregarTipoAvion);
 
         jMenuItemListadoTiposAviones.setText("Listado de tipos de aviones en la aerolínea");
         jMenuItemListadoTiposAviones.addActionListener(new java.awt.event.ActionListener() {
@@ -145,7 +159,11 @@ public class View extends javax.swing.JFrame implements Observer {
                 jMenuItemListadoTiposAvionesActionPerformed(evt);
             }
         });
-        jMenuFlota.add(jMenuItemListadoTiposAviones);
+        jMenuTipoAvion.add(jMenuItemListadoTiposAviones);
+
+        jMenuFlota.add(jMenuTipoAvion);
+
+        jMenuAvion.setText("Gestión de aviones");
 
         jMenuItemAgregarAvion.setText("Agregar y modificar información de un avión");
         jMenuItemAgregarAvion.addActionListener(new java.awt.event.ActionListener() {
@@ -153,7 +171,7 @@ public class View extends javax.swing.JFrame implements Observer {
                 jMenuItemAgregarAvionActionPerformed(evt);
             }
         });
-        jMenuFlota.add(jMenuItemAgregarAvion);
+        jMenuAvion.add(jMenuItemAgregarAvion);
 
         jMenuItemListadoAviones.setText("Listado de aviones en la aerolínea");
         jMenuItemListadoAviones.addActionListener(new java.awt.event.ActionListener() {
@@ -161,9 +179,75 @@ public class View extends javax.swing.JFrame implements Observer {
                 jMenuItemListadoAvionesActionPerformed(evt);
             }
         });
-        jMenuFlota.add(jMenuItemListadoAviones);
+        jMenuAvion.add(jMenuItemListadoAviones);
+
+        jMenuFlota.add(jMenuAvion);
 
         jMenuOpcionesAdministrador.add(jMenuFlota);
+
+        jMenuAeropuertos.setText("Gestión de aeropuertos");
+
+        jMenuPaises.setText("Gestión de países");
+
+        jMenuItemEdicionPais.setText("Agregar y modificar información de un país");
+        jMenuItemEdicionPais.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemEdicionPaisActionPerformed(evt);
+            }
+        });
+        jMenuPaises.add(jMenuItemEdicionPais);
+
+        jMenuItemListadoPais.setText("Listado de países");
+        jMenuItemListadoPais.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemListadoPaisActionPerformed(evt);
+            }
+        });
+        jMenuPaises.add(jMenuItemListadoPais);
+
+        jMenuAeropuertos.add(jMenuPaises);
+
+        jMenuCiudades.setText("Gestión de ciudades");
+
+        jMenuItemEdicionCiuadades.setText("Agregar y modificar información de una ciudad");
+        jMenuItemEdicionCiuadades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemEdicionCiuadadesActionPerformed(evt);
+            }
+        });
+        jMenuCiudades.add(jMenuItemEdicionCiuadades);
+
+        jMenuItemListadoCiudades.setText("Listado de ciudades");
+        jMenuItemListadoCiudades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemListadoCiudadesActionPerformed(evt);
+            }
+        });
+        jMenuCiudades.add(jMenuItemListadoCiudades);
+
+        jMenuAeropuertos.add(jMenuCiudades);
+
+        jMenuOpcionesAdministrador.add(jMenuAeropuertos);
+
+        jMenuFormaPago.setText("Gestión de formas de pago");
+
+        jMenuItemFormaPagoEdicion.setText("Agregar y modificar forma de pago");
+        jMenuItemFormaPagoEdicion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemFormaPagoEdicionActionPerformed(evt);
+            }
+        });
+        jMenuFormaPago.add(jMenuItemFormaPagoEdicion);
+
+        jMenuItemListadoFormaPago.setText("Listado de formas de pago");
+        jMenuItemListadoFormaPago.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemListadoFormaPagoActionPerformed(evt);
+            }
+        });
+        jMenuFormaPago.add(jMenuItemListadoFormaPago);
+
+        jMenuOpcionesAdministrador.add(jMenuFormaPago);
 
         jMenuBar1.add(jMenuOpcionesAdministrador);
 
@@ -173,11 +257,11 @@ public class View extends javax.swing.JFrame implements Observer {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(panel)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(panel)
         );
 
         pack();
@@ -214,6 +298,30 @@ public class View extends javax.swing.JFrame implements Observer {
     private void jMenuItemListadoAvionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemListadoAvionesActionPerformed
         this.controller.ListadoAvionShow();
     }//GEN-LAST:event_jMenuItemListadoAvionesActionPerformed
+
+    private void jMenuItemListadoCiudadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemListadoCiudadesActionPerformed
+        this.controller.ListadoCiudadShow();
+    }//GEN-LAST:event_jMenuItemListadoCiudadesActionPerformed
+
+    private void jMenuItemEdicionPaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEdicionPaisActionPerformed
+        this.controller.EdicionPaisShow();
+    }//GEN-LAST:event_jMenuItemEdicionPaisActionPerformed
+
+    private void jMenuItemListadoPaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemListadoPaisActionPerformed
+        this.controller.ListadoPaisShow();
+    }//GEN-LAST:event_jMenuItemListadoPaisActionPerformed
+
+    private void jMenuItemEdicionCiuadadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEdicionCiuadadesActionPerformed
+        this.controller.EdicionCiudadShow();
+    }//GEN-LAST:event_jMenuItemEdicionCiuadadesActionPerformed
+
+    private void jMenuItemFormaPagoEdicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFormaPagoEdicionActionPerformed
+        this.controller.EdicionFormaPagoShow();
+    }//GEN-LAST:event_jMenuItemFormaPagoEdicionActionPerformed
+
+    private void jMenuItemListadoFormaPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemListadoFormaPagoActionPerformed
+        this.controller.ListadoFormaPagoShow();
+    }//GEN-LAST:event_jMenuItemListadoFormaPagoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -252,18 +360,30 @@ public class View extends javax.swing.JFrame implements Observer {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenuAboutAirline;
+    private javax.swing.JMenu jMenuAeropuertos;
+    private javax.swing.JMenu jMenuAvion;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jMenuCiudades;
     private javax.swing.JMenu jMenuFlota;
+    private javax.swing.JMenu jMenuFormaPago;
     private javax.swing.JMenuItem jMenuItemAgregarAvion;
     private javax.swing.JMenuItem jMenuItemAgregarTipoAvion;
     private javax.swing.JMenuItem jMenuItemBuscadorVuelos;
     private javax.swing.JMenuItem jMenuItemContacto;
+    private javax.swing.JMenuItem jMenuItemEdicionCiuadades;
+    private javax.swing.JMenuItem jMenuItemEdicionPais;
+    private javax.swing.JMenuItem jMenuItemFormaPagoEdicion;
     private javax.swing.JMenuItem jMenuItemHistoria;
     private javax.swing.JMenuItem jMenuItemListadoAviones;
+    private javax.swing.JMenuItem jMenuItemListadoCiudades;
+    private javax.swing.JMenuItem jMenuItemListadoFormaPago;
+    private javax.swing.JMenuItem jMenuItemListadoPais;
     private javax.swing.JMenuItem jMenuItemListadoTiposAviones;
     private javax.swing.JMenuItem jMenuItemReferente;
     private javax.swing.JMenuItem jMenuItemVerInformacion;
     private javax.swing.JMenu jMenuOpcionesAdministrador;
+    private javax.swing.JMenu jMenuPaises;
+    private javax.swing.JMenu jMenuTipoAvion;
     private javax.swing.JMenu jMenuUsuario;
     private javax.swing.JMenu jMenuVuelos;
     private javax.swing.JMenu jmenuFile;

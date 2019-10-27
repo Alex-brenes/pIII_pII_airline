@@ -32,17 +32,19 @@ public class Ciudad implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "nombre")
+    @Column(name = "nombreCiudad")
     private String nombre;
     @JoinColumn(name = "abreviaturaPais", referencedColumnName = "abreviatura")
     @ManyToOne(optional = false)
     private Pais pais;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ciudad")
-    private List<Vuelo> vueloList;
+    private List<Vuelo> listaOrigen;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ciudad1")
-    private List<Vuelo> vueloList1;
+    private List<Vuelo> listaDestino;
 
     public Ciudad() {
+        this.nombre = "";
+        this.pais = null;
     }
 
     public Ciudad(String nombre) {
@@ -65,20 +67,20 @@ public class Ciudad implements Serializable {
         this.pais = pais;
     }
 
-    public List<Vuelo> getVueloList() {
-        return vueloList;
+    public List<Vuelo> getListaOrigen() {
+        return listaOrigen;
     }
 
-    public void setVueloList(List<Vuelo> vueloList) {
-        this.vueloList = vueloList;
+    public void setListaOrigen(List<Vuelo> listaOrigen) {
+        this.listaOrigen = listaOrigen;
     }
 
-    public List<Vuelo> getVueloList1() {
-        return vueloList1;
+    public List<Vuelo> getListaDestino() {
+        return listaDestino;
     }
 
-    public void setVueloList1(List<Vuelo> vueloList1) {
-        this.vueloList1 = vueloList1;
+    public void setListaDestino(List<Vuelo> listaDestino) {
+        this.listaDestino = listaDestino;
     }
 
     @Override

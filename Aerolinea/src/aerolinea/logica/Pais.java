@@ -6,6 +6,7 @@
 package aerolinea.logica;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -32,16 +33,30 @@ public class Pais implements Serializable {
     @Basic(optional = false)
     @Column(name = "abreviatura")
     private String abreviatura;
-    @Column(name = "nombre")
+    @Column(name = "nombrePais")
     private String nombre;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pais")
     private List<Ciudad> ciudadList;
 
     public Pais() {
+        this.abreviatura = "";
+        this.nombre = "";
+        this.ciudadList = new ArrayList<>();
+    }
+
+    public Pais(String abreviatura, String nombre) {
+        this.abreviatura = abreviatura;
+        this.nombre = nombre;
     }
 
     public Pais(String abreviatura) {
         this.abreviatura = abreviatura;
+        this.nombre = "";
+    }
+    
+    public Pais(Pais pais){
+        this.abreviatura = pais.abreviatura;
+        this.nombre = pais.nombre;
     }
 
     public String getAbreviatura() {
@@ -90,7 +105,7 @@ public class Pais implements Serializable {
 
     @Override
     public String toString() {
-        return "aerolinea.logica.Pais[ abreviatura=" + abreviatura + " ]";
+        return this.abreviatura + " " + this.nombre;
     }
-    
+
 }

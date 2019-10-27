@@ -53,16 +53,31 @@ public class Controller {
         Application.LISTADO_AVION_CONTROLLER.show();
     }
 
-    public void vueloShow() {
-
-    }
-
-    public void informacionUsuarioShow() {
-
-    }
-
-    public void informacionAerolineaShow() {
-
-    }
-
+    // Aeropuertos
+    // País
+        // Edicion
+        
+        public void EdicionPaisShow() {
+            Application.EDICION_PAIS_CONTROLLER.show();
+        }
+        // Listado
+        public void ListadoPaisShow() {
+            Application.LISTADO_PAIS_CONTROLLER.show();
+        }
+        
+    // Ciudad
+        public void EdicionCiudadShow() {
+            Application.EDICION_CIUDAD_CONTROLLER.show();
+        }
+        public void ListadoCiudadShow() {
+            Application.LISTADO_CIUDAD_CONTROLLER.show();
+        }
+    // Forma de pago
+        public void EdicionFormaPagoShow(){
+            Application.EDICION_FORMA_PAGO_CONTROLLER.show();
+        }
+        public void ListadoFormaPagoShow() {
+            Application.LISTADO_FORMA_PAGO_CONTROLLER.show();
+        }
+        
 }

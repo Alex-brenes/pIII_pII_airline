@@ -36,6 +36,7 @@ public class Controller {
         if (aux.size() > 0) {
             this.model.getAvion().setTipoavion(this.model.getTiposAviones().get(0));
         }
+        this.model.setChanged();
         this.model.notifyObservers();
     }
 

@@ -28,15 +28,15 @@ import java.util.List;
  */
 public class FormaPagoDAO extends AbstractDAO<Formapago, String> {
 
-    public FormaPagoDAO(){
+    public FormaPagoDAO() {
         super();
     }
 
     @Override
     public void add(Formapago s) throws Throwable {
-        String query = "INSER INTO FormaPago (idFormaPago) "
-                + "values('%s')";
-        query = String.format(s.getIdFormaPago());
+        String query = "INSERT INTO FormaPago (idFormaPago,nombreFormaPago) "
+                + "values('%s','%s')";
+        query = String.format(query, s.getIdFormaPago(), s.getNombreFormaPago());
         int count = db.executeUpdate(query);
         if (count == 0) {
             throw new Exception("La forma de pago ya existe");
@@ -69,18 +69,17 @@ public class FormaPagoDAO extends AbstractDAO<Formapago, String> {
 
     @Override
     public void update(Formapago s) throws Throwable {
-        String sql = "UPDATE FormaPago SET idFormaPago='%s' "
+        String query = "UPDATE FormaPago SET nombreFormaPago='%s' "
                 + "where idFormaPago='%s'";
-        sql = String.format(sql, s.getIdFormaPago(), s.getIdFormaPago());
-        // CREO QUE HACE FALTA UNA LLAVE PRIMARIA DIFERENTE PARA LA FORMA DE PAGO
-        int count = db.executeUpdate(sql);
+        query = String.format(query, s.getNombreFormaPago(), s.getIdFormaPago());
+        int count = db.executeUpdate(query);
         if (count == 0) {
             throw new Exception("La forma de pago no existe");
         }
     }
 
     @Override
-    public List<Formapago> searh(String s) throws Throwable{ //Búsqueda por id
+    public List<Formapago> searh(String s) throws Throwable { //Búsqueda por id
         List<Formapago> resultado = new ArrayList<Formapago>();
         try {
             String query = "SELECT * "
@@ -103,6 +102,7 @@ public class FormaPagoDAO extends AbstractDAO<Formapago, String> {
             String s;
             Formapago c = new Formapago();
             c.setIdFormaPago(rs.getString("idFormaPago"));
+            c.setNombreFormaPago(rs.getString("nombreFormaPago"));
             // Ver si cargar también las reservas
             return c;
         } catch (SQLException ex) {

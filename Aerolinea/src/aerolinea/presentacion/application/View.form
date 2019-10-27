@@ -84,36 +84,126 @@
                 <Property name="text" type="java.lang.String" value="Gesti&#xf3;n de flota"/>
               </Properties>
               <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItemAgregarTipoAvion">
+                <Menu class="javax.swing.JMenu" name="jMenuTipoAvion">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Agregar y modificar un tipo de avi&#xf3;n"/>
+                    <Property name="text" type="java.lang.String" value="Gesti&#xf3;n de tipos de aviones"/>
+                  </Properties>
+                  <SubComponents>
+                    <MenuItem class="javax.swing.JMenuItem" name="jMenuItemAgregarTipoAvion">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Agregar y modificar informaci&#xf3;n de un tipo de avi&#xf3;n"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemAgregarTipoAvionActionPerformed"/>
+                      </Events>
+                    </MenuItem>
+                    <MenuItem class="javax.swing.JMenuItem" name="jMenuItemListadoTiposAviones">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Listado de tipos de aviones en la aerol&#xed;nea"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemListadoTiposAvionesActionPerformed"/>
+                      </Events>
+                    </MenuItem>
+                  </SubComponents>
+                </Menu>
+                <Menu class="javax.swing.JMenu" name="jMenuAvion">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Gesti&#xf3;n de aviones"/>
+                  </Properties>
+                  <SubComponents>
+                    <MenuItem class="javax.swing.JMenuItem" name="jMenuItemAgregarAvion">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Agregar y modificar informaci&#xf3;n de un avi&#xf3;n"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemAgregarAvionActionPerformed"/>
+                      </Events>
+                    </MenuItem>
+                    <MenuItem class="javax.swing.JMenuItem" name="jMenuItemListadoAviones">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Listado de aviones en la aerol&#xed;nea"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemListadoAvionesActionPerformed"/>
+                      </Events>
+                    </MenuItem>
+                  </SubComponents>
+                </Menu>
+              </SubComponents>
+            </Menu>
+            <Menu class="javax.swing.JMenu" name="jMenuAeropuertos">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Gesti&#xf3;n de aeropuertos"/>
+              </Properties>
+              <SubComponents>
+                <Menu class="javax.swing.JMenu" name="jMenuPaises">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Gesti&#xf3;n de pa&#xed;ses"/>
+                  </Properties>
+                  <SubComponents>
+                    <MenuItem class="javax.swing.JMenuItem" name="jMenuItemEdicionPais">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Agregar y modificar informaci&#xf3;n de un pa&#xed;s"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemEdicionPaisActionPerformed"/>
+                      </Events>
+                    </MenuItem>
+                    <MenuItem class="javax.swing.JMenuItem" name="jMenuItemListadoPais">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Listado de pa&#xed;ses"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemListadoPaisActionPerformed"/>
+                      </Events>
+                    </MenuItem>
+                  </SubComponents>
+                </Menu>
+                <Menu class="javax.swing.JMenu" name="jMenuCiudades">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Gesti&#xf3;n de ciudades"/>
+                  </Properties>
+                  <SubComponents>
+                    <MenuItem class="javax.swing.JMenuItem" name="jMenuItemEdicionCiuadades">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Agregar y modificar informaci&#xf3;n de una ciudad"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemEdicionCiuadadesActionPerformed"/>
+                      </Events>
+                    </MenuItem>
+                    <MenuItem class="javax.swing.JMenuItem" name="jMenuItemListadoCiudades">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Listado de ciudades"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemListadoCiudadesActionPerformed"/>
+                      </Events>
+                    </MenuItem>
+                  </SubComponents>
+                </Menu>
+              </SubComponents>
+            </Menu>
+            <Menu class="javax.swing.JMenu" name="jMenuFormaPago">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Gesti&#xf3;n de formas de pago"/>
+              </Properties>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItemFormaPagoEdicion">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Agregar y modificar forma de pago"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemAgregarTipoAvionActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemFormaPagoEdicionActionPerformed"/>
                   </Events>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItemListadoTiposAviones">
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItemListadoFormaPago">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Listado de tipos de aviones en la aerol&#xed;nea"/>
+                    <Property name="text" type="java.lang.String" value="Listado de formas de pago"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemListadoTiposAvionesActionPerformed"/>
-                  </Events>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItemAgregarAvion">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Agregar y modificar informaci&#xf3;n de un avi&#xf3;n"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemAgregarAvionActionPerformed"/>
-                  </Events>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItemListadoAviones">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Listado de aviones en la aerol&#xed;nea"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemListadoAvionesActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemListadoFormaPagoActionPerformed"/>
                   </Events>
                 </MenuItem>
               </SubComponents>
@@ -146,12 +236,12 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="panel" alignment="1" max="32767" attributes="0"/>
+          <Component id="panel" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="panel" alignment="1" max="32767" attributes="0"/>
+          <Component id="panel" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>

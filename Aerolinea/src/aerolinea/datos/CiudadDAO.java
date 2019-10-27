@@ -34,7 +34,7 @@ public class CiudadDAO extends AbstractDAO<Ciudad, String> {
 
     @Override
     public void add(Ciudad c) throws Throwable {
-        String query = "INSER INTO Ciudad (nombre, abreviaturaPais) "
+        String query = "INSERT INTO Ciudad (nombreCiudad, abreviaturaPais) "
                 + "VALUES('%s', '%s')";
         query = String.format(query, c.getNombre(), c.getPais().getAbreviatura());
         int count = db.executeUpdate(query);
@@ -45,7 +45,7 @@ public class CiudadDAO extends AbstractDAO<Ciudad, String> {
 
     @Override
     public void delete(Ciudad c) throws Throwable {
-        String query = "DELETE FROM Ciudad WHERE nombre='%s'";
+        String query = "DELETE FROM Ciudad WHERE nombreCiudad='%s'";
         query = String.format(query, c.getNombre());
         int count = db.executeUpdate(query);
         if (count == 0) {
@@ -56,8 +56,8 @@ public class CiudadDAO extends AbstractDAO<Ciudad, String> {
     @Override
     public Ciudad get(String nombre) throws Throwable {
         String query = "SELECT * "
-                + "FROM Ciudad c "
-                + "WHERE c.nombre='%s'";
+                + "FROM Ciudad c INNER JOIN Pais p ON c.abreviaturaPais = p.abreviatura "
+                + "WHERE c.nombreCiudad='%s'";
         query = String.format(query, nombre);
         ResultSet rs = db.executeQuery(query);
         if (rs.next()) {
@@ -69,11 +69,11 @@ public class CiudadDAO extends AbstractDAO<Ciudad, String> {
 
     @Override
     public void update(Ciudad c) throws Throwable {
-        String sql = "UPDATE Ciudad SET abreviatura='%s' "
-                + "where nombre='%s'";
+        String query = "UPDATE Ciudad SET abreviaturaPais='%s' "
+                + "WHERE nombreCiudad='%s'";
         // Actualiza la abreviatura del pais
-        sql = String.format(sql, c.getPais().getAbreviatura(), c.getNombre());
-        int count = db.executeUpdate(sql);
+        query = String.format(query, c.getPais().getAbreviatura(), c.getNombre());
+        int count = db.executeUpdate(query);
         if (count == 0) {
             throw new Exception("La ciudad no existe");
         }
@@ -84,8 +84,8 @@ public class CiudadDAO extends AbstractDAO<Ciudad, String> {
         List<Ciudad> resultado = new ArrayList<Ciudad>();
         try {
             String query = "SELECT * "
-                    + "FROM Ciudad c "
-                    + "WHERE c.nombre LIKE '%%%s%%'";
+                    + "FROM Ciudad c INNER JOIN Pais p ON c.abreviaturaPais = p.abreviatura "
+                    + "WHERE c.nombreCiudad LIKE '%%%s%%'";
             query = String.format(query, nombre);
             ResultSet rs = db.executeQuery(query);
             while (rs.next()) {
@@ -100,11 +100,11 @@ public class CiudadDAO extends AbstractDAO<Ciudad, String> {
     @Override
     public Ciudad instancia(ResultSet rs) {
         try {
-            String s;
             Ciudad c = new Ciudad();
-            c.setNombre(rs.getString("nombre"));
+            c.setNombre(rs.getString("nombreCiudad"));
             Pais p = new Pais();
             p.setAbreviatura(rs.getString("abreviaturaPais"));
+            p.setNombre(rs.getString("nombrePais"));
             p.getCiudadList().add(c);
             c.setPais(p);
             return c;

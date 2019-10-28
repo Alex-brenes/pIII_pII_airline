@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package aerolinea.presentacion.vuelos.edicion;
+package aerolinea.presentacion.vuelo.edicion;
 
 import aerolinea.logica.Avion;
 import aerolinea.logica.Ciudad;

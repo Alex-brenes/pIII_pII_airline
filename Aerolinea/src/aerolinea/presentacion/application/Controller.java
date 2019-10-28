@@ -86,5 +86,13 @@ public class Controller {
         void ListadoVueloShow() {
             Application.LISTADO_VUELO_CONTROLLER.show();
         }
+    // Viaje
+        void EdicionViajeShow() {
+            Application.EDICION_VIAJE_CONTROLLER.show();
+        }
+
+        void ListadoViajeShow() {
+            Application.LISTADO_VIAJE_CONTROLLER.show();
+        }
         
 }

@@ -70,7 +70,7 @@ public class CiudadTableModel extends AbstractTableModel {
 
     private Icon bandera(Pais p) {
         String file = p.getAbreviatura() + ".png";
-        return new ImageIcon(getClass().getResource("../../recursos/64/" + file));
+        return new ImageIcon(getClass().getResource("../../../recursos/64/" + file));
     }
 
     @Override

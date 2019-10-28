@@ -114,19 +114,44 @@ public class Application {
         LISTADO_FORMA_PAGO_CONTROLLER = ControllerFormaPagoListado;
         // Vuelo
         // Edición
-        aerolinea.presentacion.vuelos.edicion.Model ModelVueloEdicion
-                = new aerolinea.presentacion.vuelos.edicion.Model();
-        aerolinea.presentacion.vuelos.edicion.View ViewVueloEdicion
-                = new aerolinea.presentacion.vuelos.edicion.View();
-        aerolinea.presentacion.vuelos.edicion.Controller ControllerVueloEdicion
-                = new aerolinea.presentacion.vuelos.edicion.Controller(ModelVueloEdicion, ViewVueloEdicion);
+        aerolinea.presentacion.vuelo.edicion.Model ModelVueloEdicion
+                = new aerolinea.presentacion.vuelo.edicion.Model();
+        aerolinea.presentacion.vuelo.edicion.View ViewVueloEdicion
+                = new aerolinea.presentacion.vuelo.edicion.View();
+        aerolinea.presentacion.vuelo.edicion.Controller ControllerVueloEdicion
+                = new aerolinea.presentacion.vuelo.edicion.Controller(ModelVueloEdicion, ViewVueloEdicion);
         EDICION_VUELO_CONTROLLER = ControllerVueloEdicion;
         // Listado
+        aerolinea.presentacion.vuelo.listado.Model ModelVueloListado
+                = new aerolinea.presentacion.vuelo.listado.Model();
+        aerolinea.presentacion.vuelo.listado.View ViewVueloListado
+                = new aerolinea.presentacion.vuelo.listado.View();
+        aerolinea.presentacion.vuelo.listado.Controller ControllerVueloListado
+                = new aerolinea.presentacion.vuelo.listado.Controller(ModelVueloListado, ViewVueloListado);
+        LISTADO_VUELO_CONTROLLER = ControllerVueloListado;
+        // Viaje
+        // Edición
+        aerolinea.presentacion.viaje.edicion.Model ModelViajeEdicion
+                = new aerolinea.presentacion.viaje.edicion.Model();
+        aerolinea.presentacion.viaje.edicion.View ViewViajeEdicion
+                = new aerolinea.presentacion.viaje.edicion.View();
+        aerolinea.presentacion.viaje.edicion.Controller ControllerViajeEdicion
+                = new aerolinea.presentacion.viaje.edicion.Controller(ModelViajeEdicion, ViewViajeEdicion);
+        EDICION_VIAJE_CONTROLLER = ControllerViajeEdicion;
+        // Listado
+        aerolinea.presentacion.viaje.listado.Model ModelViajeListado
+                = new aerolinea.presentacion.viaje.listado.Model();
+        aerolinea.presentacion.viaje.listado.View ViewViajeListado
+                = new aerolinea.presentacion.viaje.listado.View();
+        aerolinea.presentacion.viaje.listado.Controller ControllerViajeListado
+                = new aerolinea.presentacion.viaje.listado.Controller(ModelViajeListado, ViewViajeListado);
+        LISTADO_VIAJE_CONTROLLER = ControllerViajeListado;
+        
+
         // Application
         Model applicationModel = new Model();
         View applicationView = new View();
         Controller applicationController = new Controller(applicationModel, applicationView);
-
         applicationView.setVisible(true);
 
         //jInternalFrames
@@ -141,6 +166,10 @@ public class Application {
         applicationView.panel.add(ViewFormaPagoEdicion);
         applicationView.panel.add(ViewFormaPagoListado);
         applicationView.panel.add(ViewVueloEdicion);
+        applicationView.panel.add(ViewVueloListado);
+        applicationView.panel.add(ViewViajeEdicion);
+        applicationView.panel.add(ViewViajeListado);
+
     }
 
     public static aerolinea.presentacion.flota.tipoAvion.edicion.Controller EDICION_TIPO_AVION_CONTROLLER;
@@ -157,8 +186,10 @@ public class Application {
 
     public static aerolinea.presentacion.formaPago.edicion.Controller EDICION_FORMA_PAGO_CONTROLLER;
     public static aerolinea.presentacion.formaPago.listado.Controller LISTADO_FORMA_PAGO_CONTROLLER;
-    
-    public static aerolinea.presentacion.vuelos.edicion.Controller EDICION_VUELO_CONTROLLER;
-    public static aerolinea.presentacion.vuelos.edicion.Controller LISTADO_VUELO_CONTROLLER;
 
+    public static aerolinea.presentacion.vuelo.edicion.Controller EDICION_VUELO_CONTROLLER;
+    public static aerolinea.presentacion.vuelo.listado.Controller LISTADO_VUELO_CONTROLLER;
+
+    public static aerolinea.presentacion.viaje.edicion.Controller EDICION_VIAJE_CONTROLLER;
+    public static aerolinea.presentacion.viaje.listado.Controller LISTADO_VIAJE_CONTROLLER;
 }

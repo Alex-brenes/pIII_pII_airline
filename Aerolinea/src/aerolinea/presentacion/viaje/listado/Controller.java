@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package aerolinea.presentacion.formaPago.listado;
+package aerolinea.presentacion.viaje.listado;
 
 import aerolinea.Application;
 
@@ -23,6 +23,25 @@ public class Controller {
         this.view.setController(this);
     }
 
+    public void show() {
+        view.setVisible(true);
+    }
+
+    public void hide() {
+        view.setVisible(false);
+    }
+
+    void buscar(Integer id) {
+        try {
+            model.setViajes(aerolinea.logica.Model.getInstance().searchViaje(id));
+        } catch (Throwable ex) {
+        }
+    }
+
+    void editar(int row) {
+        Application.EDICION_VIAJE_CONTROLLER.consultar(model.getViajes().get(row).getIdViaje());
+    }
+
     public Model getModel() {
         return model;
     }
@@ -37,24 +56,5 @@ public class Controller {
 
     public void setView(View view) {
         this.view = view;
-    }
-
-    public void show() {
-        view.setVisible(true);
-    }
-
-    public void hide() {
-        view.setVisible(false);
-    }
-
-    void buscar(String id) {
-        try {
-            model.setFormasPago(aerolinea.logica.Model.getInstance().searchFormaPago(id));
-        } catch (Throwable ex) {
-        }
-    }
-
-    void editar(int row) {
-        Application.EDICION_FORMA_PAGO_CONTROLLER.consultar(model.getFormasPago().get(row).getIdFormaPago());
     }
 }

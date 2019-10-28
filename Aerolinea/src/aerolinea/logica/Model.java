@@ -228,6 +228,14 @@ public class Model {
     public Vuelo getVuelo(String s) throws Throwable {
         return this.vueloDAO.get(s);
     }
+    
+    public void deleteVuelo(Vuelo v) throws Throwable {
+        this.vueloDAO.delete(v);
+    } 
+    
+    public List<Vuelo> searchVuelo() throws Throwable{
+        return this.vueloDAO.search();
+    }
 
     // Viaje
     public void addViaje(Viaje t) throws Throwable {

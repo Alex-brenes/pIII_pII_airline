@@ -185,5 +185,6 @@ public class Tipoavion implements Serializable {
     public final static int MIN_ASIENTOS = 6;
     public final static int MAX_ASIENTOS = 9;
     public final static int ANNIO_BASE = 1980;
+    public static final int MIN_ASIENTOS_DISP = 50;
 
 }

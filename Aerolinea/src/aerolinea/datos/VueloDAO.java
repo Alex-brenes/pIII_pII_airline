@@ -17,6 +17,8 @@
 package aerolinea.datos;
 
 import aerolinea.logica.Avion;
+import aerolinea.logica.Ciudad;
+import aerolinea.logica.Pais;
 import aerolinea.logica.Tipoavion;
 import aerolinea.logica.Vuelo;
 import java.sql.ResultSet;
@@ -81,12 +83,14 @@ public class VueloDAO extends AbstractDAO<Vuelo, String> {
         String query = "UPDATE Vuelo SET dia='%s', hora='%s', origen='%s', destino='%s', avion='%s' "
                 + "where idVuelo='%s'";
         // Actualiza la abreviatura del pais
+        System.out.println(s.getHora().toString());
         query = String.format(query,
                 s.getDia(),
                 s.getHora().toString(),
                 s.getOrigen().getNombre(),
                 s.getDestino().getNombre(),
-                s.getAvion().getId());
+                s.getAvion().getId(),
+                s.getIdVuelo());
         int count = db.executeUpdate(query);
         if (count == 0) {
             throw new Exception("El vuelo no existe");
@@ -112,6 +116,23 @@ public class VueloDAO extends AbstractDAO<Vuelo, String> {
     }
 
     @Override
+    public List<Vuelo> search() throws Throwable {
+        List<Vuelo> resultado = new ArrayList<Vuelo>();
+        try {
+            String query = "SELECT * "
+                    + "FROM Vuelo v INNER JOIN Avion a ON v.avion=a.id "
+                    + "INNER JOIN tipoavion t ON a.tipoAvion=t.idTipoAvion ";
+            ResultSet rs = db.executeQuery(query);
+            while (rs.next()) {
+                resultado.add(this.instancia(rs));
+            }
+        } catch (SQLException ex) {
+        }
+        return resultado;
+
+    }
+
+    @Override
     public Vuelo instancia(ResultSet rs) throws Throwable {
         try {
             Vuelo v = new Vuelo();
@@ -119,9 +140,9 @@ public class VueloDAO extends AbstractDAO<Vuelo, String> {
             v.setDia(rs.getString("dia"));
             v.setHora(rs.getTime("hora"));
             // Origen
-            v.setOrigen(new aerolinea.logica.Ciudad(rs.getString("origen")));
+            v.setOrigen(this.origenVuelo(v.getIdVuelo()));
             // Destino
-            v.setDestino(new aerolinea.logica.Ciudad(rs.getString("destino")));
+            v.setDestino(this.destinoVuelo(v.getIdVuelo()));
             // Avión
             Avion a = new Avion();
             a.setId(rs.getString("id"));
@@ -133,12 +154,46 @@ public class VueloDAO extends AbstractDAO<Vuelo, String> {
             t.setModelo(rs.getString("modelo"));
             t.setCantidadPasajeros(rs.getInt("cantidadPasajeros"));
             t.setCantidadFilas(rs.getInt("cantidadFilas"));
-            t.setAsientosPorFila(rs.getInt("asientosPorFilas"));
+            t.setAsientosPorFila(rs.getInt("asientosPorFila"));
             a.setTipoavion(t);
             v.setAvion(a);
             return v;
         } catch (SQLException ex) {
             return null;
+        }
+    }
+
+    private Ciudad origenVuelo(String idVuelo) throws Throwable {
+        String query = "SELECT * "
+                + "FROM Vuelo v INNER JOIN Ciudad c ON v.origen=c.nombreCiudad "
+                + "INNER JOIN Pais p ON c.abreviaturaPais=p.abreviatura "
+                + "WHERE v.idVuelo='%s'";
+        query = String.format(query, idVuelo);
+        ResultSet rs = db.executeQuery(query);
+        if (rs.next()) {
+            Ciudad origen = new Ciudad();
+            origen.setNombre(rs.getString("nombreCiudad"));
+            origen.setPais(new Pais(rs.getString("abreviatura"), rs.getString("nombrePais")));
+            return origen;
+        } else {
+            throw new Exception("El origen no existe");
+        }
+    }
+
+    private Ciudad destinoVuelo(String idVuelo) throws Throwable {
+        String query = "SELECT * "
+                + "FROM Vuelo v INNER JOIN Ciudad c ON v.destino=c.nombreCiudad "
+                + "INNER JOIN Pais p ON c.abreviaturaPais=p.abreviatura "
+                + "WHERE v.idVuelo='%s'";
+        query = String.format(query, idVuelo);
+        ResultSet rs = db.executeQuery(query);
+        if (rs.next()) {
+            Ciudad origen = new Ciudad();
+            origen.setNombre(rs.getString("nombreCiudad"));
+            origen.setPais(new Pais(rs.getString("abreviatura"), rs.getString("nombrePais")));
+            return origen;
+        } else {
+            throw new Exception("El destino no existe");
         }
     }
 

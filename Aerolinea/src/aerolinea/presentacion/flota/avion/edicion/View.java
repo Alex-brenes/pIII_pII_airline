@@ -32,7 +32,6 @@ public class View extends javax.swing.JInternalFrame implements Observer {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jToggleButton1 = new javax.swing.JToggleButton();
         jLabelTitulo = new javax.swing.JLabel();
         jLabelID = new javax.swing.JLabel();
         jLabelTipo = new javax.swing.JLabel();
@@ -41,8 +40,6 @@ public class View extends javax.swing.JInternalFrame implements Observer {
         jButtonAgregar = new javax.swing.JButton();
         jButtonConsultar = new javax.swing.JButton();
         jButtonModificar = new javax.swing.JButton();
-
-        jToggleButton1.setText("jToggleButton1");
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
@@ -209,6 +206,5 @@ public class View extends javax.swing.JInternalFrame implements Observer {
     private javax.swing.JLabel jLabelTipo;
     private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JTextField jTextFieldID;
-    private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
 }

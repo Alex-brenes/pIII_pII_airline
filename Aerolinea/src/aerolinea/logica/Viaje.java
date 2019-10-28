@@ -55,10 +55,21 @@ public class Viaje implements Serializable {
     private List<Reserva> reservaList;
 
     public Viaje() {
+        this.idViaje = 0;
+        this.disponibles = 0;
+        this.fecha = new Date();
+        this.precio = 0.0f;
+        this.vuelo = null;
+        this.reservaList = null;
     }
 
     public Viaje(Integer idViaje) {
         this.idViaje = idViaje;
+        this.disponibles = 0;
+        this.fecha = null;
+        this.precio = 0.0f;
+        this.vuelo = null;
+        this.reservaList = null;
     }
 
     public Integer getIdViaje() {
@@ -133,5 +144,5 @@ public class Viaje implements Serializable {
     public String toString() {
         return "aerolinea.logica.Viaje[ idViaje=" + idViaje + " ]";
     }
-    
+
 }

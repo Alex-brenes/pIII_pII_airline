@@ -152,7 +152,7 @@ public class Vuelo implements Serializable {
 
     @Override
     public String toString() {
-        return "aerolinea.logica.Vuelo[ idVuelo=" + idVuelo + " ]";
+        return idVuelo + this.origen.toString() + " - " + this.destino.toString() + ". " + this.dia + " " + this.hora.toString();
     }
 
     private static final String DIA_DEFECTO = "Domingo";

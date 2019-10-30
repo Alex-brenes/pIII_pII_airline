@@ -7,6 +7,8 @@ package aerolinea.presentacion.viaje.edicion;
 
 import aerolinea.logica.Viaje;
 import aerolinea.logica.Vuelo;
+import java.time.Month;
+import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -24,13 +26,15 @@ public class Model extends Observable {
     // Fecha
     private List<Integer> annios;
     private List<String> meses;
-    private List<String> dias;
+    private List<Integer> dayList;
 
     public Model() {
         this.viaje = new Viaje();
         this.vuelos = new ArrayList<>();
         this.annios = new ArrayList<>();
         this.asientos = new ArrayList<>();
+        this.meses = new ArrayList<>();
+        this.dayList = new ArrayList<>();
         this.iniciarListas();
     }
 
@@ -89,12 +93,12 @@ public class Model extends Observable {
         this.notifyObservers();
     }
 
-    public List<String> getDias() {
-        return dias;
+    public List<Integer> getDayList() {
+        return dayList;
     }
 
-    public void setDias(List<String> dias) {
-        this.dias = dias;
+    public void setDayList(List<Integer> dayList) {
+        this.dayList = dayList;
         this.setChanged();
         this.notifyObservers();
     }
@@ -107,15 +111,23 @@ public class Model extends Observable {
             this.annios.add(annio);
             annio++;
         }
-//        for (int annios = Tipoavion.ANNIO_BASE; annios <= java.util.Calendar.getInstance().get(java.util.Calendar.YEAR); annios++) {
-//            this.annios.add(annios);
-//        }
-//        for (int filas = Tipoavion.MIN_FILAS; filas <= Tipoavion.MAX_FILAS; filas++) {
-//            this.filas.add(filas);
-//        }
-//        for (int asientos = Tipoavion.MIN_ASIENTOS; asientos <= Tipoavion.MAX_ASIENTOS; asientos++) {
-//            this.asientos.add(asientos);
-//        }
+
+        this.meses.add("Enero");
+        this.meses.add("Febrero");
+        this.meses.add("Marzo");
+        this.meses.add("Abril");
+        this.meses.add("Mayo");
+        this.meses.add("Junio");
+        this.meses.add("Julio");
+        this.meses.add("Agosto");
+        this.meses.add("Setiembre");
+        this.meses.add("Octubre");
+        this.meses.add("Noviembre");
+        this.meses.add("Diciembre");
+
+        this.monthDay(java.util.Calendar.getInstance().get(java.util.Calendar.YEAR),
+                java.util.Calendar.getInstance().get(java.util.Calendar.MONTH));
+
     }
 
     @Override
@@ -126,6 +138,33 @@ public class Model extends Observable {
     @Override
     public void notifyObservers() {
         super.notifyObservers();
+    }
+
+    public void monthDay(int year, int month) {
+
+        YearMonth yMonth = YearMonth.of(year, Month.of(month + 1));
+        int diff = this.dayList.size() - yMonth.lengthOfMonth();
+        int arrayIndex = 0;
+        if (!this.dayList.isEmpty()) {
+            arrayIndex = this.dayList.size() - 1;
+        }
+        // ADD
+        if (diff < 0) {
+            diff *= -1;
+            for (int u = 0; u < diff; u++) {
+                if (this.dayList.isEmpty()) {
+                    this.dayList.add(1);
+                } else {
+                    this.dayList.add(this.dayList.get(arrayIndex++) + 1);
+                }
+            }
+        } // REMOVE
+        else if (diff > 0) {
+            for (int i = 0; i < diff; i++) {
+                this.dayList.remove(arrayIndex--);
+            }
+        }
+
     }
 
     private static final int YEAR_RANGE = 50;

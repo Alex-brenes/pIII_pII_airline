@@ -76,7 +76,7 @@ public class Model {
     public Avion getAvion(String s) throws Throwable {
         return this.avionDAO.get(s);
     }
-    
+
     public List<Avion> searchAvion() throws Throwable {
         return this.avionDAO.search();
     }
@@ -98,6 +98,10 @@ public class Model {
         return this.usuarioDAO.get(s);
     }
 
+    public Usuario getUsuario(String s) throws Throwable {
+        return this.usuarioDAO.get(s);
+    }
+
     // Ciudad
     public void addCiudad(Ciudad c) throws Throwable {
         this.ciudadDAO.add(c);
@@ -114,8 +118,8 @@ public class Model {
     public Ciudad getCiudad(String s) throws Throwable {
         return this.ciudadDAO.get(s);
     }
-    
-    public List<Ciudad> searchCiudad() throws Throwable{
+
+    public List<Ciudad> searchCiudad() throws Throwable {
         return this.ciudadDAO.search();
     }
 
@@ -228,12 +232,12 @@ public class Model {
     public Vuelo getVuelo(String s) throws Throwable {
         return this.vueloDAO.get(s);
     }
-    
+
     public void deleteVuelo(Vuelo v) throws Throwable {
         this.vueloDAO.delete(v);
-    } 
-    
-    public List<Vuelo> searchVuelo() throws Throwable{
+    }
+
+    public List<Vuelo> searchVuelo() throws Throwable {
         return this.vueloDAO.search();
     }
 
@@ -252,6 +256,10 @@ public class Model {
 
     public Viaje getViaje(Integer s) throws Throwable {
         return this.viajeDAO.get(s);
+    }
+
+    public List<Viaje> searchViaje() throws Throwable {
+        return this.viajeDAO.search();
     }
 
     public static Model getInstance() {

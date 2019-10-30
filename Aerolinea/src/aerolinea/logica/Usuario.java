@@ -59,10 +59,31 @@ public class Usuario implements Serializable {
     private List<Reserva> reservaList;
 
     public Usuario() {
+        this.apellido = "";
+        this.contrasenna = "";
+        this.direccion = "";
+        this.email = "";
+        this.esAdmin = true;
+        this.fechaNacimiento = null;
+        this.idUsuario = 0;
+        this.nombre = "";
+        this.reservaList = null;
+        this.telefono = "";
+        this.telefonoTrabajo = "";
     }
 
     public Usuario(Integer idUsuario) {
         this.idUsuario = idUsuario;
+        this.apellido = "";
+        this.contrasenna = "";
+        this.direccion = "";
+        this.email = "";
+        this.esAdmin = true;
+        this.fechaNacimiento = null;
+        this.nombre = "";
+        this.reservaList = null;
+        this.telefono = "";
+        this.telefonoTrabajo = "";
     }
 
     public Usuario(Integer idUsuario, String email, String contrasenna) {
@@ -183,5 +204,5 @@ public class Usuario implements Serializable {
     public String toString() {
         return "aerolinea.logica.Usuario[ idUsuario=" + idUsuario + " ]";
     }
-    
+
 }

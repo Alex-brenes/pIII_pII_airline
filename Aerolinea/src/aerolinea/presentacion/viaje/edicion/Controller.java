@@ -7,6 +7,8 @@ package aerolinea.presentacion.viaje.edicion;
 
 import aerolinea.logica.Viaje;
 import aerolinea.logica.Vuelo;
+import java.time.Month;
+import java.time.YearMonth;
 import java.util.List;
 
 /**
@@ -86,13 +88,15 @@ public class Controller {
             for (int i = this.model.MIN_ASIENTOS; i <= this.model.getVuelos().get(0).getAvion().getTipoavion().getCantidadPasajeros(); i++) {
                 this.model.getAsientos().add(i);
             }
-            System.out.println("jeje");
         }
         this.model.setChanged();
         this.model.notifyObservers();
-
     }
 
-    
+    void diasMes(Integer annio, Integer mes) {
+        this.model.monthDay(annio, mes);
+        this.model.setChanged();
+        this.model.notifyObservers();
+    }
 
 }

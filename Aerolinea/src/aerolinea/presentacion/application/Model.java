@@ -16,6 +16,7 @@
  */
 package aerolinea.presentacion.application;
 
+import aerolinea.logica.Usuario;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -28,7 +29,11 @@ public class Model extends Observable {
     private aerolinea.logica.Usuario user;
 
     public Model() {
-        this.user = null;
+        this.user = new Usuario();
+    }
+
+    public Usuario getUser() {
+        return user;
     }
 
     public Model(aerolinea.logica.Usuario user) {
@@ -37,6 +42,8 @@ public class Model extends Observable {
 
     public void setUser(aerolinea.logica.Usuario user) {
         this.user = user;
+        this.setChanged();
+        this.notifyObservers();
     }
 
     @Override

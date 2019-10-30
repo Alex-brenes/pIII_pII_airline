@@ -17,6 +17,7 @@
 package aerolinea.presentacion.application;
 
 import aerolinea.Application;
+import aerolinea.logica.Usuario;
 
 /**
  *
@@ -94,5 +95,22 @@ public class Controller {
         void ListadoViajeShow() {
             Application.LISTADO_VIAJE_CONTROLLER.show();
         }
+    // Login
+        void LoginShow() {
+            Application.LOGIN_CONTROLLER.show();
+        }
+        
+    // Registro
+        void RegistroLogin(){
+            Application.REGISTRO_CONTROLLER.show();
+        }
+
+    public void login(Usuario user) {
+        this.model.setUser(user);
+    }
+
+    void logout() {
+        this.model.setUser(new Usuario());
+    }
         
 }

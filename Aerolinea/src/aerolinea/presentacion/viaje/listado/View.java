@@ -108,8 +108,10 @@ public class View extends javax.swing.JInternalFrame implements Observer {
     }//GEN-LAST:event_jTableViajesMouseClicked
 
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
-        if (!this.jTextFieldID.getText().isEmpty()){
+        if (!this.jTextFieldID.getText().isEmpty()) {
             this.controller.buscar(Integer.parseInt(this.jTextFieldID.getText()));
+        } else {
+            this.controller.buscarTodos();
         }
     }//GEN-LAST:event_jButtonBuscarActionPerformed
     public Model model;

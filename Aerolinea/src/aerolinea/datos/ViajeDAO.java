@@ -28,17 +28,16 @@ import java.util.List;
  */
 public class ViajeDAO extends AbstractDAO<Viaje, Integer> {
 
-    public ViajeDAO(){
+    public ViajeDAO() {
         super();
     }
-    
+
     @Override
     public void add(Viaje s) throws Throwable {
-        String query = "INSER INTO Viaje v (idViaje, fecha, precio, disponibles, vuelo) "
-                + "values('%s', '%s', '%s', '%s', '%s')";
+        String query = "INSERT INTO Viaje (fecha, precio, disponibles, vuelo) "
+                + "values('%s', %s, %s, '%s')";
         query = String.format(query,
-                s.getIdViaje(),
-                s.getFecha(),
+                this.sqlDatetimeFormat(s.getFecha()),
                 s.getPrecio(),
                 s.getDisponibles(),
                 s.getVuelo().getIdVuelo());
@@ -48,6 +47,22 @@ public class ViajeDAO extends AbstractDAO<Viaje, Integer> {
         if (count == 0) {
             throw new Exception("El vuelo ya existe");
         }
+    }
+
+    @Override
+    public List<Viaje> search() throws Throwable {
+        List<Viaje> resultado = new ArrayList<Viaje>();
+        try {
+            String query = "SELECT * FROM Viaje v INNER JOIN Vuelo o ON v.vuelo=o.idVuelo "
+                    + "INNER JOIN Avion a ON o.avion=a.id INNER JOIN TipoAvion t "
+                    + "ON a.tipoAvion = t.idTipoAvion";
+            ResultSet rs = db.executeQuery(query);
+            while (rs.next()) {
+                resultado.add(this.instancia(rs));
+            }
+        } catch (SQLException ex) {
+        }
+        return resultado;
     }
 
     @Override
@@ -63,7 +78,9 @@ public class ViajeDAO extends AbstractDAO<Viaje, Integer> {
     @Override
     public Viaje get(Integer s) throws Throwable {
         String query = "SELECT * "
-                + "FROM Viaje v "
+                + "FROM Viaje v INNER JOIN Vuelo o ON v.vuelo=o.idVuelo "
+                + "INNER JOIN Avion a ON o.avion=a.id INNER JOIN TipoAvion t "
+                + "ON a.tipoAvion = t.idTipoAvion "
                 + "WHERE v.idViaje='%s'";
         query = String.format(query, s);
         ResultSet rs = db.executeQuery(query);
@@ -76,10 +93,14 @@ public class ViajeDAO extends AbstractDAO<Viaje, Integer> {
 
     @Override
     public void update(Viaje s) throws Throwable {
-        String query = "UPDATE Viaje SET fecha='%s', precio='%s', disponibles='%s', vuelo ='%s' "
-                + "where idViaje='%s'";
-        // HAY QUE CORREGIR ALGO CON LAS FECHAS
-        query = String.format(query, s.getFecha().toString(), s.getPrecio(), s.getDisponibles(), s.getVuelo().getIdVuelo());
+        String query = "UPDATE Viaje SET fecha='%s', precio=%s, disponibles=%s, vuelo ='%s' "
+                + "WHERE idViaje=%s";
+        query = String.format(query,
+                this.sqlDatetimeFormat(s.getFecha()),
+                s.getPrecio(),
+                s.getDisponibles(),
+                s.getVuelo().getIdVuelo(),
+                s.getIdViaje());
         int count = db.executeUpdate(query);
         if (count == 0) {
             throw new Exception("El viaje no existe");
@@ -91,7 +112,9 @@ public class ViajeDAO extends AbstractDAO<Viaje, Integer> {
         List<Viaje> resultado = new ArrayList<Viaje>();
         try {
             String query = "SELECT * "
-                    + "FROM Viaje v "
+                    + "FROM Viaje v INNER JOIN Vuelo o ON v.vuelo=o.idVuelo "
+                    + "INNER JOIN Avion a ON o.avion=a.id INNER JOIN TipoAvion t "
+                    + "ON a.tipoAvion = t.idTipoAvion "
                     + "WHERE v.idViaje LIKE '%%%s%%'";
             query = String.format(query, s);
             ResultSet rs = db.executeQuery(query);
@@ -107,17 +130,81 @@ public class ViajeDAO extends AbstractDAO<Viaje, Integer> {
     public Viaje instancia(ResultSet rs) throws Throwable {
         try {
             Viaje v = new Viaje();
-            //Cargar sus reservas
             v.setIdViaje(Integer.parseInt(rs.getString("idViaje")));
             v.setPrecio(Float.parseFloat(rs.getString("precio")));
             v.setDisponibles(Integer.parseInt(rs.getString("disponibles")));
-            // No creo que esto pueda ir así
-            v.setVuelo(new aerolinea.logica.Vuelo(rs.getString("vuelo")));
-            
+            v.setFecha(new java.util.Date(rs.getDate("fecha").getTime()));
+            System.out.println(v.getFecha().toString());
+            // Vuelo
+            aerolinea.logica.Vuelo o = new aerolinea.logica.Vuelo();
+            o.setIdVuelo(rs.getString("idVuelo"));
+            o.setDia(rs.getString("dia"));
+            o.setHora(rs.getTime("hora"));
+            // Origen
+            o.setOrigen(this.origenVuelo(o.getIdVuelo()));
+            // Destino
+            o.setDestino(this.destinoVuelo(o.getIdVuelo()));
+            //Avión
+            aerolinea.logica.Avion a = new aerolinea.logica.Avion();
+            a.setId(rs.getString("id"));
+            //Tipoavion
+            aerolinea.logica.Tipoavion t = new aerolinea.logica.Tipoavion();
+            t.setIdTipoAvion(Integer.parseInt(rs.getString("idTipoAvion")));
+            t.setMarca(rs.getString("marca"));
+            t.setAnnio(rs.getInt("annio"));
+            t.setModelo(rs.getString("modelo"));
+            t.setCantidadPasajeros(rs.getInt("cantidadPasajeros"));
+            t.setCantidadFilas(rs.getInt("cantidadFilas"));
+            t.setAsientosPorFila(rs.getInt("asientosPorFila"));
+            a.setTipoavion(t);
+            v.setVuelo(o);
 
             return v;
         } catch (SQLException ex) {
             return null;
+        }
+    }
+
+    private String sqlDatetimeFormat(java.util.Date fecha) {
+        java.util.Date fechaHandler = fecha;
+
+        java.text.SimpleDateFormat fechaFormat
+                = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String s = fechaFormat.format(fechaHandler);
+        return fechaFormat.format(fechaHandler);
+    }
+
+    private aerolinea.logica.Ciudad origenVuelo(String idVuelo) throws Throwable {
+        String query = "SELECT * "
+                + "FROM Vuelo v INNER JOIN Ciudad c ON v.origen=c.nombreCiudad "
+                + "INNER JOIN Pais p ON c.abreviaturaPais=p.abreviatura "
+                + "WHERE v.idVuelo='%s'";
+        query = String.format(query, idVuelo);
+        ResultSet rs = db.executeQuery(query);
+        if (rs.next()) {
+            aerolinea.logica.Ciudad origen = new aerolinea.logica.Ciudad();
+            origen.setNombre(rs.getString("nombreCiudad"));
+            origen.setPais(new aerolinea.logica.Pais(rs.getString("abreviatura"), rs.getString("nombrePais")));
+            return origen;
+        } else {
+            throw new Exception("El origen no existe");
+        }
+    }
+
+    private aerolinea.logica.Ciudad destinoVuelo(String idVuelo) throws Throwable {
+        String query = "SELECT * "
+                + "FROM Vuelo v INNER JOIN Ciudad c ON v.destino=c.nombreCiudad "
+                + "INNER JOIN Pais p ON c.abreviaturaPais=p.abreviatura "
+                + "WHERE v.idVuelo='%s'";
+        query = String.format(query, idVuelo);
+        ResultSet rs = db.executeQuery(query);
+        if (rs.next()) {
+            aerolinea.logica.Ciudad origen = new aerolinea.logica.Ciudad();
+            origen.setNombre(rs.getString("nombreCiudad"));
+            origen.setPais(new aerolinea.logica.Pais(rs.getString("abreviatura"), rs.getString("nombrePais")));
+            return origen;
+        } else {
+            throw new Exception("El destino no existe");
         }
     }
 

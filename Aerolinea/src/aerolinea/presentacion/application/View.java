@@ -43,6 +43,8 @@ public class View extends javax.swing.JFrame implements Observer {
     private void initComponents() {
 
         panel = new javax.swing.JDesktopPane();
+        jLabelUser = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jMenuBar = new javax.swing.JMenuBar();
         jmenuFile = new javax.swing.JMenu();
         menuItemSalir = new javax.swing.JMenuItem();
@@ -50,6 +52,7 @@ public class View extends javax.swing.JFrame implements Observer {
         jMenuItemBuscadorVuelos = new javax.swing.JMenuItem();
         jMenuUsuario = new javax.swing.JMenu();
         jMenuItemVerInformacion = new javax.swing.JMenuItem();
+        jMenuItemInicioSesion = new javax.swing.JMenuItem();
         jMenuAboutAirline = new javax.swing.JMenu();
         jMenuItemReferente = new javax.swing.JMenuItem();
         jMenuItemHistoria = new javax.swing.JMenuItem();
@@ -83,15 +86,37 @@ public class View extends javax.swing.JFrame implements Observer {
 
         panel.setBackground(new java.awt.Color(255, 130, 221));
 
+        jLabelUser.setText("jLabel1");
+
+        jButton1.setText("Finalizar sesión");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        panel.setLayer(jLabelUser, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        panel.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
         panelLayout.setHorizontalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 787, Short.MAX_VALUE)
+            .addGroup(panelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelUser)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 792, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 481, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
+                .addContainerGap(465, Short.MAX_VALUE)
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1)
+                    .addComponent(jLabelUser))
+                .addContainerGap())
         );
 
         jmenuFile.setText("File");
@@ -115,13 +140,21 @@ public class View extends javax.swing.JFrame implements Observer {
 
         jMenuUsuario.setText("Usuario");
 
-        jMenuItemVerInformacion.setText("Ver información de usuario");
+        jMenuItemVerInformacion.setText("Información del usuario");
         jMenuItemVerInformacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemVerInformacionActionPerformed(evt);
             }
         });
         jMenuUsuario.add(jMenuItemVerInformacion);
+
+        jMenuItemInicioSesion.setText("Iniciar sesión o registrarse");
+        jMenuItemInicioSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemInicioSesionActionPerformed(evt);
+            }
+        });
+        jMenuUsuario.add(jMenuItemInicioSesion);
 
         jMenuBar.add(jMenuUsuario);
 
@@ -328,10 +361,6 @@ public class View extends javax.swing.JFrame implements Observer {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItemReferenteActionPerformed
 
-    private void jMenuItemVerInformacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemVerInformacionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItemVerInformacionActionPerformed
-
     private void jMenuItemAgregarAvionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAgregarAvionActionPerformed
         this.controller.EdicionAvionShow();
     }//GEN-LAST:event_jMenuItemAgregarAvionActionPerformed
@@ -388,6 +417,18 @@ public class View extends javax.swing.JFrame implements Observer {
         this.controller.ListadoViajeShow();
     }//GEN-LAST:event_jMenuItemListadoViajesActionPerformed
 
+    private void jMenuItemVerInformacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemVerInformacionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemVerInformacionActionPerformed
+
+    private void jMenuItemInicioSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemInicioSesionActionPerformed
+        this.controller.LoginShow();
+    }//GEN-LAST:event_jMenuItemInicioSesionActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.controller.logout();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -424,6 +465,8 @@ public class View extends javax.swing.JFrame implements Observer {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabelUser;
     private javax.swing.JMenu jMenuAboutAirline;
     private javax.swing.JMenu jMenuAeropuertos;
     private javax.swing.JMenu jMenuAvion;
@@ -441,6 +484,7 @@ public class View extends javax.swing.JFrame implements Observer {
     private javax.swing.JMenuItem jMenuItemEdicionVuelo;
     private javax.swing.JMenuItem jMenuItemFormaPagoEdicion;
     private javax.swing.JMenuItem jMenuItemHistoria;
+    private javax.swing.JMenuItem jMenuItemInicioSesion;
     private javax.swing.JMenuItem jMenuItemListadoAviones;
     private javax.swing.JMenuItem jMenuItemListadoCiudades;
     private javax.swing.JMenuItem jMenuItemListadoFormaPago;
@@ -484,6 +528,10 @@ public class View extends javax.swing.JFrame implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-
+        java.awt.Font font = new java.awt.Font("TimesRoman",java.awt.Font.BOLD,25);
+        this.jLabelUser.setFont(font);
+        this.jLabelUser.setText("Inicio de sesión como: "
+                + (this.model.getUser().getEmail().isEmpty()
+                ? "visitante" : this.model.getUser().getEmail()));
     }
 }

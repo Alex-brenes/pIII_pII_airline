@@ -146,12 +146,28 @@ public class Application {
         aerolinea.presentacion.viaje.listado.Controller ControllerViajeListado
                 = new aerolinea.presentacion.viaje.listado.Controller(ModelViajeListado, ViewViajeListado);
         LISTADO_VIAJE_CONTROLLER = ControllerViajeListado;
-        
 
+        // Login
+        aerolinea.presentacion.usuario.login.Model ModelLogin
+                = new aerolinea.presentacion.usuario.login.Model();
+        aerolinea.presentacion.usuario.login.View ViewLogin
+                = new aerolinea.presentacion.usuario.login.View();
+        aerolinea.presentacion.usuario.login.Controller ControllerLogin
+                = new aerolinea.presentacion.usuario.login.Controller(ModelLogin, ViewLogin);
+        LOGIN_CONTROLLER = ControllerLogin;
+        //Registro
+        aerolinea.presentacion.usuario.registro.Model ModelRegistro
+                = new aerolinea.presentacion.usuario.registro.Model();
+        aerolinea.presentacion.usuario.registro.View ViewRegistro
+                = new aerolinea.presentacion.usuario.registro.View();
+        aerolinea.presentacion.usuario.registro.Controller ControllerRegistro
+                = new aerolinea.presentacion.usuario.registro.Controller(ModelRegistro, ViewRegistro);
+        REGISTRO_CONTROLLER = ControllerRegistro;
         // Application
         Model applicationModel = new Model();
         View applicationView = new View();
         Controller applicationController = new Controller(applicationModel, applicationView);
+        APPLICATION_CONTROLLER = applicationController;
         applicationView.setVisible(true);
 
         //jInternalFrames
@@ -169,8 +185,12 @@ public class Application {
         applicationView.panel.add(ViewVueloListado);
         applicationView.panel.add(ViewViajeEdicion);
         applicationView.panel.add(ViewViajeListado);
+        applicationView.panel.add(ViewLogin);
+        applicationView.panel.add(ViewRegistro);
 
     }
+    
+    public static Controller APPLICATION_CONTROLLER;
 
     public static aerolinea.presentacion.flota.tipoAvion.edicion.Controller EDICION_TIPO_AVION_CONTROLLER;
     public static aerolinea.presentacion.flota.tipoAvion.listado.Controller LISTADO_TIPO_AVION_CONTROLLER;
@@ -192,4 +212,8 @@ public class Application {
 
     public static aerolinea.presentacion.viaje.edicion.Controller EDICION_VIAJE_CONTROLLER;
     public static aerolinea.presentacion.viaje.listado.Controller LISTADO_VIAJE_CONTROLLER;
+    
+    public static aerolinea.presentacion.usuario.login.Controller LOGIN_CONTROLLER;
+    
+    public static aerolinea.presentacion.usuario.registro.Controller REGISTRO_CONTROLLER;
 }

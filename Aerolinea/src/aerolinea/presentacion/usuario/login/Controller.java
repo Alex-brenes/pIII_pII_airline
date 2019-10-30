@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package aerolinea.presentacion.viaje.listado;
+package aerolinea.presentacion.usuario.login;
 
 import aerolinea.Application;
+import aerolinea.logica.Usuario;
 
 /**
  *
@@ -21,25 +22,6 @@ public class Controller {
         this.view = view;
         this.view.setModel(this.model);
         this.view.setController(this);
-    }
-
-    public void show() {
-        view.setVisible(true);
-    }
-
-    public void hide() {
-        view.setVisible(false);
-    }
-
-    void buscar(Integer id) {
-        try {
-            model.setViajes(aerolinea.logica.Model.getInstance().searchViaje(id));
-        } catch (Throwable ex) {
-        }
-    }
-
-    void editar(int row) {
-        Application.EDICION_VIAJE_CONTROLLER.consultar(model.getViajes().get(row).getIdViaje());
     }
 
     public Model getModel() {
@@ -58,10 +40,34 @@ public class Controller {
         this.view = view;
     }
 
-    void buscarTodos() {
-        try {
-            model.setViajes(aerolinea.logica.Model.getInstance().searchViaje());
-        } catch (Throwable ex) {
-        }
+    public void show() {
+        view.setVisible(true);
     }
+
+    public void hide() {
+        view.setVisible(false);
+    }
+
+    Usuario login(Usuario toUser) {
+        try {
+            Usuario user = aerolinea.logica.Model.getInstance().getUsuario(toUser.getEmail());
+            if (0 != user.getContrasenna().compareTo(toUser.getContrasenna())) {
+                throw new Exception("Wrong password");
+            }
+            this.hide();
+            Application.APPLICATION_CONTROLLER.login(user);
+            return user;
+        } catch (Throwable ex) {
+            ex.printStackTrace();
+        }
+        
+        return new Usuario();
+
+    }
+
+    void registerUser() {
+        this.hide();
+        Application.REGISTRO_CONTROLLER.show();
+    }
+
 }

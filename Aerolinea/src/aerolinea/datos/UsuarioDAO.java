@@ -64,11 +64,24 @@ public class UsuarioDAO extends AbstractDAO<Usuario, Integer> {
         }
     }
 
+    public Usuario get(String s) throws Throwable {
+        String query = "SELECT * "
+                + "FROM Usuario u "
+                + "WHERE u.email='%s'";
+        query = String.format(query, s);
+        ResultSet rs = db.executeQuery(query);
+        if (rs.next()) {
+            return this.instancia(rs);
+        } else {
+            throw new Exception("El usuario no existe");
+        }
+    }
+
     @Override
     public Usuario get(Integer s) throws Throwable {
         String query = "SELECT * "
                 + "FROM Usuario u "
-                + "WHERE u.idUsuario='%s'";
+                + "WHERE u.idUsuario=%s";
         query = String.format(query, s);
         ResultSet rs = db.executeQuery(query);
         if (rs.next()) {
@@ -119,7 +132,6 @@ public class UsuarioDAO extends AbstractDAO<Usuario, Integer> {
     @Override
     public Usuario instancia(ResultSet rs) throws Throwable {
         try {
-            String s;
             Usuario c = new Usuario();
             c.setEmail(rs.getString("email"));
             c.setContrasenna(rs.getString("contrasenna"));
@@ -129,7 +141,7 @@ public class UsuarioDAO extends AbstractDAO<Usuario, Integer> {
             c.setDireccion(rs.getString("direccion"));
             c.setTelefonoTrabajo(rs.getString("telefonoTrabajo"));
             c.setTelefono(rs.getString("telefono"));
-            c.setEsAdmin(rs.getBoolean("admin"));
+            c.setEsAdmin(rs.getBoolean("esAdmin"));
             c.setIdUsuario(Integer.parseInt(rs.getString("idUsuario")));
             return c;
         } catch (SQLException ex) {

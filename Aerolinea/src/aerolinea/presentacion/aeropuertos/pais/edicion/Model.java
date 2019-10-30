@@ -7,11 +7,13 @@ package aerolinea.presentacion.aeropuertos.pais.edicion;
 
 import aerolinea.logica.Pais;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Scanner;
 
 /**
  *
@@ -49,9 +51,9 @@ public class Model extends Observable {
     }
 
     public void iniciar() {
-        String line = null;
         try {
-            FileReader handler = new FileReader("../../recursos/textfile.txt");
+            String line = null;
+            FileReader handler = new FileReader("paises.txt");
             BufferedReader bufferedReader = new BufferedReader(handler);
 
             while ((line = bufferedReader.readLine()) != null) {
@@ -64,16 +66,16 @@ public class Model extends Observable {
                 while (line.charAt(c) != '\n') {
                     nombre += line.charAt(c++);
                 }
-                this.paises.add(new Pais(codigo,nombre));
+                this.paises.add(new Pais(codigo, nombre));
             }
 
             bufferedReader.close();
 
         } catch (Throwable ex) {
-            System.out.println("No se pudo leer el archivo");
+            System.out.println(ex.getMessage());
             //Se cargan dos países de prueba
-            this.paises.add(new Pais("_","Unknown"));
-            this.paises.add(new Pais("CR","Costa Rica"));
+            this.paises.add(new Pais("_", "Unknown"));
+            this.paises.add(new Pais("CR", "Costa Rica"));
         }
     }
 

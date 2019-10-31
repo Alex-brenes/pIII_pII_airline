@@ -163,6 +163,17 @@ public class Application {
         aerolinea.presentacion.usuario.registro.Controller ControllerRegistro
                 = new aerolinea.presentacion.usuario.registro.Controller(ModelRegistro, ViewRegistro);
         REGISTRO_CONTROLLER = ControllerRegistro;
+
+        //Búsqueda de vuelos
+        aerolinea.presentacion.vuelo.publicGUI.Model ModelBusqueda
+                = new aerolinea.presentacion.vuelo.publicGUI.Model();
+        aerolinea.presentacion.vuelo.publicGUI.View ViewBusqueda
+                = new aerolinea.presentacion.vuelo.publicGUI.View();
+        aerolinea.presentacion.vuelo.publicGUI.Controller ControllerBusqueda
+                = new aerolinea.presentacion.vuelo.publicGUI.Controller(ModelBusqueda, ViewBusqueda);
+
+        BUSQUEDA_CONTROLLER = ControllerBusqueda;
+        
         // Application
         Model applicationModel = new Model();
         View applicationView = new View();
@@ -187,9 +198,10 @@ public class Application {
         applicationView.panel.add(ViewViajeListado);
         applicationView.panel.add(ViewLogin);
         applicationView.panel.add(ViewRegistro);
+        applicationView.panel.add(ViewBusqueda);
 
     }
-    
+
     public static Controller APPLICATION_CONTROLLER;
 
     public static aerolinea.presentacion.flota.tipoAvion.edicion.Controller EDICION_TIPO_AVION_CONTROLLER;
@@ -212,8 +224,11 @@ public class Application {
 
     public static aerolinea.presentacion.viaje.edicion.Controller EDICION_VIAJE_CONTROLLER;
     public static aerolinea.presentacion.viaje.listado.Controller LISTADO_VIAJE_CONTROLLER;
-    
+
     public static aerolinea.presentacion.usuario.login.Controller LOGIN_CONTROLLER;
-    
+
     public static aerolinea.presentacion.usuario.registro.Controller REGISTRO_CONTROLLER;
+    
+    public static aerolinea.presentacion.vuelo.publicGUI.Controller BUSQUEDA_CONTROLLER;
+    
 }

@@ -5,6 +5,7 @@
  */
 package aerolinea.presentacion.usuario.login;
 
+import java.util.Locale;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -112,7 +113,7 @@ public class View extends javax.swing.JInternalFrame implements Observer {
 
     private void jButtonIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIniciarActionPerformed
         this.model.setUsuario(this.controller.login(this.toUser()));
-        if(!this.isVisible()){
+        if (!this.isVisible()) {
             this.jTextFieldEmail.setText("");
             this.jPasswordFieldPassword.setText("");
         }

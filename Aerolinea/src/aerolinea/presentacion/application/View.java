@@ -134,6 +134,11 @@ public class View extends javax.swing.JFrame implements Observer {
         jMenuVuelos.setText("Vuelos");
 
         jMenuItemBuscadorVuelos.setText("Buscador de vuelos");
+        jMenuItemBuscadorVuelos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemBuscadorVuelosActionPerformed(evt);
+            }
+        });
         jMenuVuelos.add(jMenuItemBuscadorVuelos);
 
         jMenuBar.add(jMenuVuelos);
@@ -354,11 +359,11 @@ public class View extends javax.swing.JFrame implements Observer {
     }//GEN-LAST:event_menuItemSalirActionPerformed
 
     private void jMenuItemHistoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHistoriaActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jMenuItemHistoriaActionPerformed
 
     private void jMenuItemReferenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemReferenteActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jMenuItemReferenteActionPerformed
 
     private void jMenuItemAgregarAvionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAgregarAvionActionPerformed
@@ -428,6 +433,10 @@ public class View extends javax.swing.JFrame implements Observer {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.controller.logout();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jMenuItemBuscadorVuelosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBuscadorVuelosActionPerformed
+        this.controller.BusquedaVuelosShow();
+    }//GEN-LAST:event_jMenuItemBuscadorVuelosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -534,4 +543,7 @@ public class View extends javax.swing.JFrame implements Observer {
                 + (this.model.getUser().getEmail().isEmpty()
                 ? "visitante" : this.model.getUser().getEmail()));
     }
+    
+    
+    
 }

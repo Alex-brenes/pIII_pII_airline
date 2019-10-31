@@ -63,7 +63,7 @@ public class Usuario implements Serializable {
         this.contrasenna = "";
         this.direccion = "";
         this.email = "";
-        this.esAdmin = true;
+        this.esAdmin = false;
         this.fechaNacimiento = null;
         this.idUsuario = 0;
         this.nombre = "";
@@ -78,7 +78,7 @@ public class Usuario implements Serializable {
         this.contrasenna = "";
         this.direccion = "";
         this.email = "";
-        this.esAdmin = true;
+        this.esAdmin = false;
         this.fechaNacimiento = null;
         this.nombre = "";
         this.reservaList = null;

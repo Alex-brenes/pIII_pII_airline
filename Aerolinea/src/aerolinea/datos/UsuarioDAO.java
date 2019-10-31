@@ -34,10 +34,9 @@ public class UsuarioDAO extends AbstractDAO<Usuario, Integer> {
     @Override
     public void add(Usuario s) throws Throwable {
         //Se quita idUsuario porque es AUTO INCREMENT
-        String query = "INSER INTO Usuario (idUsuario, email, contrasenna, nombre, apellido, fechaNacimiento, direccion, telefonoTrabajo, telefono, esAdmin) "
-                + "values('%s','%s','%s','%s','%s','%s','%s','%s','%s', '%s')";
+        String query = "INSERT INTO Usuario (email, contrasenna, nombre, apellido, fechaNacimiento, direccion, telefonoTrabajo, telefono, esAdmin) "
+                + "values('%s','%s','%s','%s','%s','%s','%s','%s', %s)";
         query = String.format(query,
-                s.getIdUsuario(),
                 s.getEmail(),
                 s.getContrasenna(),
                 s.getNombre(),
@@ -48,7 +47,6 @@ public class UsuarioDAO extends AbstractDAO<Usuario, Integer> {
                 s.getTelefono(),
                 s.getEsAdmin());
         int count = db.executeUpdate(query);
-        // CARGAR TODAS LAS RESERVAS DE ESTE USUARIO si no es admin
         if (count == 0) {
             throw new Exception("El usuario ya existe");
         }

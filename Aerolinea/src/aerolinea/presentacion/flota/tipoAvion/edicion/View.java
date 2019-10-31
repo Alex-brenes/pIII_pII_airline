@@ -58,7 +58,6 @@ public class View extends javax.swing.JInternalFrame implements java.util.Observ
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
-        setIconifiable(true);
 
         jLabelTitulo.setText("Tipo de avión");
 

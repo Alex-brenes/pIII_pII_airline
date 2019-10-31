@@ -50,6 +50,9 @@ public class Controller {
 
     Usuario login(Usuario toUser) {
         try {
+            if (Application.APPLICATION_CONTROLLER.getModel().getUser().getEmail().isEmpty()) {
+
+            }
             Usuario user = aerolinea.logica.Model.getInstance().getUsuario(toUser.getEmail());
             if (0 != user.getContrasenna().compareTo(toUser.getContrasenna())) {
                 throw new Exception("Wrong password");
@@ -60,14 +63,20 @@ public class Controller {
         } catch (Throwable ex) {
             ex.printStackTrace();
         }
-        
+
         return new Usuario();
 
     }
 
     void registerUser() {
-        this.hide();
-        Application.REGISTRO_CONTROLLER.show();
+        try {
+            if (Application.APPLICATION_CONTROLLER.getModel().getUser().getEmail().isEmpty()) {
+                this.hide();
+                Application.REGISTRO_CONTROLLER.show();
+            }
+            throw new Exception("");
+        }
+        catch(Throwable ex){}
     }
 
 }

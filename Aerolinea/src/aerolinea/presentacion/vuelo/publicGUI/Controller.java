@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package aerolinea.presentacion.usuario.registro;
+package aerolinea.presentacion.vuelo.publicGUI;
 
-import aerolinea.Application;
-import aerolinea.logica.Usuario;
+import aerolinea.logica.Ciudad;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -20,6 +21,7 @@ public class Controller {
     public Controller(Model model, View view) {
         this.model = model;
         this.view = view;
+        this.iniciarListas();
         this.view.setModel(this.model);
         this.view.setController(this);
     }
@@ -44,16 +46,11 @@ public class Controller {
         this.view.setVisible(true);
     }
 
-    public void hide() {
-        this.view.setVisible(false);
-    }
-
-    void registerUser(Usuario toUser) {
+    private void iniciarListas() {
         try {
-            aerolinea.logica.Model.getInstance().addUsuario(toUser);
-            Application.APPLICATION_CONTROLLER.login(toUser);
+            this.model.setCities(aerolinea.logica.Model.getInstance().searchCiudad());
         } catch (Throwable ex) {
-            ex.printStackTrace(System.out);
+
         }
     }
 

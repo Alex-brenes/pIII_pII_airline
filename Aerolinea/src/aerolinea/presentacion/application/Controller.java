@@ -25,8 +25,24 @@ import aerolinea.logica.Usuario;
  */
 public class Controller {
 
-    Model model;
-    View view;
+    private Model model;
+    private View view;
+
+    public Model getModel() {
+        return model;
+    }
+
+    public void setModel(Model model) {
+        this.model = model;
+    }
+
+    public View getView() {
+        return view;
+    }
+
+    public void setView(View view) {
+        this.view = view;
+    }
 
     public Controller(Model model, View view) {
         this.model = model;
@@ -34,76 +50,112 @@ public class Controller {
         this.view.setModel(this.model);
         this.view.setController(this);
     }
+
     //Flota
     // Edicion
     public void EdicionTipoShow() {
-        Application.EDICION_TIPO_AVION_CONTROLLER.show();
+        if (this.model.getUser().getEsAdmin()) {
+            Application.EDICION_TIPO_AVION_CONTROLLER.show();
+        }
     }
     // Listado
 
     public void ListadoTipoShow() {
-        Application.LISTADO_TIPO_AVION_CONTROLLER.show();
+        if (this.model.getUser().getEsAdmin()) {
+            Application.LISTADO_TIPO_AVION_CONTROLLER.show();
+        }
     }
 
     public void EdicionAvionShow() {
-        Application.EDICION_AVION_CONTROLLER.show();
+        if (this.model.getUser().getEsAdmin()) {
+            Application.EDICION_AVION_CONTROLLER.show();
+        }
     }
     // Listado
 
     public void ListadoAvionShow() {
-        Application.LISTADO_AVION_CONTROLLER.show();
+        if (this.model.getUser().getEsAdmin()) {
+            Application.LISTADO_AVION_CONTROLLER.show();
+        }
     }
 
     // Aeropuertos
     // País
-        // Edicion
-        
-        public void EdicionPaisShow() {
+    // Edicion
+    public void EdicionPaisShow() {
+        if (this.model.getUser().getEsAdmin()) {
             Application.EDICION_PAIS_CONTROLLER.show();
         }
-        // Listado
-        public void ListadoPaisShow() {
+    }
+    // Listado
+
+    public void ListadoPaisShow() {
+        if (this.model.getUser().getEsAdmin()) {
             Application.LISTADO_PAIS_CONTROLLER.show();
         }
-        
+    }
+
     // Ciudad
-        public void EdicionCiudadShow() {
+    public void EdicionCiudadShow() {
+        if (this.model.getUser().getEsAdmin()) {
             Application.EDICION_CIUDAD_CONTROLLER.show();
         }
-        public void ListadoCiudadShow() {
+    }
+
+    public void ListadoCiudadShow() {
+        if (this.model.getUser().getEsAdmin()) {
             Application.LISTADO_CIUDAD_CONTROLLER.show();
         }
+    }
+
     // Forma de pago
-        public void EdicionFormaPagoShow(){
+    public void EdicionFormaPagoShow() {
+        if (this.model.getUser().getEsAdmin()) {
             Application.EDICION_FORMA_PAGO_CONTROLLER.show();
         }
-        public void ListadoFormaPagoShow() {
+    }
+
+    public void ListadoFormaPagoShow() {
+        if (this.model.getUser().getEsAdmin()) {
             Application.LISTADO_FORMA_PAGO_CONTROLLER.show();
         }
+    }
+
     // Vuelo
-        void EdicionVueloShow() {
+    void EdicionVueloShow() {
+        if (this.model.getUser().getEsAdmin()) {
             Application.EDICION_VUELO_CONTROLLER.show();
         }
-        void ListadoVueloShow() {
+    }
+
+    void ListadoVueloShow() {
+        if (this.model.getUser().getEsAdmin()) {
             Application.LISTADO_VUELO_CONTROLLER.show();
         }
+    }
+
     // Viaje
-        void EdicionViajeShow() {
+    void EdicionViajeShow() {
+        if (this.model.getUser().getEsAdmin()) {
             Application.EDICION_VIAJE_CONTROLLER.show();
         }
+    }
 
-        void ListadoViajeShow() {
+    void ListadoViajeShow() {
+        if (this.model.getUser().getEsAdmin()) {
             Application.LISTADO_VIAJE_CONTROLLER.show();
         }
+    }
+
     // Login
-        void LoginShow() {
-            Application.LOGIN_CONTROLLER.show();
-        }
-        
+    void LoginShow() {
+        Application.LOGIN_CONTROLLER.show();
+    }
+
     // Registro
-        void RegistroLogin(){
-            Application.REGISTRO_CONTROLLER.show();
-        }
+    void RegistroLogin() {
+        Application.REGISTRO_CONTROLLER.show();
+    }
 
     public void login(Usuario user) {
         this.model.setUser(user);
@@ -112,5 +164,10 @@ public class Controller {
     void logout() {
         this.model.setUser(new Usuario());
     }
-        
+
+    // Búsqueda de vuelos
+    void BusquedaVuelosShow() {
+        Application.BUSQUEDA_CONTROLLER.show();
+    }
+
 }

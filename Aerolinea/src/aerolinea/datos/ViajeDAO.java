@@ -107,6 +107,31 @@ public class ViajeDAO extends AbstractDAO<Viaje, Integer> {
         }
     }
 
+    public List<Viaje> search(Viaje v) throws Throwable {
+        List<Viaje> resultado = new ArrayList<Viaje>();
+        try {
+            String query = "SELECT * "
+                    + "FROM Viaje v INNER JOIN Vuelo o ON v.vuelo=o.idVuelo "
+                    + "INNER JOIN Avion a ON o.avion=a.id INNER JOIN TipoAvion t "
+                    + "ON a.tipoAvion = t.idTipoAvion "
+                    + "WHERE v.precio LIKE '%%s%' AND v.fecha LIKE '%%s%' "
+                    + "AND u.origen LIKE '%%s%' AND u.destino '%%s%'AND v.disponibles "
+                    + "LIKE '%%s%' ";
+            query = String.format(query,
+                    v.getPrecio(),
+                    this.sqlDatetimeFormat(v.getFecha()),
+                    v.getVuelo().getOrigen().getNombre(),
+                    v.getVuelo().getDestino().getNombre(),
+                    v.getDisponibles());
+            ResultSet rs = db.executeQuery(query);
+            while (rs.next()) {
+                resultado.add(this.instancia(rs));
+            }
+        } catch (SQLException ex) {
+        }
+        return resultado;
+    }
+
     @Override
     public List<Viaje> searh(Integer s) throws Throwable {
         List<Viaje> resultado = new ArrayList<Viaje>();

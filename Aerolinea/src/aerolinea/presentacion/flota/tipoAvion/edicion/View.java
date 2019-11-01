@@ -30,6 +30,7 @@ public class View extends javax.swing.JInternalFrame implements java.util.Observ
      */
     public View() {
         initComponents();
+        this.jTextFieldPassengers.setEditable(false);
     }
 
     /**
@@ -55,6 +56,8 @@ public class View extends javax.swing.JInternalFrame implements java.util.Observ
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jTextFieldPassengers = new javax.swing.JTextField();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
@@ -114,6 +117,8 @@ public class View extends javax.swing.JInternalFrame implements java.util.Observ
             }
         });
 
+        jLabel1.setText("Cantidad máxima de pasajeros");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -132,21 +137,24 @@ public class View extends javax.swing.JInternalFrame implements java.util.Observ
                                     .addComponent(jLabelAnnio)
                                     .addComponent(jLabelModelo)
                                     .addComponent(jLabelFilas)
-                                    .addComponent(jLabelAsientos))
+                                    .addComponent(jLabelAsientos)
+                                    .addComponent(jLabel1))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jTextFieldMarca)
                                     .addComponent(jTextFieldModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jComboBoxFilas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboBoxAsientos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboBoxAnnios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jComboBoxAnnios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jTextFieldPassengers, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jComboBoxAsientos, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton1)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButton3)))))
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,12 +181,16 @@ public class View extends javax.swing.JInternalFrame implements java.util.Observ
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelAsientos)
                     .addComponent(jComboBoxAsientos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jTextFieldPassengers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
                     .addComponent(jButton2)
                     .addComponent(jButton1))
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         pack();
@@ -245,6 +257,9 @@ public class View extends javax.swing.JInternalFrame implements java.util.Observ
         this.jComboBoxFilas.setModel(new DefaultComboBoxModel<Integer>(
                 this.model.getFilas().toArray(new Integer[0])));
         this.jComboBoxFilas.setSelectedItem(t.getCantidadFilas());
+        this.jTextFieldPassengers.setText(Integer.toString(
+                (Integer) this.jComboBoxAsientos.getSelectedItem()
+                * (Integer) this.jComboBoxFilas.getSelectedItem()));
     }
 
     private aerolinea.logica.Tipoavion toTipoAvion() {
@@ -265,6 +280,7 @@ public class View extends javax.swing.JInternalFrame implements java.util.Observ
     private javax.swing.JComboBox jComboBoxAnnios;
     private javax.swing.JComboBox jComboBoxAsientos;
     private javax.swing.JComboBox jComboBoxFilas;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelAnnio;
     private javax.swing.JLabel jLabelAsientos;
     private javax.swing.JLabel jLabelFilas;
@@ -273,5 +289,6 @@ public class View extends javax.swing.JInternalFrame implements java.util.Observ
     private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JTextField jTextFieldMarca;
     private javax.swing.JTextField jTextFieldModelo;
+    private javax.swing.JTextField jTextFieldPassengers;
     // End of variables declaration//GEN-END:variables
 }

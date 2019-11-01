@@ -6,6 +6,7 @@
 package aerolinea.presentacion.vuelo.publicGUI;
 
 import aerolinea.logica.Ciudad;
+import aerolinea.logica.Viaje;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,6 +52,16 @@ public class Controller {
             this.model.setCities(aerolinea.logica.Model.getInstance().searchCiudad());
         } catch (Throwable ex) {
 
+        }
+    }
+
+    void buscar(Viaje toViaje) {
+        try{
+
+            this.model.setTrips(aerolinea.logica.Model.getInstance().searchViaje(toViaje));
+        }
+        catch(Throwable ex){
+            
         }
     }
 

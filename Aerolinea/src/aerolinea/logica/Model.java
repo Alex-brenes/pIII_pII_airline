@@ -262,6 +262,10 @@ public class Model {
         return this.viajeDAO.search();
     }
 
+    public List<Viaje> searchViaje(Viaje v) throws Throwable {
+        return this.viajeDAO.search(v);
+    }
+
     public static Model getInstance() {
         if (instance == null) {
             instance = new Model();

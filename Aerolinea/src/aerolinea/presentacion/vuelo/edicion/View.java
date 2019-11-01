@@ -269,14 +269,14 @@ public class View extends javax.swing.JInternalFrame implements Observer {
         return nuevo;
     }
 
-    private Time toSQLTime(){
+    private Time toSQLTime() {
         Time nuevo = new Time(
                 this.jComboBoxHora.getSelectedIndex(),
                 this.jComboBoxMinuto.getSelectedIndex(),
                 this.jComboBoxSegundo.getSelectedIndex());
         return nuevo;
     }
-    
+
     public Model getModel() {
         return this.model;
     }

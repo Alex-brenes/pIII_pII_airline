@@ -134,6 +134,7 @@ public class View extends javax.swing.JInternalFrame implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         this.jTableCiudades.setModel(new CiudadTableModel(this.model.getCiudades()));
+        this.jTableCiudades.getColumnModel().getColumn(1).setPreferredWidth(1);
         this.jTableCiudades.getColumnModel().getColumn(3).setPreferredWidth(50);
         this.jTableCiudades.setRowHeight(50);
     }

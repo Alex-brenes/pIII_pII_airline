@@ -53,20 +53,13 @@ public class Model extends Observable {
     public void iniciar() {
         try {
             String line = null;
-            FileReader handler = new FileReader("paises.txt");
+            FileReader handler = new FileReader(TEXTFILE);
             BufferedReader bufferedReader = new BufferedReader(handler);
 
             while ((line = bufferedReader.readLine()) != null) {
-                String codigo = "";
-                String nombre = "";
-                int c = 0;
-                while (line.charAt(c) != '-') {
-                    codigo += line.charAt(c++);
-                }
-                while (line.charAt(c) != '\n') {
-                    nombre += line.charAt(c++);
-                }
-                this.paises.add(new Pais(codigo, nombre));
+                this.paises.add(
+                        new Pais(line.substring(0, 2),
+                                line.substring(3, line.length())));
             }
 
             bufferedReader.close();
@@ -85,8 +78,10 @@ public class Model extends Observable {
         this.setChanged();
         this.notifyObservers();
     }
-
-    private final String PAISES = "countries.txt";
-    private final Integer ISO = 2;
-
+    private final String TEXTFILE
+            = "C:\\Users\\pc\\Documents\\Universidad\\"
+            + "Nivel II - Ciclo II\\Programación III\\"
+            + "Proyectos\\Proyecto II\\pIII_pII_airline"
+            + "\\Aerolinea\\src\\aerolinea\\presentacion"
+            + "\\recursos\\textfile.txt";
 }

@@ -180,8 +180,8 @@ public class Tipoavion implements Serializable {
         return this.marca + " " + this.modelo;
     }
 
-    public final static int MIN_FILAS = 45;
-    public final static int MAX_FILAS = 90;
+    public final static int MIN_FILAS = 35;
+    public final static int MAX_FILAS = 60;
     public final static int MIN_ASIENTOS = 6;
     public final static int MAX_ASIENTOS = 9;
     public final static int ANNIO_BASE = 1980;

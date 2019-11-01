@@ -89,6 +89,7 @@ public class Model extends Observable {
 
     public void setCities(List<Ciudad> cities) {
         this.cities = cities;
+        this.cities.add(0, null);
         this.setChanged();
         this.notifyObservers();
     }
@@ -100,7 +101,7 @@ public class Model extends Observable {
         this.notifyObservers();
     }
 
-        public void monthDay(int year, int month) {
+    public void monthDay(int year, int month) {
 
         YearMonth yMonth = YearMonth.of(year, Month.of(month + 1));
         int diff = this.days.size() - yMonth.lengthOfMonth();
@@ -124,9 +125,11 @@ public class Model extends Observable {
                 this.days.remove(arrayIndex--);
             }
         }
-
+        this.years.add(0, null);
+        this.months.add(0, null);
+        this.days.add(0, null);
     }
-    
+
     private void iniciarListas() {
 
         int annio = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);

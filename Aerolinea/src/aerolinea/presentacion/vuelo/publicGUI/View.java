@@ -86,8 +86,13 @@ public class View extends javax.swing.JInternalFrame implements Observer {
         });
 
         jButtonSearch.setText("Buscar");
+        jButtonSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSearchActionPerformed(evt);
+            }
+        });
 
-        jButton1.setText("Comprar seleccionado");
+        jButton1.setText("Reservar asientos en el vuelo seleccionado");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -127,9 +132,7 @@ public class View extends javax.swing.JInternalFrame implements Observer {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jTextFieldAvailableSeats, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTextFieldPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabelPrice)
-                                .addGap(108, 108, 108)))
+                            .addComponent(jLabelPrice))
                         .addGap(120, 120, 120))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,6 +187,10 @@ public class View extends javax.swing.JInternalFrame implements Observer {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxFromActionPerformed
 
+    private void jButtonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchActionPerformed
+        this.controller.buscar(this.toViaje());
+    }//GEN-LAST:event_jButtonSearchActionPerformed
+
     private Model model;
     private Controller controller;
 
@@ -220,6 +227,31 @@ public class View extends javax.swing.JInternalFrame implements Observer {
 
     }
 
+    private aerolinea.logica.Viaje toViaje() {
+        try {
+            aerolinea.logica.Viaje exampleQuery = new aerolinea.logica.Viaje();
+            exampleQuery.setDisponibles(Integer.parseInt(this.jTextFieldAvailableSeats.getText()));
+            exampleQuery.setFecha(this.toDate());
+            exampleQuery.setPrecio(Float.parseFloat(this.jTextFieldPrice.getText()));
+            aerolinea.logica.Vuelo v = new aerolinea.logica.Vuelo();
+            v.setOrigen((aerolinea.logica.Ciudad) this.jComboBoxFrom.getSelectedItem());
+            v.setDestino((aerolinea.logica.Ciudad) this.jComboBoxTo.getSelectedItem());
+            exampleQuery.setVuelo(v);
+            return exampleQuery;
+        } catch (Throwable ex) {
+            return null;
+        }
+    }
+
+    private java.util.Date toDate() {
+
+        java.util.Date date = new java.util.Date(
+                (Integer) this.jComboBoxYear.getSelectedItem() - 1900,
+                this.jComboBoxMonth.getSelectedIndex(),
+                this.jComboBoxDate.getSelectedIndex() + 1
+        );
+        return date;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

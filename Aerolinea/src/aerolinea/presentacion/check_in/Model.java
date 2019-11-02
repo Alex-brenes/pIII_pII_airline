@@ -15,6 +15,7 @@ import java.util.Observer;
  */
 public class Model extends Observable {
 
+    
     private BiArray<Boolean> array;
     private Viaje viaje;
 
@@ -65,7 +66,7 @@ public class Model extends Observable {
     private void init() {
         for (int x = 0; x < this.array.getRow(); x++) {
             for (int y = 0; y < this.array.getColumn(); y++) {
-                this.array.add(x, y, false);
+                this.array.add(x, y, true);
             }
         }
     }

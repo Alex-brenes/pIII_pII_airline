@@ -6,8 +6,12 @@
 package aerolinea.presentacion.check_in;
 
 import java.awt.Color;
+import java.awt.Image;
+import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
+import javax.imageio.ImageIO;
+import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  *
@@ -39,9 +43,20 @@ public class View extends javax.swing.JInternalFrame implements Observer {
         initComponents();
         this.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent e) {
-                change(e.getXOnScreen(), e.getY());
+                change(e.getX(), e.getY());
             }
         });
+        try {
+            NON_AVAILABLE_SEAT = ImageIO.read(getClass().getResourceAsStream(NON_AVAILABLE_SEAT_PATH));
+            AVAILABLE_SEAT = ImageIO.read(getClass().getResourceAsStream(AVAILABLE_SEAT_PATH));
+        } catch (IOException ex) {
+
+        }
+        this.jTableSeat.setLocation(BEGIN, BEGIN);
+        this.jTableSeat.getTableHeader().setReorderingAllowed(false);
+        this.jTableSeat.getTableHeader().setResizingAllowed(false);
+        this.jTableSeat.setOpaque(false);
+        ((DefaultTableCellRenderer) this.jTableSeat.getDefaultRenderer(Object.class)).setOpaque(false);
     }
 
     /**
@@ -53,6 +68,9 @@ public class View extends javax.swing.JInternalFrame implements Observer {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableSeat = new javax.swing.JTable();
+
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
         setMaximizable(true);
@@ -62,15 +80,39 @@ public class View extends javax.swing.JInternalFrame implements Observer {
             }
         });
 
+        jTableSeat.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jTableSeat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableSeatMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTableSeat);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 954, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(80, 80, 80)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 707, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(151, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 488, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(130, Short.MAX_VALUE))
         );
 
         pack();
@@ -79,6 +121,12 @@ public class View extends javax.swing.JInternalFrame implements Observer {
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
 
     }//GEN-LAST:event_formMouseClicked
+
+    private void jTableSeatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableSeatMouseClicked
+        if (evt.getClickCount() == 2) {
+            this.change(this.jTableSeat.getSelectedColumn(), this.jTableSeat.getSelectedRow());
+        }
+    }//GEN-LAST:event_jTableSeatMouseClicked
 
     private Model model;
     private Controller controller;
@@ -91,54 +139,69 @@ public class View extends javax.swing.JInternalFrame implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         this.repaint();
+        this.jTableSeat.setOpaque(false);
+        this.jTableSeat.setRowHeight(AVAILABLE_SEAT.getHeight(this) + AVAILABLE_SEAT.getHeight(this) / 4);
     }
 
     @Override
     public void paint(java.awt.Graphics g) {
         super.paint(g);
-        this.renderSeats(g);
+        this.renderRowIndex(g);
     }
 
-    private void renderSeats(java.awt.Graphics g) {
-        int xPosition = BEGIN;
-        int yPosition = BEGIN;
-        for (int i = 0; i < this.model.getArray().getColumn(); i++) {
-            for (int z = 0; z < this.model.getArray().getRow(); z++) {
-                g.setColor((this.model.getArray().get(z, i) ? Color.RED : Color.BLUE));
-                g.fillRect(xPosition, yPosition, WIDTH, WIDTH);
-                g.setColor(Color.green);
-                g.fillRect(xPosition + 12, yPosition, 12, 12);
-                //g.drawString("(" + xPosition + "," + yPosition + ")", xPosition, yPosition);
-                xPosition += X_DISTANCE;
-            }
-            xPosition = BEGIN;
-            yPosition += Y_DISTANCE;
+    @Override
+    public void setVisible(boolean isVisible) {
+        if (isVisible) {
+            this.jTableSeat.setModel(new SeatTableModel(this.model.getArray()));
         }
+        super.setVisible(isVisible);
+    }
+
+    private void renderRowIndex(java.awt.Graphics g) {
+        int xPosition = BEGIN - this.jTableSeat.getColumnModel().getColumn(0).getWidth() - WIDTH;
+        int yPosition = BEGIN + this.jTableSeat.getRowHeight();
+        int uCode = UFIRST;
+        for (int x = 0; x < this.model.getArray().getColumn(); x++) {
+            g.drawString(Character.toString((char) uCode++), xPosition, yPosition);
+            yPosition += this.jTableSeat.getRowHeight();
+        }
+//        xPosition = BEGIN + AVAILABLE_SEAT.getWidth(this) / 4;
+//        yPosition = BEGIN - WIDTH;
+//        for (int y = 0; y < this.model.getArray().getRow(); y++) {
+//            g.drawString(Integer.toString(y), xPosition, yPosition);
+//            xPosition += X_DISTANCE;
+//        }
+//        xPosition = BEGIN;
+//        yPosition = BEGIN;
+//        for (int i = 0; i < this.model.getArray().getColumn(); i++) {
+//            for (int z = 0; z < this.model.getArray().getRow(); z++) {
+//                g.drawImage(
+//                        (this.model.getArray().get(z, i)
+//                        ? AVAILABLE_SEAT
+//                        : NON_AVAILABLE_SEAT), xPosition, yPosition, this);
+////                g.setColor((this.model.getArray().get(z, i) ? Color.RED : Color.BLUE));
+////                g.fillRect(xPosition, yPosition, WIDTH, WIDTH);
+//                xPosition += X_DISTANCE;
+//            }
+//            xPosition = BEGIN;
+//            yPosition += Y_DISTANCE;
+//        }
     }
 
     private void change(int x, int y) {
-        x = this.findX(x);
-        y = this.findY(y + Y_DISTANCE + WIDTH);
-        if (x >= 0 && y >= 0) {
-            this.controller.changeFlag(x, y);
-        }
+        this.controller.changeFlag(x, y);
     }
-
-    private int findY(int y) {
-        return 0;
-    }
-
-    private int findX(int x) {
-        int rowIndex = 0;
-
-        return rowIndex - 1;
-    }
-
     private static final int BEGIN = 100;
     private static final int WIDTH = 10;
     private static final int Y_DISTANCE = 24;
     private static final int X_DISTANCE = 24;
-
+    private static final int UFIRST = 0x41;
+    private static Image AVAILABLE_SEAT;
+    private static Image NON_AVAILABLE_SEAT;
+    private static final String AVAILABLE_SEAT_PATH = "../recursos/available.png";
+    private static final String NON_AVAILABLE_SEAT_PATH = "../recursos/nonavailable.png";
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTableSeat;
     // End of variables declaration//GEN-END:variables
 }

@@ -55,13 +55,11 @@ public class Controller {
         }
     }
 
-    void buscar(Viaje toViaje) {
-        try{
-
-            this.model.setTrips(aerolinea.logica.Model.getInstance().searchViaje(toViaje));
-        }
-        catch(Throwable ex){
-            
+    void buscar(Viaje toViaje, String date) {
+        try {
+            this.model.setTrips(aerolinea.logica.Model.getInstance().searchViaje(toViaje, date));
+        } catch (Throwable ex) {
+            System.out.println(ex.getMessage());
         }
     }
 

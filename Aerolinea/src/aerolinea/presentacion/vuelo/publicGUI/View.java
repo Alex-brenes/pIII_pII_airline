@@ -71,7 +71,7 @@ public class View extends javax.swing.JInternalFrame implements Observer {
 
         jLabelDate.setText("Fecha");
 
-        jLabelPrice.setText("Precio");
+        jLabelPrice.setText("Precios menores a");
 
         jLabelAvailableSeats.setText("Asientos disponibles");
 
@@ -105,7 +105,6 @@ public class View extends javax.swing.JInternalFrame implements Observer {
                         .addComponent(jLabelTitulo)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 101, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -118,13 +117,13 @@ public class View extends javax.swing.JInternalFrame implements Observer {
                                     .addComponent(jComboBoxTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabelDate)
-                                .addGap(18, 18, 18)
+                                .addGap(39, 39, 39)
                                 .addComponent(jComboBoxYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jComboBoxMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jComboBoxDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(65, 65, 65)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabelAvailableSeats)
@@ -137,18 +136,27 @@ public class View extends javax.swing.JInternalFrame implements Observer {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButtonSearch)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 615, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(jButton1)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 851, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 20, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabelTitulo)
-                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextFieldPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelPrice))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextFieldAvailableSeats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelAvailableSeats)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabelDate)
                             .addComponent(jComboBoxYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -157,27 +165,18 @@ public class View extends javax.swing.JInternalFrame implements Observer {
                         .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabelFrom)
-                            .addComponent(jComboBoxFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabelPrice)
-                            .addGap(18, 18, 18)
-                            .addComponent(jLabelAvailableSeats))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jTextFieldPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextFieldAvailableSeats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelTo)
-                    .addComponent(jComboBoxTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                            .addComponent(jComboBoxFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelTo)
+                            .addComponent(jComboBoxTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(35, 35, 35)
                 .addComponent(jButtonSearch)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -188,7 +187,8 @@ public class View extends javax.swing.JInternalFrame implements Observer {
     }//GEN-LAST:event_jComboBoxFromActionPerformed
 
     private void jButtonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchActionPerformed
-        this.controller.buscar(this.toViaje());
+        this.controller.buscar(this.toViaje(), this.dateToString());
+        this.model.setViajeToSearch(this.toViaje());
     }//GEN-LAST:event_jButtonSearchActionPerformed
 
     private Model model;
@@ -224,15 +224,18 @@ public class View extends javax.swing.JInternalFrame implements Observer {
                 this.model.getMonths().toArray(new String[0])));
         this.jComboBoxYear.setModel(new DefaultComboBoxModel<Integer>(
                 this.model.getYears().toArray(new Integer[0])));
-
     }
 
     private aerolinea.logica.Viaje toViaje() {
         try {
             aerolinea.logica.Viaje exampleQuery = new aerolinea.logica.Viaje();
-            exampleQuery.setDisponibles(Integer.parseInt(this.jTextFieldAvailableSeats.getText()));
-            exampleQuery.setFecha(this.toDate());
-            exampleQuery.setPrecio(Float.parseFloat(this.jTextFieldPrice.getText()));
+            exampleQuery.setDisponibles(
+                    (this.jTextFieldAvailableSeats.getText().isEmpty()
+                    ? 0
+                    : Integer.parseInt(this.jTextFieldAvailableSeats.getText())));
+            exampleQuery.setPrecio((this.jTextFieldPrice.getText().isEmpty()
+                    ? 0
+                    : Float.parseFloat(this.jTextFieldPrice.getText())));
             aerolinea.logica.Vuelo v = new aerolinea.logica.Vuelo();
             v.setOrigen((aerolinea.logica.Ciudad) this.jComboBoxFrom.getSelectedItem());
             v.setDestino((aerolinea.logica.Ciudad) this.jComboBoxTo.getSelectedItem());
@@ -243,14 +246,23 @@ public class View extends javax.swing.JInternalFrame implements Observer {
         }
     }
 
-    private java.util.Date toDate() {
-
-        java.util.Date date = new java.util.Date(
-                (Integer) this.jComboBoxYear.getSelectedItem() - 1900,
-                this.jComboBoxMonth.getSelectedIndex(),
-                this.jComboBoxDate.getSelectedIndex() + 1
-        );
-        return date;
+    private String dateToString() {
+        String year = (this.jComboBoxYear.getSelectedItem() == null
+                ? "%%"
+                : Integer.toString((Integer) this.jComboBoxYear.getSelectedItem()));
+        String month = (this.jComboBoxMonth.getSelectedItem() == null
+                ? "%%"
+                : Integer.toString(this.jComboBoxMonth.getSelectedIndex()));
+        String date = (this.jComboBoxDate.getSelectedItem() == null
+                ? "%%"
+                : Integer.toString(this.jComboBoxDate.getSelectedIndex()));
+        if (this.jComboBoxMonth.getSelectedItem() != null) {
+            month = (this.jComboBoxMonth.getSelectedIndex() >= 10 ? month : "0" + month);
+        }
+        if (this.jComboBoxDate.getSelectedItem() != null) {
+            date = (this.jComboBoxDate.getSelectedIndex() >= 10 ? date : "0" + date);
+        }
+        return "%" + year + "-" + month + "-" + date + "%";
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

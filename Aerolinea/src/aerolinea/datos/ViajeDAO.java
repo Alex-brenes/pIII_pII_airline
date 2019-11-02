@@ -107,22 +107,28 @@ public class ViajeDAO extends AbstractDAO<Viaje, Integer> {
         }
     }
 
-    public List<Viaje> search(Viaje v) throws Throwable {
+    public List<Viaje> search(Viaje v, String date) throws Throwable {
         List<Viaje> resultado = new ArrayList<Viaje>();
         try {
             String query = "SELECT * "
                     + "FROM Viaje v INNER JOIN Vuelo o ON v.vuelo=o.idVuelo "
                     + "INNER JOIN Avion a ON o.avion=a.id INNER JOIN TipoAvion t "
                     + "ON a.tipoAvion = t.idTipoAvion "
-                    + "WHERE v.precio LIKE '%%s%' AND v.fecha LIKE '%%s%' "
-                    + "AND u.origen LIKE '%%s%' AND u.destino '%%s%'AND v.disponibles "
-                    + "LIKE '%%s%' ";
+                    + "WHERE v.precio <= '%s' AND v.fecha LIKE '%s' "
+                    + "AND o.origen LIKE '%%%s%%' AND o.destino LIKE '%%%s%%' "
+                    + "AND v.disponibles "
+                    + ">= '%s' ";
             query = String.format(query,
-                    v.getPrecio(),
-                    this.sqlDatetimeFormat(v.getFecha()),
-                    v.getVuelo().getOrigen().getNombre(),
-                    v.getVuelo().getDestino().getNombre(),
-                    v.getDisponibles());
+                    this.priceParam(v.getPrecio()),
+                    date,
+                    (v.getVuelo().getOrigen() != null
+                    ? v.getVuelo().getOrigen().getNombre()
+                    : ""),
+                    (v.getVuelo().getDestino() != null
+                    ? v.getVuelo().getDestino().getNombre()
+                    : ""),
+                    this.availableParam(v.getDisponibles()));
+            System.out.println(query);
             ResultSet rs = db.executeQuery(query);
             while (rs.next()) {
                 resultado.add(this.instancia(rs));
@@ -192,7 +198,6 @@ public class ViajeDAO extends AbstractDAO<Viaje, Integer> {
 
     private String sqlDatetimeFormat(java.util.Date fecha) {
         java.util.Date fechaHandler = fecha;
-
         java.text.SimpleDateFormat fechaFormat
                 = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String s = fechaFormat.format(fechaHandler);
@@ -232,5 +237,15 @@ public class ViajeDAO extends AbstractDAO<Viaje, Integer> {
             throw new Exception("El destino no existe");
         }
     }
+
+    private String priceParam(float p) {
+        return (p == 0 ? MAX : Integer.toString((int) p));
+    }
+
+    private String availableParam(int p) {
+        return (p == 0 ? "" : Integer.toString(p));
+    }
+
+    private final String MAX = "999999";
 
 }

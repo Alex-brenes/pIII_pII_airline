@@ -262,8 +262,8 @@ public class Model {
         return this.viajeDAO.search();
     }
 
-    public List<Viaje> searchViaje(Viaje v) throws Throwable {
-        return this.viajeDAO.search(v);
+    public List<Viaje> searchViaje(Viaje v, String date) throws Throwable {
+        return this.viajeDAO.search(v, date);
     }
 
     public static Model getInstance() {

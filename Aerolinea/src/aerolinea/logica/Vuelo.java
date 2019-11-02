@@ -55,7 +55,7 @@ public class Vuelo implements Serializable {
     private Ciudad destino;
 
     public Vuelo() {
-        this.avion = null;
+        this.avion = new Avion();
         this.destino = null;
         this.dia = DIA_DEFECTO;
         this.hora = new Time(0, 0, 0);

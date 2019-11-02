@@ -5,6 +5,7 @@
  */
 package aerolinea.presentacion.vuelo.publicGUI;
 
+import aerolinea.Application;
 import aerolinea.logica.Ciudad;
 import aerolinea.logica.Viaje;
 import java.util.ArrayList;
@@ -61,6 +62,11 @@ public class Controller {
         } catch (Throwable ex) {
             System.out.println(ex.getMessage());
         }
+    }
+
+    void checkIn(int selectedRow) {
+        Application.CHECK_IN_CONTROLLER.setViaje(this.model.getTrips().get(selectedRow));
+        Application.CHECK_IN_CONTROLLER.show();
     }
 
 }

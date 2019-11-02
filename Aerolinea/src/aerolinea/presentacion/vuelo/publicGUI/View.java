@@ -93,6 +93,11 @@ public class View extends javax.swing.JInternalFrame implements Observer {
         });
 
         jButton1.setText("Reservar asientos en el vuelo seleccionado");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -190,6 +195,11 @@ public class View extends javax.swing.JInternalFrame implements Observer {
         this.controller.buscar(this.toViaje(), this.dateToString());
         this.model.setViajeToSearch(this.toViaje());
     }//GEN-LAST:event_jButtonSearchActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (this.jTableViajes.getSelectedRow() >= 0)
+            this.controller.checkIn(this.jTableViajes.getSelectedRow());
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private Model model;
     private Controller controller;

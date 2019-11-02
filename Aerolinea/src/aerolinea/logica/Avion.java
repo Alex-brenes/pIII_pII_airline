@@ -41,6 +41,7 @@ public class Avion implements Serializable {
     private Tipoavion tipoavion;
 
     public Avion() {
+        this.tipoavion = new aerolinea.logica.Tipoavion();
     }
 
     public Avion(String id) {

@@ -5,17 +5,43 @@
  */
 package aerolinea.presentacion.check_in;
 
+import java.awt.Color;
+import java.util.Observable;
+import java.util.Observer;
+
 /**
  *
  * @author pc
  */
-public class View extends javax.swing.JInternalFrame {
+public class View extends javax.swing.JInternalFrame implements Observer {
+
+    public Model getModel() {
+        return model;
+    }
+
+    public void setModel(Model model) {
+        this.model = model;
+        this.model.addObserver(this);
+    }
+
+    public Controller getController() {
+        return controller;
+    }
 
     /**
      * Creates new form View
      */
+    public void setController(Controller controller) {
+        this.controller = controller;
+    }
+
     public View() {
         initComponents();
+        this.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                change(e.getXOnScreen(), e.getY());
+            }
+        });
     }
 
     /**
@@ -27,20 +53,91 @@ public class View extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        setClosable(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        setMaximizable(true);
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 927, Short.MAX_VALUE)
+            .addGap(0, 954, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 486, Short.MAX_VALUE)
+            .addGap(0, 488, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+
+    }//GEN-LAST:event_formMouseClicked
+
+    private Model model;
+    private Controller controller;
+
+    @Override
+    public void update(java.awt.Graphics g) {
+        this.paint(g);
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        this.repaint();
+    }
+
+    @Override
+    public void paint(java.awt.Graphics g) {
+        super.paint(g);
+        this.renderSeats(g);
+    }
+
+    private void renderSeats(java.awt.Graphics g) {
+        int xPosition = BEGIN;
+        int yPosition = BEGIN;
+        for (int i = 0; i < this.model.getArray().getColumn(); i++) {
+            for (int z = 0; z < this.model.getArray().getRow(); z++) {
+                g.setColor((this.model.getArray().get(z, i) ? Color.RED : Color.BLUE));
+                g.fillRect(xPosition, yPosition, WIDTH, WIDTH);
+                g.setColor(Color.green);
+                g.fillRect(xPosition + 12, yPosition, 12, 12);
+                //g.drawString("(" + xPosition + "," + yPosition + ")", xPosition, yPosition);
+                xPosition += X_DISTANCE;
+            }
+            xPosition = BEGIN;
+            yPosition += Y_DISTANCE;
+        }
+    }
+
+    private void change(int x, int y) {
+        x = this.findX(x);
+        y = this.findY(y + Y_DISTANCE + WIDTH);
+        if (x >= 0 && y >= 0) {
+            this.controller.changeFlag(x, y);
+        }
+    }
+
+    private int findY(int y) {
+        return 0;
+    }
+
+    private int findX(int x) {
+        int rowIndex = 0;
+
+        return rowIndex - 1;
+    }
+
+    private static final int BEGIN = 100;
+    private static final int WIDTH = 10;
+    private static final int Y_DISTANCE = 24;
+    private static final int X_DISTANCE = 24;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

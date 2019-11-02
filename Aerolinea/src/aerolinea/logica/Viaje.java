@@ -59,7 +59,7 @@ public class Viaje implements Serializable {
         this.disponibles = 0;
         this.fecha = new Date();
         this.precio = 0.0f;
-        this.vuelo = null;
+        this.vuelo = new Vuelo();
         this.reservaList = null;
     }
 

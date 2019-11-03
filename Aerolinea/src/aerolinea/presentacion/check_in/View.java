@@ -113,6 +113,11 @@ public class View extends javax.swing.JInternalFrame implements Observer {
         jLabelTotalN.setText("jLabel1");
 
         jButtonCompra.setText("Realizar compra");
+        jButtonCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCompraActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Total");
 
@@ -176,6 +181,10 @@ public class View extends javax.swing.JInternalFrame implements Observer {
         }
     }//GEN-LAST:event_jTableSeatMouseClicked
 
+    private void jButtonCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCompraActionPerformed
+        this.controller.purchase();
+    }//GEN-LAST:event_jButtonCompraActionPerformed
+
     private Model model;
     private Controller controller;
 
@@ -187,6 +196,7 @@ public class View extends javax.swing.JInternalFrame implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         this.repaint();
+        jButtonCompra.setEnabled(model.getSelectedSeats().size() > 0);
         this.jTableSeat.setOpaque(false);
         this.jTableSeat.setRowHeight(AVAILABLE_SEAT.getHeight(this) + AVAILABLE_SEAT.getHeight(this) / 4);
         this.jLabelTotalN.setText(Float.toString(model.getSelectedSeats().size() * model.getViaje().getPrecio()));

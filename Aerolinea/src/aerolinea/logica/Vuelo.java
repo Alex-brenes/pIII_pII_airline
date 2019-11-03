@@ -56,11 +56,11 @@ public class Vuelo implements Serializable {
 
     public Vuelo() {
         this.avion = new Avion();
-        this.destino = null;
+        this.destino = new Ciudad();
         this.dia = DIA_DEFECTO;
         this.hora = new Time(0, 0, 0);
         this.idVuelo = "";
-        this.origen = null;
+        this.origen = new Ciudad();
         this.viajeList = null;
     }
 

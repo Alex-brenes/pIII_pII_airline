@@ -6,6 +6,7 @@
 package aerolinea.presentacion.check_in;
 
 import aerolinea.logica.Tiquete;
+import java.util.List;
 
 /**
  *
@@ -58,9 +59,10 @@ public class Controller {
                 model.getArray().add(x, y, model.getSelectedSeats().get(model.getSelectedSeats().size() - 1));
             }
         } else {
-            
-            model.getSelectedSeats().remove(model.getArray().get(x, y));
-            model.getArray().remove(x, y);
+            if (model.getSelectedSeats().contains(this.model.getArray().get(x, y))) {
+                model.getSelectedSeats().remove(model.getArray().get(x, y));
+                model.getArray().remove(x, y);
+            }
         }
         this.model.setChanged();
         this.model.notifyObservers();
@@ -85,6 +87,16 @@ public class Controller {
             default:
                 return "Z";
         }
+    }
+
+    void purchase() {
+        if (aerolinea.Application.APPLICATION_CONTROLLER.getModel().getUser().getNombre() == "") {
+            aerolinea.Application.LOGIN_CONTROLLER.show();
+        } else {
+            aerolinea.Application.PURCHASE_CONTROLLER.Show();
+            aerolinea.Application.PURCHASE_CONTROLLER.setEntities(model.getSelectedSeats(), model.getViaje());
+        }
+        hide();
     }
 
 }

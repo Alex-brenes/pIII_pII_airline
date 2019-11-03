@@ -31,6 +31,7 @@ public class View extends javax.swing.JFrame implements Observer {
     public View() {
         initComponents();
         setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
+        super.setIconImage(java.awt.Toolkit.getDefaultToolkit().getImage(getClass().getResource("../recursos/airline.png")));
     }
 
     /**

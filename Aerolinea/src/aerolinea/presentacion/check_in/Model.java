@@ -25,6 +25,10 @@ public class Model extends Observable {
     private Reserva reserva;
 
     public Model() {
+        restart();
+    }
+
+    public void restart() {
         this.selectedSeats = new ArrayList<Tiquete>();
         this.viaje = new Viaje();
         this.reserva = new Reserva();
@@ -60,6 +64,7 @@ public class Model extends Observable {
 
     public void setViaje(Viaje viaje) {
         this.viaje = viaje;
+        init();
         this.setChanged();
         this.notifyObservers();
     }

@@ -143,7 +143,7 @@ public class Viaje implements Serializable {
 
     @Override
     public String toString() {
-        return "aerolinea.logica.Viaje[ idViaje=" + idViaje + " ]";
+        return this.fecha.toString() + " " + this.vuelo.getOrigen().getNombre() + " - " + this.vuelo.getDestino().getNombre() + " $ " + this.precio;
     }
 
 }

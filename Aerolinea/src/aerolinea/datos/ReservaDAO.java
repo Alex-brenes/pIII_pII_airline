@@ -28,22 +28,23 @@ import java.util.List;
  */
 public class ReservaDAO extends AbstractDAO<Reserva, Integer> {
 
-    public ReservaDAO(){
+    public ReservaDAO() {
         super();
     }
 
     @Override
     public void add(Reserva s) throws Throwable {
-        String query = "INSER INTO Reserva (idReserva, cantidad, documento, viaje, formaPago, usuario) "
-                + "values('%s','%s','%s','%s','%s','%s')";
+        String query = "INSERT INTO Reserva (cantidad, documento, viaje, formaPago, usuario, Usuario_idUsuario) "
+                + "values(%s,'%s',%s,'%s','%s',%s)";
         query = String.format(query,
-                s.getIdReserva(),
                 s.getCantidad(),
                 s.getDocumento(),
-                s.getViaje(),
-                s.getFormapago()
-        //        s.getUsuario().getIdUsuario()
+                s.getViaje().getIdViaje(),
+                s.getFormapago().getIdFormaPago(),
+                s.getUsuario1().getEmail(),
+                s.getUsuario1().getIdUsuario()
         );
+        System.out.println(query);
         int count = db.executeUpdate(query);
         if (count == 0) {
             throw new Exception("La reserva ya existe");
@@ -82,7 +83,7 @@ public class ReservaDAO extends AbstractDAO<Reserva, Integer> {
                 s.getCantidad(),
                 s.getDocumento(),
                 s.getViaje(),
-                s.getFormapago(), 
+                s.getFormapago(),
                 s.getUsuario());
         int count = db.executeUpdate(sql);
         if (count == 0) {
@@ -92,7 +93,7 @@ public class ReservaDAO extends AbstractDAO<Reserva, Integer> {
 
     @Override
     public List<Reserva> searh(Integer s) throws Throwable { // Busqueda por usuario
-                List<Reserva> resultado = new ArrayList<Reserva>();
+        List<Reserva> resultado = new ArrayList<Reserva>();
         try {
             String query = "SELECT * "
                     + "FROM Reserva r "

@@ -97,13 +97,28 @@ public class FormaPagoDAO extends AbstractDAO<Formapago, String> {
     }
 
     @Override
+    public List<Formapago> search() throws Throwable {
+        List<Formapago> resultado = new ArrayList<Formapago>();
+        try {
+            String query = "SELECT * "
+                    + "FROM Formapago f";
+            ResultSet rs = db.executeQuery(query);
+            while (rs.next()) {
+                resultado.add(this.instancia(rs));
+            }
+
+        } catch (SQLException ex) {
+        }
+        return resultado;
+
+    }
+
+    @Override
     public Formapago instancia(ResultSet rs) throws Throwable {
         try {
-            String s;
             Formapago c = new Formapago();
             c.setIdFormaPago(rs.getString("idFormaPago"));
             c.setNombreFormaPago(rs.getString("nombreFormaPago"));
-            // Ver si cargar también las reservas
             return c;
         } catch (SQLException ex) {
             return null;

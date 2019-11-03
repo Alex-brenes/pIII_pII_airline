@@ -97,7 +97,7 @@ public class Formapago implements Serializable {
 
     @Override
     public String toString() {
-        return "aerolinea.logica.Formapago[ idFormaPago=" + idFormaPago + " ]";
+        return this.nombreFormaPago;
     }
     
 }

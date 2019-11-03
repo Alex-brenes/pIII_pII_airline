@@ -139,6 +139,10 @@ public class Model {
     public Formapago getFormaPago(String s) throws Throwable {
         return this.formaPagoDAO.get(s);
     }
+    
+    public List<Formapago> searchFormaPago() throws Throwable {
+        return this.formaPagoDAO.search();
+    }
 
     // Pais
     public void addPais(Pais p) throws Throwable {

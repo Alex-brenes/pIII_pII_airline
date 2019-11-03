@@ -34,12 +34,20 @@ public class TiqueteDAO extends AbstractDAO<Tiquete, Integer> {
 
     @Override
     public void add(Tiquete s) throws Throwable {
-        String query = "INSERT INTO Tiquete (fila,asiento,reserva) "
-                + "VALUES('%s', %s, '%s')";
-        query = String.format(query, s.getFila(), s.getAsiento(), s.getReserva().getIdReserva());
-        int count = db.executeUpdate(query);
-        if (count == 0) {
-            throw new Exception("El tiquete ya existe");
+        String query = "SELECT * FROM reserva ORDER BY idReserva DESC LIMIT 1";
+        ResultSet rs = db.executeQuery(query);
+        if (rs.next()) {
+            query = "INSERT INTO Tiquete (fila,asiento,reserva) "
+                    + "VALUES('%s', %s, %s)";
+            query = String.format(query,
+                    s.getFila(),
+                    s.getAsiento(),
+                    rs.getInt("idReserva"));
+            int count = db.executeUpdate(query);
+            if (count == 0) {
+                throw new Exception("El tiquete ya existe");
+            }
+
         }
     }
 
@@ -71,10 +79,10 @@ public class TiqueteDAO extends AbstractDAO<Tiquete, Integer> {
     public void update(Tiquete s) throws Throwable {
         String query = "UPDATE Tiquete SET fila ='%s', asiento=%s, reserva='%s' "
                 + "where idTiquete='%s'";
-        query = String.format(query, 
+        query = String.format(query,
                 s.getFila(),
-                s.getAsiento(), 
-                s.getReserva().getIdReserva(), 
+                s.getAsiento(),
+                s.getReserva().getIdReserva(),
                 s.getIdTiquete());
         int count = db.executeUpdate(query);
         if (count == 0) {

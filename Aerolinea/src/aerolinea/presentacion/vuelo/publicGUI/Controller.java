@@ -45,7 +45,13 @@ public class Controller {
     }
 
     public void show() {
+        this.model.setTrips(new ArrayList<Viaje>());
+        this.model.setViajeToSearch(new Viaje());
         this.view.setVisible(true);
+    }
+
+    public void hide() {
+        this.view.setVisible(false);
     }
 
     private void iniciarListas() {
@@ -57,6 +63,7 @@ public class Controller {
     }
 
     void buscar(Viaje toViaje, String date) {
+        Application.CHECK_IN_CONTROLLER.getModel().restart();
         try {
             this.model.setTrips(aerolinea.logica.Model.getInstance().searchViaje(toViaje, date));
         } catch (Throwable ex) {
@@ -65,6 +72,7 @@ public class Controller {
     }
 
     void checkIn(int selectedRow) {
+        hide();
         Application.CHECK_IN_CONTROLLER.setViaje(this.model.getTrips().get(selectedRow));
         Application.CHECK_IN_CONTROLLER.show();
     }

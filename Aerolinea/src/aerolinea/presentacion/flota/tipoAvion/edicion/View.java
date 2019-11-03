@@ -16,6 +16,8 @@
  */
 package aerolinea.presentacion.flota.tipoAvion.edicion;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Observable;
 import javax.swing.DefaultComboBoxModel;
 
@@ -31,6 +33,28 @@ public class View extends javax.swing.JInternalFrame implements java.util.Observ
     public View() {
         initComponents();
         this.jTextFieldPassengers.setEditable(false);
+        jComboBoxAsientos.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    jTextFieldPassengers.setText(Integer.toString(
+                            (Integer) jComboBoxAsientos.getSelectedItem()
+                            * (Integer) jComboBoxFilas.getSelectedItem()));
+                } catch (Throwable ex) {
+
+                }
+            }
+        });
+        jComboBoxFilas.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    jTextFieldPassengers.setText(Integer.toString(
+                            (Integer) jComboBoxAsientos.getSelectedItem()
+                            * (Integer) jComboBoxFilas.getSelectedItem()));
+                } catch (Throwable ex) {
+
+                }
+            }
+        });
     }
 
     /**
@@ -50,9 +74,9 @@ public class View extends javax.swing.JInternalFrame implements java.util.Observ
         jTextFieldModelo = new javax.swing.JTextField();
         jLabelFilas = new javax.swing.JLabel();
         jLabelAsientos = new javax.swing.JLabel();
-        jComboBoxFilas = new javax.swing.JComboBox();
-        jComboBoxAsientos = new javax.swing.JComboBox();
-        jComboBoxAnnios = new javax.swing.JComboBox();
+        jComboBoxFilas = new javax.swing.JComboBox<>();
+        jComboBoxAsientos = new javax.swing.JComboBox<>();
+        jComboBoxAnnios = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -80,16 +104,12 @@ public class View extends javax.swing.JInternalFrame implements java.util.Observ
 
         jLabelAsientos.setText("Canidad de asientos por fila");
 
-        jComboBoxFilas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBoxFilas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxFilasActionPerformed(evt);
             }
         });
 
-        jComboBoxAsientos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jComboBoxAnnios.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBoxAnnios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxAnniosActionPerformed(evt);
@@ -145,9 +165,8 @@ public class View extends javax.swing.JInternalFrame implements java.util.Observ
                                     .addComponent(jTextFieldModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jComboBoxFilas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jComboBoxAnnios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jTextFieldPassengers, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jComboBoxAsientos, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(jTextFieldPassengers)
+                                    .addComponent(jComboBoxAsientos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton1)
                                 .addGap(18, 18, 18)
@@ -190,7 +209,7 @@ public class View extends javax.swing.JInternalFrame implements java.util.Observ
                     .addComponent(jButton3)
                     .addComponent(jButton2)
                     .addComponent(jButton1))
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         pack();
@@ -277,9 +296,9 @@ public class View extends javax.swing.JInternalFrame implements java.util.Observ
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox jComboBoxAnnios;
-    private javax.swing.JComboBox jComboBoxAsientos;
-    private javax.swing.JComboBox jComboBoxFilas;
+    private javax.swing.JComboBox<Integer> jComboBoxAnnios;
+    private javax.swing.JComboBox<Integer> jComboBoxAsientos;
+    private javax.swing.JComboBox<Integer> jComboBoxFilas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelAnnio;
     private javax.swing.JLabel jLabelAsientos;

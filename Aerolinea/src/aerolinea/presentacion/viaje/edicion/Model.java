@@ -65,6 +65,8 @@ public class Model extends Observable {
 
     public void setAsientos(List<Integer> asientos) {
         this.asientos = asientos;
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public void setVuelos(List<Vuelo> vuelos) {

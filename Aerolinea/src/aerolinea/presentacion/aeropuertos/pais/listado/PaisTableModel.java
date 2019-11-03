@@ -67,7 +67,19 @@ public class PaisTableModel extends AbstractTableModel {
 
     private Icon bandera(Pais p) {
         String file = p.getAbreviatura() + ".png";
-        return new ImageIcon(getClass().getResource("../../../recursos/64/" + file));
+        try {
+            ImageIcon image = new ImageIcon(getClass().getResource("../../../recursos/64/" + file));
+            return image;
+
+        } catch (Throwable e) {
+            try {
+                ImageIcon image = new ImageIcon(getClass().getResource("../../../recursos/64/_.png"));
+                return image;
+
+            } catch (Throwable ex) {
+                return null;
+            }
+        }
     }
 
     @Override

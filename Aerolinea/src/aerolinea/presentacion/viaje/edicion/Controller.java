@@ -9,6 +9,7 @@ import aerolinea.logica.Viaje;
 import aerolinea.logica.Vuelo;
 import java.time.Month;
 import java.time.YearMonth;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -91,6 +92,14 @@ public class Controller {
         }
         this.model.setChanged();
         this.model.notifyObservers();
+    }
+
+    public void cambiaAsientos(Vuelo v) {
+        model.setAsientos(new ArrayList<Integer>());
+        for (int i = model.MIN_ASIENTOS; i <= v.getAvion().getTipoavion().getCantidadPasajeros(); i++) {
+            this.model.getAsientos().add(i);
+        }
+
     }
 
     void diasMes(Integer annio, Integer mes) {

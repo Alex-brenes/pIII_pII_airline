@@ -44,7 +44,7 @@ public class Formapago implements Serializable {
     public void setNombreFormaPago(String nombreFormaPago) {
         this.nombreFormaPago = nombreFormaPago;
     }
-    
+  
     public Formapago() {
         this.idFormaPago = "";
         this.reservaList = null;

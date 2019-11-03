@@ -6,6 +6,7 @@
 package aerolinea.logica;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -60,7 +61,7 @@ public class Viaje implements Serializable {
         this.fecha = new Date();
         this.precio = 0.0f;
         this.vuelo = new Vuelo();
-        this.reservaList = null;
+        this.reservaList = new ArrayList<Reserva>();
     }
 
     public Viaje(Integer idViaje) {

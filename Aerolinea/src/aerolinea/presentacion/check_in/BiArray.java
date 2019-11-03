@@ -70,5 +70,9 @@ public class BiArray<T> {
             this.array[i] = (T[]) (new Object[this.column]);
         }
     }
+    
+    public void remove(int x, int y){
+        array[x][y] = null;
+    }
 
 }

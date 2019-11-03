@@ -5,9 +5,11 @@
  */
 package aerolinea.presentacion.check_in;
 
+import aerolinea.logica.Tiquete;
 import java.awt.Color;
 import java.awt.Image;
 import java.io.IOException;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import javax.imageio.ImageIO;
@@ -70,6 +72,12 @@ public class View extends javax.swing.JInternalFrame implements Observer {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableSeat = new javax.swing.JTable();
+        jLabelTotal = new javax.swing.JLabel();
+        jLabelSelectedSeats = new javax.swing.JLabel();
+        jLabelTotalN = new javax.swing.JLabel();
+        jButtonCompra = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabelTotalSS = new javax.swing.JLabel();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
@@ -98,21 +106,61 @@ public class View extends javax.swing.JInternalFrame implements Observer {
         });
         jScrollPane1.setViewportView(jTableSeat);
 
+        jLabelTotal.setText("Total");
+
+        jLabelSelectedSeats.setText("Asientos seleccionados:");
+
+        jLabelTotalN.setText("jLabel1");
+
+        jButtonCompra.setText("Realizar compra");
+
+        jLabel1.setText("Total");
+
+        jLabelTotalSS.setText("jLabel2");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(80, 80, 80)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 707, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(151, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonCompra)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 707, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelTotal)
+                                .addGap(36, 36, 36)
+                                .addComponent(jLabelTotalN))
+                            .addComponent(jLabelSelectedSeats)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabelTotalSS)
+                                .addGap(19, 19, 19)))))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(59, 59, 59)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(130, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelTotal)
+                            .addComponent(jLabelTotalN))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabelSelectedSeats)
+                        .addGap(139, 139, 139)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabelTotalSS)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(47, 47, 47)
+                .addComponent(jButtonCompra)
+                .addContainerGap(72, Short.MAX_VALUE))
         );
 
         pack();
@@ -141,12 +189,24 @@ public class View extends javax.swing.JInternalFrame implements Observer {
         this.repaint();
         this.jTableSeat.setOpaque(false);
         this.jTableSeat.setRowHeight(AVAILABLE_SEAT.getHeight(this) + AVAILABLE_SEAT.getHeight(this) / 4);
+        this.jLabelTotalN.setText(Float.toString(model.getSelectedSeats().size() * model.getViaje().getPrecio()));
+
+    }
+
+    private void renderSelectedSeats(List<Tiquete> selectedSeats, java.awt.Graphics g) {
+        int yPosition = jLabelSelectedSeats.getY() + 60;
+        for (Tiquete t : selectedSeats) {
+            g.drawString(t.toString(), jLabelSelectedSeats.getX() + 20, yPosition);
+            yPosition += jLabelSelectedSeats.getHeight() + 1;
+        }
+        jLabelTotalSS.setText(Integer.toString(model.getSelectedSeats().size()));
     }
 
     @Override
     public void paint(java.awt.Graphics g) {
         super.paint(g);
         this.renderRowIndex(g);
+        renderSelectedSeats(model.getSelectedSeats(), g);
     }
 
     @Override
@@ -201,6 +261,12 @@ public class View extends javax.swing.JInternalFrame implements Observer {
     private static final String AVAILABLE_SEAT_PATH = "../recursos/available.png";
     private static final String NON_AVAILABLE_SEAT_PATH = "../recursos/nonavailable.png";
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonCompra;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabelSelectedSeats;
+    private javax.swing.JLabel jLabelTotal;
+    private javax.swing.JLabel jLabelTotalN;
+    private javax.swing.JLabel jLabelTotalSS;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableSeat;
     // End of variables declaration//GEN-END:variables

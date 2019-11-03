@@ -34,13 +34,21 @@ public class Tiquete implements Serializable {
     @Basic(optional = false)
     @Column(name = "idTiquete")
     private Integer idTiquete;
-    @Column(name = "numeroAsiento")
-    private Integer numeroAsiento;
+    @Column(name = "fila")
+    private String fila;
+    @Column(name = "asiento")
+    private Integer asiento;
     @JoinColumn(name = "reserva", referencedColumnName = "idReserva")
     @ManyToOne(optional = false)
     private Reserva reserva;
 
     public Tiquete() {
+    }
+
+    public Tiquete(String fila, Integer asiento, Reserva reserva) {
+        this.fila = fila;
+        this.asiento = asiento;
+        this.reserva = reserva;
     }
 
     public Tiquete(Integer idTiquete) {
@@ -55,12 +63,20 @@ public class Tiquete implements Serializable {
         this.idTiquete = idTiquete;
     }
 
-    public Integer getNumeroAsiento() {
-        return numeroAsiento;
+    public String getFila() {
+        return fila;
     }
 
-    public void setNumeroAsiento(Integer numeroAsiento) {
-        this.numeroAsiento = numeroAsiento;
+    public void setFila(String fila) {
+        this.fila = fila;
+    }
+
+    public Integer getAsiento() {
+        return asiento;
+    }
+
+    public void setAsiento(Integer asiento) {
+        this.asiento = asiento;
     }
 
     public Reserva getReserva() {
@@ -88,12 +104,18 @@ public class Tiquete implements Serializable {
         if ((this.idTiquete == null && other.idTiquete != null) || (this.idTiquete != null && !this.idTiquete.equals(other.idTiquete))) {
             return false;
         }
+        if ((this.asiento == null && other.asiento != null) || (this.asiento != null && !this.asiento.equals(other.asiento))) {
+            return false;
+        }
+        if ((this.fila  == null && other.fila != null) || (this.fila != null && !this.fila.equals(other.fila))) {
+            return false;
+        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "aerolinea.logica.Tiquete[ idTiquete=" + idTiquete + " ]";
+        return "Asiento " + fila + Integer.toString(asiento);
     }
-    
+
 }

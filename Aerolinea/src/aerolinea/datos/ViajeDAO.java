@@ -16,6 +16,10 @@
  */
 package aerolinea.datos;
 
+import aerolinea.logica.Formapago;
+import aerolinea.logica.Reserva;
+import aerolinea.logica.Tiquete;
+import aerolinea.logica.Usuario;
 import aerolinea.logica.Viaje;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -58,7 +62,9 @@ public class ViajeDAO extends AbstractDAO<Viaje, Integer> {
                     + "ON a.tipoAvion = t.idTipoAvion";
             ResultSet rs = db.executeQuery(query);
             while (rs.next()) {
-                resultado.add(this.instancia(rs));
+                Viaje v = this.instancia(rs);
+                v.setReservaList(getReserva(v));
+                resultado.add(v);
             }
         } catch (SQLException ex) {
         }
@@ -85,7 +91,9 @@ public class ViajeDAO extends AbstractDAO<Viaje, Integer> {
         query = String.format(query, s);
         ResultSet rs = db.executeQuery(query);
         if (rs.next()) {
-            return this.instancia(rs);
+            Viaje v = this.instancia(rs);
+            v.setReservaList(getReserva(v));
+            return v;
         } else {
             throw new Exception("El viaje no existe");
         }
@@ -128,10 +136,12 @@ public class ViajeDAO extends AbstractDAO<Viaje, Integer> {
                     ? v.getVuelo().getDestino().getNombre()
                     : ""),
                     this.availableParam(v.getDisponibles()));
-            System.out.println(query);
             ResultSet rs = db.executeQuery(query);
             while (rs.next()) {
-                resultado.add(this.instancia(rs));
+                Viaje vu = this.instancia(rs);
+                vu.setReservaList(getReserva(vu));
+                resultado.add(vu);
+                //resultado.add(this.instancia(rs));
             }
         } catch (SQLException ex) {
         }
@@ -165,7 +175,6 @@ public class ViajeDAO extends AbstractDAO<Viaje, Integer> {
             v.setPrecio(Float.parseFloat(rs.getString("precio")));
             v.setDisponibles(Integer.parseInt(rs.getString("disponibles")));
             v.setFecha(new java.util.Date(rs.getDate("fecha").getTime()));
-            System.out.println(v.getFecha().toString());
             // Vuelo
             aerolinea.logica.Vuelo o = new aerolinea.logica.Vuelo();
             o.setIdVuelo(rs.getString("idVuelo"));
@@ -246,6 +255,104 @@ public class ViajeDAO extends AbstractDAO<Viaje, Integer> {
         return (p == 0 ? "" : Integer.toString(p));
     }
 
+    private List<Reserva> getReserva(Viaje v) {
+        List<Reserva> result = new ArrayList<Reserva>();
+        String query = "SELECT * "
+                + "FROM Viaje v INNER JOIN Reserva r ON r.viaje=v.idViaje "
+                + "WHERE v.idViaje=%s";
+        query = String.format(query, v.getIdViaje());
+        System.out.println(query);
+        ResultSet rs = db.executeQuery(query);
+        try {
+
+            while (rs.next()) {
+                Reserva reserva = this.reservaInstance(rs);
+                reserva.setFormapago(this.getFormaPago(reserva));
+                reserva.setTiqueteList(this.getTiquete(reserva));
+                reserva.setUsuario1(this.usuarioInstance(rs));
+                result.add(reserva);
+            }
+        } catch (Throwable ex) {
+            return null;
+        }
+        return result;
+    }
+
+    private Reserva reservaInstance(ResultSet rs) {
+        Reserva r = new Reserva();
+        try {
+            r.setCantidad(rs.getInt("cantidad"));
+            r.setDocumento(rs.getString("documento"));
+            r.setIdReserva(rs.getInt("idReserva"));
+        } catch (Throwable ex) {
+            return null;
+        }
+        return r;
+    }
+
+    private List<Tiquete> getTiquete(Reserva r) {
+        List<Tiquete> result = new ArrayList<Tiquete>();
+        String query = "SELECT * FROM Reserva r INNER JOIN Tiquete t "
+                + "ON t.reserva=r.idReserva WHERE r.idReserva=%s";
+        query = String.format(query, r.getIdReserva());
+        ResultSet rs = db.executeQuery(query);
+        try {
+            while (rs.next()) {
+                Tiquete tiquete = this.TiqueteInstance(rs);
+                tiquete.setReserva(r);
+                result.add(tiquete);
+            }
+        } catch (Throwable ex) {
+            return null;
+        }
+        return result;
+    }
+
+    private Tiquete TiqueteInstance(ResultSet rs) throws SQLException {
+        Tiquete t = new Tiquete();
+        t.setIdTiquete(rs.getInt("idTiquete"));
+        t.setFila(rs.getString("fila"));
+        t.setAsiento(rs.getInt("asiento"));
+        return t;
+    }
     private final String MAX = "999999";
+
+    private Usuario usuarioInstance(ResultSet rs) {
+        try {
+            String query = "SELECT * FROM Usuario WHERE idUsuario=%s";
+            query = String.format(query, rs.getInt("Usuario_idUsuario"));
+            ResultSet rs2 = db.executeQuery(query);
+            Usuario usuario = new Usuario();
+            usuario.setEmail(rs2.getString("email"));
+            usuario.setContrasenna(rs2.getString("contrasenna"));
+            usuario.setNombre(rs2.getString("nombre"));
+            usuario.setApellido(rs2.getString("apellido"));
+            usuario.setFechaNacimiento(rs2.getString("fechaNacimiento"));
+            usuario.setDireccion(rs2.getString("direccion"));
+            usuario.setTelefonoTrabajo(rs2.getString("telefonoTrabajo"));
+            usuario.setTelefono(rs2.getString("telefono"));
+            usuario.setEsAdmin(rs2.getBoolean("esAdmin"));
+            usuario.setIdUsuario(Integer.parseInt(rs2.getString("idUsuario")));
+            return usuario;
+        } catch (Throwable ex) {
+            return null;
+        }
+    }
+
+    private Formapago getFormaPago(Reserva reserva) {
+        try {
+            String query = "SELECT * FROM Reserva r INNER JOIN "
+                    + "Formapago f ON r.formaPago=f.idFormaPago "
+                    + "WHERE r.idReserva=%s";
+            query = String.format(query, reserva.getIdReserva());
+            ResultSet rs = this.db.executeQuery(query);
+            Formapago f = new Formapago(
+                    rs.getString("idFormaPago"),
+                    rs.getString("nombreFormaPago"));
+            return f;
+        } catch (Throwable ex) {
+            return null;
+        }
+    }
 
 }

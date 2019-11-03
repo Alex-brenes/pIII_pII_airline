@@ -5,6 +5,8 @@
  */
 package aerolinea.presentacion.check_in;
 
+import aerolinea.logica.Tiquete;
+
 /**
  *
  * @author pc
@@ -50,9 +52,39 @@ public class Controller {
     }
 
     void changeFlag(int x, int y) {
-        this.model.getArray().add(x, y, !this.model.getArray().get(x, y));
+        if (this.model.getArray().get(x, y) == null) {
+            if (model.getSelectedSeats().size() < 8) {
+                model.getSelectedSeats().add(new Tiquete(toColumn(y), x, model.getReserva()));
+                model.getArray().add(x, y, model.getSelectedSeats().get(model.getSelectedSeats().size() - 1));
+            }
+        } else {
+            
+            model.getSelectedSeats().remove(model.getArray().get(x, y));
+            model.getArray().remove(x, y);
+        }
         this.model.setChanged();
         this.model.notifyObservers();
+    }
+
+    public String toColumn(int i) {
+        switch (i) {
+            case 0:
+                return Character.toString('\u0041');
+            case 1:
+                return Character.toString('\u0042');
+            case 2:
+                return Character.toString('\u0043');
+            case 3:
+                return Character.toString('\u0044');
+            case 4:
+                return Character.toString('\u0045');
+            case 5:
+                return Character.toString('\u0046');
+            case 6:
+                return Character.toString('\u0047');
+            default:
+                return "Z";
+        }
     }
 
 }

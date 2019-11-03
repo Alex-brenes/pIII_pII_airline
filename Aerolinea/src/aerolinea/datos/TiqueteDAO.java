@@ -28,15 +28,15 @@ import java.util.List;
  */
 public class TiqueteDAO extends AbstractDAO<Tiquete, Integer> {
 
-    public TiqueteDAO(){
+    public TiqueteDAO() {
         super();
     }
-    
+
     @Override
     public void add(Tiquete s) throws Throwable {
-        String query = "INSER INTO Tiquete (idTiquete, numeroAsiento, reserva) "
-                + "VALUES('%s', '%s', '%s')";
-        query = String.format(query, s.getIdTiquete(), s.getNumeroAsiento(), s.getReserva().getIdReserva());
+        String query = "INSERT INTO Tiquete (fila,asiento,reserva) "
+                + "VALUES('%s', %s, '%s')";
+        query = String.format(query, s.getFila(), s.getAsiento(), s.getReserva().getIdReserva());
         int count = db.executeUpdate(query);
         if (count == 0) {
             throw new Exception("El tiquete ya existe");
@@ -69,9 +69,13 @@ public class TiqueteDAO extends AbstractDAO<Tiquete, Integer> {
 
     @Override
     public void update(Tiquete s) throws Throwable {
-        String query = "UPDATE Tiquete SET numeroAsiento='%s', reserva='%s' "
+        String query = "UPDATE Tiquete SET fila ='%s', asiento=%s, reserva='%s' "
                 + "where idTiquete='%s'";
-        query = String.format(query,  s.getNumeroAsiento(),s.getReserva().getIdReserva(),s.getIdTiquete());
+        query = String.format(query, 
+                s.getFila(),
+                s.getAsiento(), 
+                s.getReserva().getIdReserva(), 
+                s.getIdTiquete());
         int count = db.executeUpdate(query);
         if (count == 0) {
             throw new Exception("El tiquete no existe");
@@ -101,7 +105,8 @@ public class TiqueteDAO extends AbstractDAO<Tiquete, Integer> {
             String s;
             Tiquete c = new Tiquete();
             c.setIdTiquete(Integer.parseInt(rs.getString("idTiquete")));
-            c.setNumeroAsiento(Integer.parseInt(rs.getString("numeroAsiento")));
+            c.setAsiento(Integer.parseInt(rs.getString("asiento")));
+            c.setFila((rs.getString("fila")));
             //Por ahora
             c.setReserva(new aerolinea.logica.Reserva(Integer.parseInt(rs.getString("reserva"))));
             return c;

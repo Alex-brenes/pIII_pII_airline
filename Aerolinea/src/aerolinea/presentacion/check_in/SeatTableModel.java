@@ -5,6 +5,7 @@
  */
 package aerolinea.presentacion.check_in;
 
+import aerolinea.logica.Tiquete;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
@@ -17,9 +18,9 @@ import javax.swing.table.AbstractTableModel;
  */
 public class SeatTableModel extends AbstractTableModel {
 
-    private BiArray<Boolean> array;
+    private BiArray<Tiquete> array;
 
-    public SeatTableModel(BiArray<Boolean> array) {
+    public SeatTableModel(BiArray<Tiquete> array) {
         this.array = array;
         COLUMNS = array.getRow();
         ROWS = array.getColumn();
@@ -49,7 +50,7 @@ public class SeatTableModel extends AbstractTableModel {
 
     private Icon getImage(int rowIndex, int columnIndex) {
         return new ImageIcon(getClass().getResource(
-                (this.array.get(columnIndex, rowIndex)
+                (this.array.get(columnIndex, rowIndex) == null
                 ? AVAILABLE_SEAT_PATH
                 : NON_AVAILABLE_SEAT_PATH)));
     }

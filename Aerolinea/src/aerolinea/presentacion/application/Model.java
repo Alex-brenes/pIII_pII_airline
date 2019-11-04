@@ -30,12 +30,6 @@ public class Model extends Observable {
 
     public Model() {
         this.user = new Usuario();
-        //BORRAR DESPUÉS
-            //ES PARA PRUEBAS
-        this.user.setEsAdmin(true);
-            //ES PARA PRUEBAS
-        //BORRAR DESPUÉS
-        
     }
 
     public Usuario getUser() {

@@ -17,6 +17,8 @@
 package aerolinea.datos;
 
 import aerolinea.logica.Reserva;
+import aerolinea.logica.Usuario;
+import aerolinea.logica.Viaje;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -89,6 +91,23 @@ public class ReservaDAO extends AbstractDAO<Reserva, Integer> {
         if (count == 0) {
             throw new Exception("La reserva no existe");
         }
+    }
+
+    public List<Reserva> search(Usuario u) throws Throwable {
+        List<Reserva> result = new ArrayList<Reserva>();
+        try {
+            List<Viaje> viajes = aerolinea.logica.Model.getInstance().searchViaje();
+            for (Viaje v : viajes) {
+                for (Reserva r : v.getReservaList()) {
+                    if (r.getUsuario1().equals(u)) {
+                        r.setViaje(v);
+                        result.add(r);
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+        }
+        return result;
     }
 
     @Override

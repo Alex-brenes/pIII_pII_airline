@@ -63,5 +63,9 @@ public class Controller {
         }
     }
 
+    void historial() {
+        Application.USUARIO_HISTORY_CONTROLLER.Show(model.getUsuario());
+    }
+
     
 }

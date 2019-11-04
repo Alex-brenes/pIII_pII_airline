@@ -128,6 +128,10 @@ public class Model extends Observable {
                 return 5;
             case '\u0047':
                 return 6;
+            case '\u0048':
+                return 7;
+            case '\u0049':
+                return 8;
             default:
                 return -1;
         }

@@ -173,6 +173,9 @@ public class Model {
     public List<Reserva> searchReserva(Integer id) throws Throwable {
         return this.reservaDAO.searh(id);
     }
+    public List<Reserva> searchReserva(Usuario u) throws Throwable {
+        return this.reservaDAO.search(u);
+    }
 
     public void updateReserva(Reserva r) throws Throwable {
         this.reservaDAO.update(r);

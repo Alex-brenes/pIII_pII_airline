@@ -66,9 +66,18 @@ public class Model extends Observable {
 
         } catch (Throwable ex) {
             System.out.println(ex.getMessage());
-            //Se cargan dos países de prueba
+            //Se cargan países de prueba
             this.paises.add(new Pais("_", "Unknown"));
             this.paises.add(new Pais("CR", "Costa Rica"));
+            this.paises.add(new Pais("BG", "Bulgaria"));
+            this.paises.add(new Pais("BH", "Bahréin"));
+            this.paises.add(new Pais("BI", "Barundi"));
+            this.paises.add(new Pais("BJ", "Benin"));
+            this.paises.add(new Pais("BL", "San Bartolomé"));
+            this.paises.add(new Pais("BM", "Bermudas"));
+            this.paises.add(new Pais("BN", "Brunéi"));
+            this.paises.add(new Pais("BO", "Bolivia"));
+            this.paises.add(new Pais("BR", "Brasil"));
         }
     }
 

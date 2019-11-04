@@ -193,23 +193,32 @@ public class Application {
                 = new aerolinea.presentacion.purchase.Controller(ModelPurchase, ViewPurchase);
 
         PURCHASE_CONTROLLER = ControllerPurchase;
-        
+
         // User Info
-        
         aerolinea.presentacion.usuario.information.Model ModelUserInfo
                 = new aerolinea.presentacion.usuario.information.Model();
         aerolinea.presentacion.usuario.information.View ViewUserInfo
                 = new aerolinea.presentacion.usuario.information.View();
         aerolinea.presentacion.usuario.information.Controller ControllerUserInfo
                 = new aerolinea.presentacion.usuario.information.Controller(ModelUserInfo, ViewUserInfo);
-        
+
         USUARIO_INFO_CONTROLLER = ControllerUserInfo;
-        
+
+        // User History
+        aerolinea.presentacion.usuario.history.Model ModelUserHistory
+                = new aerolinea.presentacion.usuario.history.Model();
+        aerolinea.presentacion.usuario.history.View ViewUserHistory
+                = new aerolinea.presentacion.usuario.history.View();
+        aerolinea.presentacion.usuario.history.Controller ControllerUserHistory
+                = new aerolinea.presentacion.usuario.history.Controller(ModelUserHistory, ViewUserHistory);
+
+        USUARIO_HISTORY_CONTROLLER = ControllerUserHistory;
         // Application
         Model applicationModel = new Model();
         View applicationView = new View();
         Controller applicationController = new Controller(applicationModel, applicationView);
         APPLICATION_CONTROLLER = applicationController;
+
         applicationView.setVisible(true);
 
         //jInternalFrames
@@ -233,6 +242,7 @@ public class Application {
         applicationView.panel.add(ViewCheckIn);
         applicationView.panel.add(ViewPurchase);
         applicationView.panel.add(ViewUserInfo);
+        applicationView.panel.add(ViewUserHistory);
     }
 
     public static Controller APPLICATION_CONTROLLER;
@@ -267,7 +277,9 @@ public class Application {
     public static aerolinea.presentacion.check_in.Controller CHECK_IN_CONTROLLER;
 
     public static aerolinea.presentacion.purchase.Controller PURCHASE_CONTROLLER;
-    
+
     public static aerolinea.presentacion.usuario.information.Controller USUARIO_INFO_CONTROLLER;
+
+    public static aerolinea.presentacion.usuario.history.Controller USUARIO_HISTORY_CONTROLLER;
 
 }

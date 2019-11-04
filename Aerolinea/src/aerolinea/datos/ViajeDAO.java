@@ -261,7 +261,7 @@ public class ViajeDAO extends AbstractDAO<Viaje, Integer> {
                 + "FROM Viaje v INNER JOIN Reserva r ON r.viaje=v.idViaje "
                 + "WHERE v.idViaje=%s";
         query = String.format(query, v.getIdViaje());
-        System.out.println(query);
+
         ResultSet rs = db.executeQuery(query);
         try {
 
@@ -284,6 +284,7 @@ public class ViajeDAO extends AbstractDAO<Viaje, Integer> {
             r.setCantidad(rs.getInt("cantidad"));
             r.setDocumento(rs.getString("documento"));
             r.setIdReserva(rs.getInt("idReserva"));
+            r.setUsuario(rs.getString("usuario"));
         } catch (Throwable ex) {
             return null;
         }
@@ -322,18 +323,22 @@ public class ViajeDAO extends AbstractDAO<Viaje, Integer> {
             String query = "SELECT * FROM Usuario WHERE idUsuario=%s";
             query = String.format(query, rs.getInt("Usuario_idUsuario"));
             ResultSet rs2 = db.executeQuery(query);
-            Usuario usuario = new Usuario();
-            usuario.setEmail(rs2.getString("email"));
-            usuario.setContrasenna(rs2.getString("contrasenna"));
-            usuario.setNombre(rs2.getString("nombre"));
-            usuario.setApellido(rs2.getString("apellido"));
-            usuario.setFechaNacimiento(rs2.getString("fechaNacimiento"));
-            usuario.setDireccion(rs2.getString("direccion"));
-            usuario.setTelefonoTrabajo(rs2.getString("telefonoTrabajo"));
-            usuario.setTelefono(rs2.getString("telefono"));
-            usuario.setEsAdmin(rs2.getBoolean("esAdmin"));
-            usuario.setIdUsuario(Integer.parseInt(rs2.getString("idUsuario")));
-            return usuario;
+            System.out.println(query);
+            if (rs2.next()) {
+                Usuario usuario = new Usuario();
+                usuario.setEmail(rs2.getString("email"));
+                usuario.setContrasenna(rs2.getString("contrasenna"));
+                usuario.setNombre(rs2.getString("nombre"));
+                usuario.setApellido(rs2.getString("apellido"));
+                usuario.setFechaNacimiento(rs2.getString("fechaNacimiento"));
+                usuario.setDireccion(rs2.getString("direccion"));
+                usuario.setTelefonoTrabajo(rs2.getString("telefonoTrabajo"));
+                usuario.setTelefono(rs2.getString("telefono"));
+                usuario.setEsAdmin(rs2.getBoolean("esAdmin"));
+                usuario.setIdUsuario(Integer.parseInt(rs2.getString("idUsuario")));
+                return usuario;
+            }
+            return null;
         } catch (Throwable ex) {
             return null;
         }
@@ -346,10 +351,13 @@ public class ViajeDAO extends AbstractDAO<Viaje, Integer> {
                     + "WHERE r.idReserva=%s";
             query = String.format(query, reserva.getIdReserva());
             ResultSet rs = this.db.executeQuery(query);
-            Formapago f = new Formapago(
-                    rs.getString("idFormaPago"),
-                    rs.getString("nombreFormaPago"));
-            return f;
+            if (rs.next()) {
+                Formapago f = new Formapago(
+                        rs.getString("idFormaPago"),
+                        rs.getString("nombreFormaPago"));
+                return f;
+            }
+            return null;
         } catch (Throwable ex) {
             return null;
         }

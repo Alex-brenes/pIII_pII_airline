@@ -31,13 +31,13 @@ public class View extends javax.swing.JInternalFrame implements Observer {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableReservas = new javax.swing.JTable();
         jLabelHistory = new javax.swing.JLabel();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableReservas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -48,7 +48,7 @@ public class View extends javax.swing.JInternalFrame implements Observer {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableReservas);
 
         jLabelHistory.setText("Historial de reservas");
 
@@ -80,7 +80,7 @@ public class View extends javax.swing.JInternalFrame implements Observer {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabelHistory;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableReservas;
     // End of variables declaration//GEN-END:variables
 
     Model model;
@@ -92,6 +92,7 @@ public class View extends javax.swing.JInternalFrame implements Observer {
 
     public void setModel(Model model) {
         this.model = model;
+        model.addObserver(this);
     }
 
     public Controller getController() {
@@ -106,6 +107,6 @@ public class View extends javax.swing.JInternalFrame implements Observer {
     
     @Override
     public void update(Observable arg0, Object arg1) {
-        
+        this.jTableReservas.setModel(new ReservaTableModel(this.model.getReservas()));
     }
 }

@@ -138,9 +138,9 @@ public class ViajeDAO extends AbstractDAO<Viaje, Integer> {
                     this.availableParam(v.getDisponibles()));
             ResultSet rs = db.executeQuery(query);
             while (rs.next()) {
-                Viaje vu = this.instancia(rs);
-                vu.setReservaList(getReserva(vu));
-                resultado.add(vu);
+                Viaje vi = this.instancia(rs);
+                vi.setReservaList(getReserva(vi));
+                resultado.add(vi);
                 //resultado.add(this.instancia(rs));
             }
         } catch (SQLException ex) {
@@ -197,8 +197,8 @@ public class ViajeDAO extends AbstractDAO<Viaje, Integer> {
             t.setCantidadFilas(rs.getInt("cantidadFilas"));
             t.setAsientosPorFila(rs.getInt("asientosPorFila"));
             a.setTipoavion(t);
+            o.setAvion(a);
             v.setVuelo(o);
-
             return v;
         } catch (SQLException ex) {
             return null;

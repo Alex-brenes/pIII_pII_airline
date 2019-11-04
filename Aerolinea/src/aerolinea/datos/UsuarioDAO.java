@@ -91,8 +91,8 @@ public class UsuarioDAO extends AbstractDAO<Usuario, Integer> {
 
     @Override
     public void update(Usuario s) throws Throwable {
-        String query = "UPDATE USUARIO SET email='%s', contrasenna='%s', nombre='%s', apellido='%s', fechaNacimiento='%s', direccion='%s', telefonoTrabajo='%s', telefono='%s', admin='%s' "
-                + "WHERE idUsuario='%s'";
+        String query = "UPDATE USUARIO SET email='%s', contrasenna='%s', nombre='%s', apellido='%s', fechaNacimiento='%s', direccion='%s', telefonoTrabajo='%s', telefono='%s', esAdmin=%s "
+                + "WHERE idUsuario=%s";
         query = String.format(query,
                 s.getEmail(),
                 s.getContrasenna(),
@@ -104,6 +104,7 @@ public class UsuarioDAO extends AbstractDAO<Usuario, Integer> {
                 s.getTelefono(),
                 s.getEsAdmin(),
                 s.getIdUsuario());
+        System.out.println(query);
         int count = db.executeUpdate(query);
         if (count == 0) {
             throw new Exception("El usuario no existe");

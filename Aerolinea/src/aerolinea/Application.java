@@ -194,6 +194,17 @@ public class Application {
 
         PURCHASE_CONTROLLER = ControllerPurchase;
         
+        // User Info
+        
+        aerolinea.presentacion.usuario.information.Model ModelUserInfo
+                = new aerolinea.presentacion.usuario.information.Model();
+        aerolinea.presentacion.usuario.information.View ViewUserInfo
+                = new aerolinea.presentacion.usuario.information.View();
+        aerolinea.presentacion.usuario.information.Controller ControllerUserInfo
+                = new aerolinea.presentacion.usuario.information.Controller(ModelUserInfo, ViewUserInfo);
+        
+        USUARIO_INFO_CONTROLLER = ControllerUserInfo;
+        
         // Application
         Model applicationModel = new Model();
         View applicationView = new View();
@@ -221,7 +232,7 @@ public class Application {
         applicationView.panel.add(ViewBusqueda);
         applicationView.panel.add(ViewCheckIn);
         applicationView.panel.add(ViewPurchase);
-
+        applicationView.panel.add(ViewUserInfo);
     }
 
     public static Controller APPLICATION_CONTROLLER;
@@ -257,4 +268,6 @@ public class Application {
 
     public static aerolinea.presentacion.purchase.Controller PURCHASE_CONTROLLER;
     
+    public static aerolinea.presentacion.usuario.information.Controller USUARIO_INFO_CONTROLLER;
+
 }

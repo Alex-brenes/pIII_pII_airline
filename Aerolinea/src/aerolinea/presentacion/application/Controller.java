@@ -170,4 +170,15 @@ public class Controller {
         Application.BUSQUEDA_CONTROLLER.show();
     }
 
+    void InformacionUsuarioShow() {
+        if (!this.model.getUser().getNombre().isEmpty()) {
+            Application.USUARIO_INFO_CONTROLLER.setUser(this.model.getUser());
+            Application.USUARIO_INFO_CONTROLLER.Show();
+        }
+    }
+
+    public void setUser(Usuario u) {
+        this.model.setUser(u);
+    }
+
 }

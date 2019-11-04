@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import javax.imageio.ImageIO;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
 /**
@@ -59,6 +61,7 @@ public class View extends javax.swing.JInternalFrame implements Observer {
         this.jTableSeat.getTableHeader().setResizingAllowed(false);
         this.jTableSeat.setOpaque(false);
         ((DefaultTableCellRenderer) this.jTableSeat.getDefaultRenderer(Object.class)).setOpaque(false);
+        jTableSeat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
     }
 
     /**
@@ -128,12 +131,15 @@ public class View extends javax.swing.JInternalFrame implements Observer {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(80, 80, 80)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonCompra)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 707, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addContainerGap()
+                        .addComponent(jButtonCompra)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabelTotal)
@@ -145,13 +151,14 @@ public class View extends javax.swing.JInternalFrame implements Observer {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabelTotalSS)
                                 .addGap(19, 19, 19)))))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(59, 59, 59)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabelTotal)
@@ -161,11 +168,10 @@ public class View extends javax.swing.JInternalFrame implements Observer {
                         .addGap(139, 139, 139)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(jLabelTotalSS)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(47, 47, 47)
+                            .addComponent(jLabelTotalSS))))
+                .addGap(18, 18, 18)
                 .addComponent(jButtonCompra)
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(136, Short.MAX_VALUE))
         );
 
         pack();
@@ -187,7 +193,6 @@ public class View extends javax.swing.JInternalFrame implements Observer {
 
     private Model model;
     private Controller controller;
-
     @Override
     public void update(java.awt.Graphics g) {
         this.paint(g);
@@ -228,8 +233,8 @@ public class View extends javax.swing.JInternalFrame implements Observer {
     }
 
     private void renderRowIndex(java.awt.Graphics g) {
-        int xPosition = BEGIN - this.jTableSeat.getColumnModel().getColumn(0).getWidth() - WIDTH;
-        int yPosition = BEGIN + this.jTableSeat.getRowHeight();
+        int xPosition = BEGIN - this.jTableSeat.getColumnModel().getColumn(0).getWidth();
+        int yPosition = BEGIN - 20;
         int uCode = UFIRST;
         for (int x = 0; x < this.model.getArray().getColumn(); x++) {
             g.drawString(Character.toString((char) uCode++), xPosition, yPosition);

@@ -84,6 +84,10 @@ public class Controller {
                 return Character.toString('\u0046');
             case 6:
                 return Character.toString('\u0047');
+            case 7:
+                return Character.toString('\u0048');
+            case 8:
+                return Character.toString('\u0049');
             default:
                 return "Z";
         }
@@ -95,8 +99,8 @@ public class Controller {
         } else {
             aerolinea.Application.PURCHASE_CONTROLLER.Show();
             aerolinea.Application.PURCHASE_CONTROLLER.setEntities(model.getSelectedSeats(), model.getViaje());
+            hide();
         }
-        hide();
     }
 
 }

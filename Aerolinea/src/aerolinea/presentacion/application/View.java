@@ -54,10 +54,6 @@ public class View extends javax.swing.JFrame implements Observer {
         jMenuUsuario = new javax.swing.JMenu();
         jMenuItemVerInformacion = new javax.swing.JMenuItem();
         jMenuItemInicioSesion = new javax.swing.JMenuItem();
-        jMenuAboutAirline = new javax.swing.JMenu();
-        jMenuItemReferente = new javax.swing.JMenuItem();
-        jMenuItemHistoria = new javax.swing.JMenuItem();
-        jMenuItemContacto = new javax.swing.JMenuItem();
         jMenuOpcionesAdministrador = new javax.swing.JMenu();
         jMenuFlota = new javax.swing.JMenu();
         jMenuTipoAvion = new javax.swing.JMenu();
@@ -163,29 +159,6 @@ public class View extends javax.swing.JFrame implements Observer {
         jMenuUsuario.add(jMenuItemInicioSesion);
 
         jMenuBar.add(jMenuUsuario);
-
-        jMenuAboutAirline.setText("Información de la aerolínea");
-
-        jMenuItemReferente.setText("Referente institucional");
-        jMenuItemReferente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemReferenteActionPerformed(evt);
-            }
-        });
-        jMenuAboutAirline.add(jMenuItemReferente);
-
-        jMenuItemHistoria.setText("Historia de la aerolínea");
-        jMenuItemHistoria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemHistoriaActionPerformed(evt);
-            }
-        });
-        jMenuAboutAirline.add(jMenuItemHistoria);
-
-        jMenuItemContacto.setText("Contáctenos");
-        jMenuAboutAirline.add(jMenuItemContacto);
-
-        jMenuBar.add(jMenuAboutAirline);
 
         jMenuOpcionesAdministrador.setText("Opciones de administrador");
 
@@ -359,14 +332,6 @@ public class View extends javax.swing.JFrame implements Observer {
         System.exit(0);
     }//GEN-LAST:event_menuItemSalirActionPerformed
 
-    private void jMenuItemHistoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHistoriaActionPerformed
-
-    }//GEN-LAST:event_jMenuItemHistoriaActionPerformed
-
-    private void jMenuItemReferenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemReferenteActionPerformed
-
-    }//GEN-LAST:event_jMenuItemReferenteActionPerformed
-
     private void jMenuItemAgregarAvionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAgregarAvionActionPerformed
         this.controller.EdicionAvionShow();
     }//GEN-LAST:event_jMenuItemAgregarAvionActionPerformed
@@ -424,7 +389,7 @@ public class View extends javax.swing.JFrame implements Observer {
     }//GEN-LAST:event_jMenuItemListadoViajesActionPerformed
 
     private void jMenuItemVerInformacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemVerInformacionActionPerformed
-        // TODO add your handling code here:
+        this.controller.InformacionUsuarioShow();
     }//GEN-LAST:event_jMenuItemVerInformacionActionPerformed
 
     private void jMenuItemInicioSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemInicioSesionActionPerformed
@@ -477,7 +442,6 @@ public class View extends javax.swing.JFrame implements Observer {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabelUser;
-    private javax.swing.JMenu jMenuAboutAirline;
     private javax.swing.JMenu jMenuAeropuertos;
     private javax.swing.JMenu jMenuAvion;
     private javax.swing.JMenuBar jMenuBar;
@@ -487,13 +451,11 @@ public class View extends javax.swing.JFrame implements Observer {
     private javax.swing.JMenuItem jMenuItemAgregarAvion;
     private javax.swing.JMenuItem jMenuItemAgregarTipoAvion;
     private javax.swing.JMenuItem jMenuItemBuscadorVuelos;
-    private javax.swing.JMenuItem jMenuItemContacto;
     private javax.swing.JMenuItem jMenuItemEdicionCiuadades;
     private javax.swing.JMenuItem jMenuItemEdicionPais;
     private javax.swing.JMenuItem jMenuItemEdicionViaje;
     private javax.swing.JMenuItem jMenuItemEdicionVuelo;
     private javax.swing.JMenuItem jMenuItemFormaPagoEdicion;
-    private javax.swing.JMenuItem jMenuItemHistoria;
     private javax.swing.JMenuItem jMenuItemInicioSesion;
     private javax.swing.JMenuItem jMenuItemListadoAviones;
     private javax.swing.JMenuItem jMenuItemListadoCiudades;
@@ -502,7 +464,6 @@ public class View extends javax.swing.JFrame implements Observer {
     private javax.swing.JMenuItem jMenuItemListadoTiposAviones;
     private javax.swing.JMenuItem jMenuItemListadoViajes;
     private javax.swing.JMenuItem jMenuItemListadoVuelo;
-    private javax.swing.JMenuItem jMenuItemReferente;
     private javax.swing.JMenuItem jMenuItemVerInformacion;
     private javax.swing.JMenu jMenuOpcionesAdministrador;
     private javax.swing.JMenu jMenuPaises;

@@ -57,34 +57,6 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenuAboutAirline">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Informaci&#xf3;n de la aerol&#xed;nea"/>
-          </Properties>
-          <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemReferente">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Referente institucional"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemReferenteActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemHistoria">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Historia de la aerol&#xed;nea"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemHistoriaActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemContacto">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Cont&#xe1;ctenos"/>
-              </Properties>
-            </MenuItem>
-          </SubComponents>
-        </Menu>
         <Menu class="javax.swing.JMenu" name="jMenuOpcionesAdministrador">
           <Properties>
             <Property name="text" type="java.lang.String" value="Opciones de administrador"/>

@@ -32,8 +32,6 @@ public class Model extends Observable {
         this.selectedSeats = new ArrayList<Tiquete>();
         this.viaje = new Viaje();
         this.reserva = new Reserva();
-        this.array = new BiArray<Tiquete>(this.viaje.getVuelo().getAvion().getTipoavion().getCantidadFilas(),
-                this.viaje.getVuelo().getAvion().getTipoavion().getAsientosPorFila());
         this.init();
     }
 
@@ -97,6 +95,8 @@ public class Model extends Observable {
     }
 
     private void init() {
+        this.array = new BiArray<Tiquete>(this.viaje.getVuelo().getAvion().getTipoavion().getCantidadFilas(),
+                this.viaje.getVuelo().getAvion().getTipoavion().getAsientosPorFila());
         for (int x = 0; x < this.array.getRow(); x++) {
             for (int y = 0; y < this.array.getColumn(); y++) {
                 this.array.add(x, y, null);
